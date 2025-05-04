@@ -1,4 +1,4 @@
-import type { Cover, ThemedStyles } from '../../types'
+import type { Exam, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -15,24 +15,14 @@ const CoverStyles = styled.div<ThemedStyles>`
   border: 1px solid ${(props) => props.theme.grey[2]};
 `
 
-function RenderCover({ cover }: CoverProps): React.JSX.Element {
+function RenderCover({ title, description, image }: Exam): React.JSX.Element {
   return (
     <CoverStyles>
-      {cover.map(({ variant, text }, i) =>
-        variant === 0 ? (
-          <Image key={i} src={text} />
-        ) : variant === 1 ? (
-          <NormalText key={i}>{text}</NormalText>
-        ) : variant === 2 ? (
-          <BigText key={i}>{text}</BigText>
-        ) : null
-      )}
+      {image && <Image src={image} alt="exam logo" />}
+      {title && <BigText>{title}</BigText>}
+      {description && <NormalText>{description}</NormalText>}
     </CoverStyles>
   )
 }
 
 export default React.memo(RenderCover)
-
-export interface CoverProps {
-  cover: Cover
-}

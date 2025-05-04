@@ -1,4 +1,4 @@
-import type { SlideProps } from '../types'
+import type {} from '../types'
 
 import styled, { keyframes } from 'styled-components'
 
@@ -26,3 +26,6 @@ export const Slide = styled.div<SlideProps>`
       props.direction === 'right' ? slideFromRight : props.direction === 'bottom' ? slideFromBottom : null}
     0.5s;
 `
+export interface SlideProps {
+  direction: 'right' | 'bottom'
+}

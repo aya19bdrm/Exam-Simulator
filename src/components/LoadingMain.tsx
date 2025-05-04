@@ -1,4 +1,4 @@
-import type { LoadingStylesProps } from '../types'
+import type { ThemedStyles } from '../types'
 
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
@@ -49,3 +49,8 @@ export default ({ size, height }) => (
     <Repeat size={size} />
   </LoadingStyles>
 )
+
+export interface LoadingStylesProps extends ThemedStyles {
+  color: string
+  height: number
+}

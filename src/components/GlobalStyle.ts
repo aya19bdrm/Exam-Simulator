@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components'
 import theme from '../styles/theme'
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
   html {
     font-size: ${theme.fontSize}
   }

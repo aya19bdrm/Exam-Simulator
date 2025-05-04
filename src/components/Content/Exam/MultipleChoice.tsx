@@ -1,11 +1,10 @@
-import type { Choice, QuestionType, ThemedStyles } from '../../../types'
+import type { Question, ThemedStyles } from '../../../types'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
-import { formatAnswerLabel } from '../../../utils/format'
 
 export const MultipleStyles = styled.div<MultipleStylesProps>`
   display: grid;
@@ -14,9 +13,9 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   cursor: pointer;
   svg {
     color: ${(props) =>
-      props.review && props.correct
+      props.$review && props.$correct
         ? darken(0.3, props.theme.quatro)
-        : props.review && !props.correct
+        : props.$review && !props.$correct
           ? props.theme.grey[5]
           : props.theme.grey[10]};
     margin-right: 0.5rem;
@@ -25,9 +24,9 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
     display: flex;
     font: 1.4rem 'Open Sans';
     color: ${(props) =>
-      props.review && props.correct
+      props.$review && props.$correct
         ? darken(0.3, props.theme.quatro)
-        : props.review && !props.correct
+        : props.$review && !props.$correct
           ? props.theme.grey[5]
           : props.theme.black};
     & > :first-child {
@@ -37,42 +36,23 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-function MultipleChoices({ review, question, answers, onMultipleChoice }: MultipleChoiceProps): React.JSX.Element {
+function MultipleChoices({ index, question, onMultipleChoice }: MultipleChoiceProps): React.JSX.Element {
   const [value, setValue] = useState<number | null>(null)
 
-  // sets value when component mounts only
-  useEffect(() => {
-    answers.forEach((el, i) => {
-      if (!!el) {
-        setValue(i)
-      }
-    })
-  }, [])
-
-  // sets value when user clicks choice
-  function onClick(i: number): void {
-    if (review) {
-      return
-    }
-
+  function onChoose(i: number): void {
     setValue(i)
-    onMultipleChoice(i)
+    onMultipleChoice?.(index, i)
   }
 
   return (
     <div>
-      {question.choices.map(({ text }, i) => (
-        // @ts-expect-error
-        <MultipleStyles
-          key={i}
-          review={review || undefined}
-          correct={question.answer[i] || undefined}
-          onClick={() => onClick(i)}
-        >
+      {question.choices.map(({ label, text, correct }, i) => (
+        <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">
-            <div>{formatAnswerLabel(i)}.</div>
+            {/* <div>{formatAnswerLabel(i)}.</div> */}
+            <div>{label}.</div>
             <div>{text}</div>
           </div>
         </MultipleStyles>
@@ -84,13 +64,12 @@ function MultipleChoices({ review, question, answers, onMultipleChoice }: Multip
 export default React.memo(MultipleChoices)
 
 export interface MultipleChoiceProps {
-  review: boolean
-  question: QuestionType
-  answers: number[]
-  onMultipleChoice?: Function
+  index: number
+  question: Question
+  onMultipleChoice?: (questionIndex: number, answer: number) => void
 }
 
 export interface MultipleStylesProps extends ThemedStyles {
-  review: boolean
-  correct: boolean
+  $review?: boolean
+  $correct?: boolean
 }

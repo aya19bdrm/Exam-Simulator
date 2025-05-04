@@ -1,9 +1,10 @@
 import type { ThemedStyles } from '../../../types'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
+import { SessionContext } from '../../../session'
 
 const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   display: flex;
@@ -26,7 +27,7 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
   & > :last-child {
     margin-right: 5rem;
-    color: ${(props) => (props.bookmarked ? props.theme.tertiary : props.theme.grey[10])};
+    color: ${(props) => (props.$bookmarked ? props.theme.tertiary : props.theme.grey[10])};
     transition: 0.3s;
     cursor: pointer;
     &:hover {
@@ -36,28 +37,29 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
 `
 
 function TopDisplay({
-  question,
-  length,
+  questionNumber,
+  questionCount,
   examMode,
-  marked,
+  bookmarked,
   onBookmarkQuestion
 }: ExamTopDisplayProps): React.JSX.Element {
-  const bookmarked = marked.includes(question)
+  const exam = useContext(ExamContext)
+  const session = useContext(SessionContext)
 
   return (
-    <TopDisplayStyles bookmarked={bookmarked || undefined}>
+    <TopDisplayStyles $bookmarked={bookmarked}>
       <div>
         <div>
-          Question {question + 1} of {length}
+          Question {questionNumber + 1} of {questionCount}
         </div>
 
         <div className="bookmarked">{examMode === 1 ? '[ Bookmarked Questions ]' : null}</div>
       </div>
 
       {bookmarked ? (
-        <Bookmark size={40} onClick={() => onBookmarkQuestion(question, false)} />
+        <Bookmark size={40} onClick={() => onBookmarkQuestion(questionNumber, false)} />
       ) : (
-        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(question, true)} />
+        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(questionNumber, true)} />
       )}
     </TopDisplayStyles>
   )
@@ -66,13 +68,13 @@ function TopDisplay({
 export default React.memo(TopDisplay)
 
 export interface ExamTopDisplayProps {
-  question: number
-  length: number
+  questionNumber: number
+  questionCount: number
   examMode: number
-  marked: number[]
+  bookmarked: boolean
   onBookmarkQuestion: (question: number, marked: boolean) => void
 }
 
 export interface ExamTopDisplayStylesProps extends ThemedStyles {
-  bookmarked: boolean
+  $bookmarked?: boolean
 }

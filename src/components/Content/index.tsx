@@ -1,4 +1,4 @@
-import type { Choice, ExamReport, Exam as ExamType, ThemedStyles } from '../../types'
+import type { Choice, Exam as ExamType, PageTypes, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -17,39 +17,29 @@ const ContentStyles = styled.div<ContentStylesProps>`
 export default (props: ContentProps): React.JSX.Element => {
   return (
     <ContentStyles open={props.open}>
-      {props.mode === 0 ? <Cover cover={props.exam.cover} /> : props.mode === 1 ? <Exam {...props} /> : null}
+      {props.page === 'cover' ? <Cover {...props.exam} /> : props.page === 'exam' ? <Exam {...props} /> : null}
     </ContentStyles>
   )
 }
 
 export interface ContentProps {
-  mode: number
-  open: boolean
-  exam: ExamType
+  page: PageTypes
+  // open: boolean
+  // exam: ExamType
 
-  // --- ReviewProps ---
-  reviewMode: number
-  report: ExamReport
-  // exam: Exam
-  reviewQuestion: number
-  reviewType: number
-
-  // --- ExamProps ---
-  explanationRef: React.RefObject<HTMLDivElement>
-  explanation: boolean
-  // exam: Exam
-  examMode: number
-  question: number
-  answers: Choice[][]
-  fillIns: string[]
-  intervals: number[]
-  marked: number[]
-  confirmPauseTimer: boolean
-  onBookmarkQuestion: (question: number, marked: boolean) => void
-  onMultipleChoice: Function
-  onMultipleAnswer: Function
-  onFillIn: (x: string) => void
-  setIntervals: React.Dispatch<React.SetStateAction<number[]>>
+  // // --- ExamProps ---
+  // examMode: number
+  // question: number
+  // answers: Choice[][]
+  // fillIns: string[]
+  // intervals: number[]
+  // marked: number[]
+  // confirmPauseTimer: boolean
+  // onBookmarkQuestion: (questionNumber: number, toMark: boolean) => void
+  // onMultipleChoice: Function
+  // onMultipleAnswer: Function
+  // onFillIn: (x: string) => void
+  // setIntervals: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 export interface ContentStylesProps extends ThemedStyles {

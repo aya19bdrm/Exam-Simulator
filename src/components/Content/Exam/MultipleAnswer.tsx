@@ -1,31 +1,15 @@
-import type { Choice, QuestionType } from '../../../types'
+import type { Question } from '../../../types'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { CheckBox } from '@styled-icons/material/CheckBox'
 import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
-import { MultipleStyles } from './MultipleChoice.js'
+import { MultipleStyles } from './MultipleChoice'
 import { formatAnswerLabel } from '../../../utils/format'
 
-function MultipleAnswer({ review, question, answers, onMultipleAnswer }: MultipleAnswerProps): React.JSX.Element {
+function MultipleAnswer({ index, question, onMultipleAnswer }: MultipleAnswerProps): React.JSX.Element {
   const [values, setValues] = useState<number[]>([])
 
-  useEffect(() => {
-    const values: number[] = []
-
-    answers.forEach((el: unknown, i: number) => {
-      if (!!el) {
-        values.push(i)
-      }
-
-      setValues(values)
-    })
-  }, [])
-
-  const onClick = (i: number) => {
-    if (review) {
-      return
-    }
-
+  const onChoose = (i: number) => {
     let newValues: number[]
 
     if (values.includes(i)) {
@@ -34,21 +18,14 @@ function MultipleAnswer({ review, question, answers, onMultipleAnswer }: Multipl
       newValues = values.concat(i)
     }
 
-    const newAnswers = answers.map((_, i) => newValues.includes(i))
     setValues(newValues)
-    onMultipleAnswer(newAnswers)
+    onMultipleAnswer?.(index, newValues)
   }
 
   return (
     <div>
       {question.choices.map(({ text }, i) => (
-        // @ts-expect-error
-        <MultipleStyles
-          key={i}
-          review={review || undefined}
-          correct={question.answer[i] || undefined}
-          onClick={() => onClick(i)}
-        >
+        <MultipleStyles key={i} $correct={question.choices[i].correct} onClick={() => onChoose(i)}>
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}
 
           <div className="text">
@@ -64,8 +41,7 @@ function MultipleAnswer({ review, question, answers, onMultipleAnswer }: Multipl
 export default React.memo(MultipleAnswer)
 
 export interface MultipleAnswerProps {
-  review: boolean
-  question: QuestionType
-  answers: number[]
-  onMultipleAnswer?: Function
+  index: number
+  question: Question
+  onMultipleAnswer?: (questionIndex: number, answers: number[]) => void
 }
