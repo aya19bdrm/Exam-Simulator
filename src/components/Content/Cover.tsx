@@ -3,6 +3,7 @@ import type { Exam, ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import { Image, BigText, NormalText } from '../../styles/repeated'
+import { ExamContext } from '../../exam'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 50vw;
@@ -15,7 +16,10 @@ const CoverStyles = styled.div<ThemedStyles>`
   border: 1px solid ${(props) => props.theme.grey[2]};
 `
 
-function RenderCover({ title, description, image }: Exam): React.JSX.Element {
+function RenderCover({}: object): React.JSX.Element {
+  const exam = React.useContext(ExamContext)
+  const { image, title, description } = exam || {}
+
   return (
     <CoverStyles>
       {image && <Image src={image} alt="exam logo" />}
