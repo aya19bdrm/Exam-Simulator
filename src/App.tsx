@@ -17,7 +17,7 @@ const contentProps: ContentProps = {
   question: 0,
   time: 0,
   explanation: false,
-  questionNumber: 0,
+  questionIndex: 0,
   onMultipleChoice: Function,
   onMultipleAnswer: Function
 }
@@ -29,22 +29,22 @@ function App() {
   const [session, setSession] = useState<Session>(defaultSession)
 
   useEffect(() => {
-    contentProps.onBookmarkQuestion = (questionNumber: number, toMark: boolean) => {
+    contentProps.onBookmarkQuestion = (questionIndex: number, toMark: boolean) => {
       if (toMark) {
-        contentProps.marked.push(questionNumber)
+        contentProps.marked.push(questionIndex)
       } else {
-        contentProps.marked = contentProps.marked.filter((q) => q !== questionNumber)
+        contentProps.marked = contentProps.marked.filter((q) => q !== questionIndex)
       }
     }
 
-    contentProps.onMultipleChoice = (questionNumber: number, choiceNumber: number) => {
-      contentProps.answers[questionNumber] = contentProps.answers[questionNumber] || []
-      contentProps.answers[questionNumber].push(contentProps.exam[questionNumber].choices[choiceNumber])
+    contentProps.onMultipleChoice = (questionIndex: number, choiceNumber: number) => {
+      contentProps.answers[questionIndex] = contentProps.answers[questionIndex] || []
+      contentProps.answers[questionIndex].push(contentProps.exam[questionIndex].choices[choiceNumber])
     }
 
-    contentProps.onMultipleAnswer = (questionNumber: number, choiceNumber: number) => {
-      contentProps.answers[questionNumber] = contentProps.answers[questionNumber] || []
-      contentProps.answers[questionNumber].push(contentProps.exam[questionNumber].choices[choiceNumber])
+    contentProps.onMultipleAnswer = (questionIndex: number, choiceNumber: number) => {
+      contentProps.answers[questionIndex] = contentProps.answers[questionIndex] || []
+      contentProps.answers[questionIndex].push(contentProps.exam[questionIndex].choices[choiceNumber])
     }
 
     import('./exam.json').then((data) => {

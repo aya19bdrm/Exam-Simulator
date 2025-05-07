@@ -37,7 +37,7 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
 `
 
 function TopDisplay({
-  questionNumber,
+  questionIndex,
   questionCount,
   examMode,
   bookmarked,
@@ -50,16 +50,16 @@ function TopDisplay({
     <TopDisplayStyles $bookmarked={bookmarked}>
       <div>
         <div>
-          Question {questionNumber + 1} of {questionCount}
+          Question {questionIndex + 1} of {questionCount}
         </div>
 
         <div className="bookmarked">{examMode === 1 ? '[ Bookmarked Questions ]' : null}</div>
       </div>
 
       {bookmarked ? (
-        <Bookmark size={40} onClick={() => onBookmarkQuestion(questionNumber, false)} />
+        <Bookmark size={40} onClick={() => onBookmarkQuestion(questionIndex, false)} />
       ) : (
-        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(questionNumber, true)} />
+        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(questionIndex, true)} />
       )}
     </TopDisplayStyles>
   )
@@ -68,7 +68,7 @@ function TopDisplay({
 export default React.memo(TopDisplay)
 
 export interface ExamTopDisplayProps {
-  questionNumber: number
+  questionIndex: number
   questionCount: number
   examMode: number
   bookmarked: boolean

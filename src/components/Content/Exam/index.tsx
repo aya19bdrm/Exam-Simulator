@@ -18,31 +18,31 @@ const TestStyles = styled.div`
 export default ({
   exam,
   examMode,
-  questionNumber,
+  questionIndex,
   marked,
   onBookmarkQuestion,
   onMultipleChoice,
   onMultipleAnswer
 }: ExamProps): React.JSX.Element => {
-  const question = exam.test[questionNumber]
+  const question = exam.test[questionIndex]
 
   return (
     <TestStyles>
       <TopDisplay
-        questionNumber={questionNumber}
+        questionIndex={questionIndex}
         questionCount={exam.test.length}
         examMode={examMode}
-        bookmarked={marked.includes(questionNumber)}
+        bookmarked={marked.includes(questionIndex)}
         onBookmarkQuestion={onBookmarkQuestion}
       />
 
-      <Slide key={questionNumber} direction="right">
+      <Slide key={questionIndex} direction="right">
         <Question {...question} />
 
         {question.type === 'multiple-choice' ? (
-          <MultipleChoice index={questionNumber} question={question} onMultipleChoice={onMultipleChoice} />
+          <MultipleChoice index={questionIndex} question={question} onMultipleChoice={onMultipleChoice} />
         ) : question.type === 'multiple-answer' ? (
-          <MultipleAnswer index={questionNumber} question={question} onMultipleAnswer={onMultipleAnswer} />
+          <MultipleAnswer index={questionIndex} question={question} onMultipleAnswer={onMultipleAnswer} />
         ) : null}
       </Slide>
     </TestStyles>
@@ -52,7 +52,7 @@ export default ({
 export interface ExamProps {
   exam: Exam
   examMode: number
-  questionNumber: number
+  questionIndex: number
   answers: Choice[][]
   fillIns: string[]
   intervals: number[]

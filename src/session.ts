@@ -13,14 +13,14 @@ export interface Session {
   explanation: boolean
 
   /** the question number */
-  questionNumber: number
+  questionIndex: number
 }
 
 export const defaultSession: Session = {
   question: 0,
   time: 0,
   explanation: false,
-  questionNumber: 0
+  questionIndex: 0
 }
 
 export const SessionContext = createContext<Session>(defaultSession)
