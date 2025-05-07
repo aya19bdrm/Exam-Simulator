@@ -22,7 +22,7 @@ const NormalText = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export default ({ text, choices }: Question): React.JSX.Element => {
+export default ({ text }: Question): React.JSX.Element => {
   return (
     <QuestionStyles data-test="Question">
       {/* {question.image && <React.Fragment key={index}><Image src={text} /><br /></React.Fragment>} */}

@@ -1,10 +1,12 @@
-import type { Question, ThemedStyles } from '../../../types'
+import type { ThemedStyles } from '../../../types'
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
+import { ExamContext } from '../../../exam'
+import { AnswerOfMultipleChoice, SessionContext } from '../../../session'
 
 export const MultipleStyles = styled.div<MultipleStylesProps>`
   display: grid;
@@ -31,23 +33,30 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
           : props.theme.black};
     & > :first-child {
       font-weight: 600;
-      margin-right: 0.5rem;
+      ${(props) => (props.dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
     }
   }
 `
 
-function MultipleChoices({ index, question, onMultipleChoice }: MultipleChoiceProps): React.JSX.Element {
-  const [value, setValue] = useState<number | null>(null)
+function MultipleChoices({}: MultipleChoiceProps): React.JSX.Element {
+  const exam = useContext(ExamContext)
+  const { questionIndex, answers } = useContext(SessionContext)
 
-  function onChoose(i: number): void {
+  if (!exam) return <></>
+
+  const answer = answers[questionIndex] as AnswerOfMultipleChoice
+  const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
+
+  const onChoose = (i: number): void => {
     setValue(i)
-    onMultipleChoice?.(index, i)
+    answers[questionIndex] = i
   }
 
   return (
     <div>
-      {question.choices.map(({ label, text, correct }, i) => (
-        <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}>
+      {exam.test[questionIndex].choices.map(({ label, text, correct }, i) => (
+        // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}> NOTE: display correct only if reviewing
+        <MultipleStyles dir={'rtl'} key={i} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">
@@ -63,11 +72,7 @@ function MultipleChoices({ index, question, onMultipleChoice }: MultipleChoicePr
 
 export default React.memo(MultipleChoices)
 
-export interface MultipleChoiceProps {
-  index: number
-  question: Question
-  onMultipleChoice?: (questionIndex: number, answer: number) => void
-}
+export interface MultipleChoiceProps {}
 
 export interface MultipleStylesProps extends ThemedStyles {
   $review?: boolean

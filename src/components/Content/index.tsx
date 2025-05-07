@@ -1,4 +1,4 @@
-import type { Choice, Exam as ExamType, PageTypes, ThemedStyles } from '../../types'
+import type { PageTypes, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -17,29 +17,14 @@ const ContentStyles = styled.div<ContentStylesProps>`
 export default (props: ContentProps): React.JSX.Element => {
   return (
     <ContentStyles open={props.open}>
-      {props.page === 'cover' ? <Cover /> : props.page === 'exam' ? <Exam {...props} /> : null}
+      {props.page === 'cover' ? <Cover /> : props.page === 'exam' ? <Exam /> : null}
     </ContentStyles>
   )
 }
 
 export interface ContentProps {
   page: PageTypes
-  // open: boolean
-  // exam: ExamType
-
-  // // --- ExamProps ---
-  // examMode: number
-  // question: number
-  // answers: Choice[][]
-  // fillIns: string[]
-  // intervals: number[]
-  // marked: number[]
-  // confirmPauseTimer: boolean
-  // onBookmarkQuestion: (questionNumber: number, toMark: boolean) => void
-  // onMultipleChoice: Function
-  // onMultipleAnswer: Function
-  // onFillIn: (x: string) => void
-  // setIntervals: React.Dispatch<React.SetStateAction<number[]>>
+  open: boolean
 }
 
 export interface ContentStylesProps extends ThemedStyles {

@@ -9,10 +9,10 @@
       "type": "multiple-choice",
       "text": "ما الاختيار الذي تكون اجابتك صحيحة اذا اخترته؟",
       "choices": [
-        { "label": "A", "text": "هذا الاختيار", "correct": false, "explanation": "هذا الاختيار هو الخطأ" },
-        { "label": "B", "text": "الاختيار اللي قبلي", "correct": false, "explanation": "هذا الاختيار هو الخطأ" },
-        { "label": "C", "text": "الاختيار اللي تحتي", "correct": true, "explanation": "هذا الاختيار هو الصحيح" },
-        { "label": "D", "text": "جميع ما سبق", "correct": false, "explanation": "هذا الاختيار هو الخطأ" }
+        { "label": "أ", "text": "هذا الاختيار", "correct": false, "explanation": "هذا الاختيار هو الخطأ" },
+        { "label": "ب", "text": "الاختيار اللي قبلي", "correct": false, "explanation": "هذا الاختيار هو الخطأ" },
+        { "label": "ج", "text": "الاختيار اللي تحتي", "correct": true, "explanation": "هذا الاختيار هو الصحيح" },
+        { "label": "د", "text": "جميع ما سبق", "correct": false, "explanation": "هذا الاختيار هو الخطأ" }
       ],
       "answer": 2
     }

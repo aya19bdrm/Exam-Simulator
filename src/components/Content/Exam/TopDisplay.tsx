@@ -1,10 +1,11 @@
 import type { ThemedStyles } from '../../../types'
 
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
 import { SessionContext } from '../../../session'
+import { ExamContext } from '../../../exam'
 
 const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   display: flex;
@@ -36,24 +37,29 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
 `
 
-function TopDisplay({
-  questionIndex,
-  questionCount,
-  examMode,
-  bookmarked,
-  onBookmarkQuestion
-}: ExamTopDisplayProps): React.JSX.Element {
+function TopDisplay({}: ExamTopDisplayProps): React.JSX.Element {
   const exam = useContext(ExamContext)
-  const session = useContext(SessionContext)
+  const { questionIndex, bookmarks } = useContext(SessionContext)
+
+  if (!exam) return <></>
+
+  const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(questionIndex))
+
+  const onBookmarkQuestion = (question: number, marked: boolean) => {
+    setBookmarked(marked)
+    if (marked) {
+      bookmarks.push(question)
+    } else {
+      bookmarks.splice(bookmarks.indexOf(question), 1)
+    }
+  }
 
   return (
     <TopDisplayStyles $bookmarked={bookmarked}>
       <div>
         <div>
-          Question {questionIndex + 1} of {questionCount}
+          Question {questionIndex + 1} of {exam.test.length}
         </div>
-
-        <div className="bookmarked">{examMode === 1 ? '[ Bookmarked Questions ]' : null}</div>
       </div>
 
       {bookmarked ? (
@@ -67,13 +73,7 @@ function TopDisplay({
 
 export default React.memo(TopDisplay)
 
-export interface ExamTopDisplayProps {
-  questionIndex: number
-  questionCount: number
-  examMode: number
-  bookmarked: boolean
-  onBookmarkQuestion: (question: number, marked: boolean) => void
-}
+export interface ExamTopDisplayProps {}
 
 export interface ExamTopDisplayStylesProps extends ThemedStyles {
   $bookmarked?: boolean
