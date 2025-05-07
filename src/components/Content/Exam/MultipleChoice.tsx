@@ -1,12 +1,11 @@
-import type { ThemedStyles } from '../../../types'
+import type { Exam, ThemedStyles } from '../../../types'
+import type { AnswerOfMultipleChoice, Session } from '../../../session'
 
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
-import { ExamContext } from '../../../exam'
-import { AnswerOfMultipleChoice, SessionContext } from '../../../session'
 
 export const MultipleStyles = styled.div<MultipleStylesProps>`
   display: grid;
@@ -38,12 +37,7 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-function MultipleChoices({}: MultipleChoiceProps): React.JSX.Element {
-  const exam = useContext(ExamContext)
-  const { questionIndex, answers } = useContext(SessionContext)
-
-  if (!exam) return <></>
-
+function MultipleChoices({ exam, session: { questionIndex, answers } }: MultipleChoiceProps): React.JSX.Element {
   const answer = answers[questionIndex] as AnswerOfMultipleChoice
   const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
 
@@ -72,7 +66,10 @@ function MultipleChoices({}: MultipleChoiceProps): React.JSX.Element {
 
 export default React.memo(MultipleChoices)
 
-export interface MultipleChoiceProps {}
+export interface MultipleChoiceProps {
+  exam: Exam
+  session: Session
+}
 
 export interface MultipleStylesProps extends ThemedStyles {
   $review?: boolean

@@ -28,15 +28,15 @@ export default ({}: ExamProps): React.JSX.Element => {
 
   return (
     <TestStyles>
-      <TopDisplay />
+      <TopDisplay exam={exam} session={session} />
 
       <Slide key={questionIndex} direction="right">
         <Question {...question} />
 
         {question.type === 'multiple-choice' ? (
-          <MultipleChoice />
+          <MultipleChoice exam={exam} session={session} />
         ) : question.type === 'multiple-answer' ? (
-          <MultipleAnswer />
+          <MultipleAnswer exam={exam} session={session} />
         ) : null}
       </Slide>
     </TestStyles>

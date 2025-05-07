@@ -1,18 +1,12 @@
-import type {} from '../../../types'
+import type { Exam } from '../../../types'
+import type { AnswerOfMultipleAnswer, Session } from '../../../session'
 
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { CheckBox } from '@styled-icons/material/CheckBox'
 import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
 import { MultipleStyles } from './MultipleChoice'
-import { ExamContext } from '../../../exam'
-import { AnswerOfMultipleAnswer, SessionContext } from '../../../session'
 
-function MultipleAnswer({}: MultipleAnswerProps): React.JSX.Element {
-  const exam = useContext(ExamContext)
-  const { questionIndex, answers } = useContext(SessionContext)
-
-  if (!exam) return <></>
-
+function MultipleAnswer({ exam, session: { questionIndex, answers } }: MultipleAnswerProps): React.JSX.Element {
   const answer = answers[questionIndex] as AnswerOfMultipleAnswer
   const [values, setValues] = useState<AnswerOfMultipleAnswer>(answer)
 
@@ -49,4 +43,7 @@ function MultipleAnswer({}: MultipleAnswerProps): React.JSX.Element {
 
 export default React.memo(MultipleAnswer)
 
-export interface MultipleAnswerProps {}
+export interface MultipleAnswerProps {
+  exam: Exam
+  session: Session
+}
