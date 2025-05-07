@@ -10,16 +10,12 @@ const ContentStyles = styled.div<ContentStylesProps>`
   justify-items: center;
   align-items: center;
   padding: 2rem;
-  padding-right: ${(props) => (props.open ? '28rem' : '7rem')};
+  padding-right: ${(props) => (props.$open ? '28rem' : '7rem')};
   transition: 0.3s;
 `
 
-export default (props: ContentProps): React.JSX.Element => {
-  return (
-    <ContentStyles open={props.open}>
-      {props.page === 'cover' ? <Cover /> : props.page === 'exam' ? <Exam /> : null}
-    </ContentStyles>
-  )
+export default ({ page, open }: ContentProps): React.JSX.Element => {
+  return <ContentStyles $open={open}>{page === 'cover' ? <Cover /> : page === 'exam' ? <Exam /> : null}</ContentStyles>
 }
 
 export interface ContentProps {
@@ -28,5 +24,5 @@ export interface ContentProps {
 }
 
 export interface ContentStylesProps extends ThemedStyles {
-  open: boolean
+  $open: boolean
 }
