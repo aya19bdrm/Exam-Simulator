@@ -14,8 +14,8 @@ export interface Session {
   // /** the current question number */
   // question: number
 
-  // /** the time elapsed */
-  // time: number
+  /** the time elapsed */
+  time: number
 
   // /** whether the question is being explained */
   // explanation: boolean
@@ -59,7 +59,7 @@ export const SessionActionTypes = {
 export const defaultSession: Session = {
   questionIndex: 0,
   // question: 0,
-  // time: 0,
+  time: 0,
   // explanation: false,
   bookmarks: [],
   answers: [],

@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Drawer from './Drawer'
 // import Footer from './Footer'
 // import Confirm from '../Confirm'
 import { Main } from '../../styles/Main'
+import { ExamContext } from '../../exam'
+import { SessionContext } from '../../session'
+import Footer from './Footer'
 
 // const Navigation: React.FC<NavigationProps> = ({})=>{}
 
 export default ({ time, children }: NavigationProps): React.JSX.Element => {
+  const exam = useContext(ExamContext)
+  const session = useContext(SessionContext)
+
   const [open, setOpen] = useState<boolean>(true)
   const [confirmBeginExam, setConfirmBeginExam] = useState<boolean>(false)
   const [confirmEndExam, setConfirmEndExam] = useState<boolean>(false)
@@ -34,7 +40,7 @@ export default ({ time, children }: NavigationProps): React.JSX.Element => {
 
       <Main $open={open}>{children}</Main>
 
-      {/* <Footer open={open} {...rest} /> */}
+      {exam && <Footer open={open} exam={exam} session={session} />}
 
       {/* <Confirm
         show={confirmBeginExam}
