@@ -81,7 +81,7 @@ export default ({ open }: GridProps): React.JSX.Element | null => {
   // if (exam.test.length === 0) return null
 
   const onClickGridItem = (question: number) => {
-    session.update!({ type: SessionActionTypes.SET_QUESTION_INDEX, payload: question })
+    session.update!(SessionActionTypes.SET_QUESTION_INDEX, question)
   }
 
   return (

@@ -27,7 +27,8 @@ export interface Session {
   answers: Answers
 
   /**  */
-  update?: React.ActionDispatch<[action: SessionAction<SessionActionTypes>]>
+  // update?: React.ActionDispatch<[action: SessionAction<SessionActionTypes>]>
+  update: SessionDispatch
 }
 
 export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS'
@@ -40,10 +41,14 @@ export interface SessionAction<T extends SessionActionTypes = SessionActionTypes
   type: T
   payload: SessionActions[T]['payload']
 }
-export type SessionDispatch<T extends SessionActionTypes = SessionActionTypes> = (
+export type SessionReducerFunc<T extends SessionActionTypes = SessionActionTypes> = (
   state: Session,
   action: SessionAction<T>
 ) => Session
+export type SessionDispatch<T extends SessionActionTypes = SessionActionTypes> = (
+  type: T,
+  payload: SessionActions[T]['payload']
+) => void
 
 export const SessionActionTypes = {
   SET_QUESTION_INDEX: 'SET_QUESTION_INDEX',
@@ -57,12 +62,13 @@ export const defaultSession: Session = {
   // time: 0,
   // explanation: false,
   bookmarks: [],
-  answers: []
+  answers: [],
+  update: () => {}
 }
 
 export const SessionContext = createContext<Session>(defaultSession)
 
-export const SessionReducer: SessionDispatch = (state: Session, action: SessionAction): Session => {
+export const SessionReducer: SessionReducerFunc = (state: Session, action: SessionAction): Session => {
   switch (action.type) {
     case SessionActionTypes.SET_QUESTION_INDEX: {
       const _action = action as SessionAction<'SET_QUESTION_INDEX'>

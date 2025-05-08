@@ -4,7 +4,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 import LoadingMain from './components/LoadingMain'
 import Navigation from './components/Navigation'
 import Content from './components/Content'
-import { defaultSession, SessionContext, SessionReducer } from './session'
+import { defaultSession, SessionActionTypes, SessionContext, SessionDispatch, SessionReducer } from './session'
 import { ExamContext } from './exam'
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
       setExam(exam)
     })
 
-    session.update = updateSession
+    session.update = ((type, payload) => updateSession({ type, payload })) as SessionDispatch
 
     setLoading(false)
   }, [])
