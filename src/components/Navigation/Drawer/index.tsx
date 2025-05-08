@@ -72,8 +72,7 @@ const MenuItem = styled.div<ThemedStyles>`
   }
 `
 
-export default ({ open }: DrawerProps): React.JSX.Element => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(open)
+export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
   const [showQuestionType, setShowQuestionType] = React.useState<'all' | 'marked'>('all')
 
   const menu = [
@@ -102,8 +101,8 @@ export default ({ open }: DrawerProps): React.JSX.Element => {
 
   return (
     <DrawerStyles>
-      <Control $open={isOpen} onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <ChevronLeft className="chevron" size={20} /> : <Menu size={20} />}
+      <Control $open={open} onClick={() => toggleOpen()}>
+        {open ? <ChevronLeft className="chevron" size={20} /> : <Menu size={20} />}
       </Control>
 
       <MainMenu>
@@ -128,6 +127,7 @@ export default ({ open }: DrawerProps): React.JSX.Element => {
 
 export interface DrawerProps {
   open: boolean
+  toggleOpen: () => void
 }
 
 export interface ControlStylesProps extends ThemedStyles {

@@ -30,7 +30,7 @@ export default ({ time, children }: NavigationProps): React.JSX.Element => {
 
   return (
     <>
-      <Drawer open={open} />
+      <Drawer open={open} toggleOpen={toggleOpen} />
 
       <Main $open={open}>{children}</Main>
 
