@@ -1,33 +1,34 @@
+import type { Exam, ExamReport } from '../types.ts'
+
 import { dequal } from 'dequal/lite'
 import { lighten } from 'polished'
-import theme from '../styles/theme.js'
-import { Exam, ExamReport } from '../types.js'
+import { Answers } from '../session.ts'
+import theme from '../styles/theme.ts'
 
 /**
- * @param {number} question - The index of the question.
- * @param {boolean[][]} answers - The user's answers to the questions.
- * @param {string[]} fillIns - The user's fill-in-the-blank answers.
- * @param {boolean[]} orders - The user's order list answers.
+ * @param {number} questionIndex - The index of the question.
+ * @param {Answers} answers - The user's answers to the questions.
  * @param {number[]} marked - The indices of the questions that are marked.
+ * @returns {string} - The color for the grid item based on the answer status.
  */
-export function analyzeGridItem(
-  question: number,
-  answers: boolean[][],
-  fillIns: string[],
-  orders: boolean[],
-  marked: number[]
-) {
-  const incomplete = answers.map((el, i) => {
-    if (el.indexOf(true) === -1 && !fillIns[i] && !orders[i]) {
+export function analyzeGridItem(questionIndex: number, answers: Answers, marked: number[]): string {
+  const incomplete = answers.map((answer, i) => {
+    const isMultipleChoiceNotAnswered = Array.isArray(answer) && answer.length === 0
+    const isMultipleAnswerNotAnswered = answer === null
+
+    if (isMultipleChoiceNotAnswered || isMultipleAnswerNotAnswered) {
       return i
     }
   })
 
-  if (marked.indexOf(question) !== -1) {
+  if (marked.includes(questionIndex)) {
+    // Bookmarked grid item (question)
     return lighten(0.25, theme.tertiary)
-  } else if (incomplete.indexOf(question) !== -1) {
+  } else if (incomplete.includes(questionIndex)) {
+    // Incompleted grid item (question)
     return theme.grey[1]
   } else {
+    // Completed grid item (question)
     return lighten(0.1, theme.primary)
   }
 }
