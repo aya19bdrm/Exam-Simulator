@@ -50,7 +50,7 @@ function MultipleChoices({ exam, session: { questionIndex, answers } }: Multiple
     <div>
       {exam.test[questionIndex].choices.map(({ label, text, correct }, i) => (
         // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}> NOTE: display correct only if reviewing
-        <MultipleStyles dir={'rtl'} key={i} onClick={() => onChoose(i)}>
+        <MultipleStyles dir={'ltr'} key={i} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">

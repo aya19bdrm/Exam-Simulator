@@ -19,6 +19,11 @@ function App() {
       setExam(exam)
     })
 
+    // import('./session.json').then((data) => {
+    //   const session: Session = data.default as Session
+    //   setSession(session)
+    // })
+
     session.update = ((type, payload) => updateSession({ type, payload })) as SessionDispatch
 
     setLoading(false)

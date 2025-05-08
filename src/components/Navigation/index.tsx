@@ -14,23 +14,23 @@ export default ({ time, children }: NavigationProps): React.JSX.Element => {
   const session = useContext(SessionContext)
 
   const [open, setOpen] = useState<boolean>(true)
-  const [confirmBeginExam, setConfirmBeginExam] = useState<boolean>(false)
-  const [confirmEndExam, setConfirmEndExam] = useState<boolean>(false)
-  const [confirmTimeExpired, setConfirmTimeExpired] = useState<boolean>(false)
-  const [confirmReviewExam, setConfirmReviewExam] = useState<boolean>(false)
-  const [confirmSaveSession, setConfirmSaveSession] = useState<boolean>(false)
-  const [confirmStartSession, setConfirmStartSession] = useState<boolean>(false)
-  const [confirmPauseTimer, setConfirmPauseTimer] = useState<boolean>(false)
-  const [confirmDeleteExam, setConfirmDeleteExam] = useState<boolean>(false)
-  const [confirmDeleteHistory, setConfirmDeleteHistory] = useState<boolean>(false)
-  const [confirmDeleteSession, setConfirmDeleteSession] = useState<boolean>(false)
-  const [showNotes, setShowNotes] = useState<boolean>(false)
+  // const [confirmBeginExam, setConfirmBeginExam] = useState<boolean>(false)
+  // const [confirmEndExam, setConfirmEndExam] = useState<boolean>(false)
+  // const [confirmTimeExpired, setConfirmTimeExpired] = useState<boolean>(false)
+  // const [confirmReviewExam, setConfirmReviewExam] = useState<boolean>(false)
+  // const [confirmSaveSession, setConfirmSaveSession] = useState<boolean>(false)
+  // const [confirmStartSession, setConfirmStartSession] = useState<boolean>(false)
+  // const [confirmPauseTimer, setConfirmPauseTimer] = useState<boolean>(false)
+  // const [confirmDeleteExam, setConfirmDeleteExam] = useState<boolean>(false)
+  // const [confirmDeleteHistory, setConfirmDeleteHistory] = useState<boolean>(false)
+  // const [confirmDeleteSession, setConfirmDeleteSession] = useState<boolean>(false)
+  // const [showNotes, setShowNotes] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (time === 0) {
-      setConfirmTimeExpired(true)
-    }
-  }, [time])
+  // useEffect(() => {
+  //   if (time === 0) {
+  //     setConfirmTimeExpired(true)
+  //   }
+  // }, [time])
 
   const toggleOpen = () => setOpen(!open)
 

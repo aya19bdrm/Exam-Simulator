@@ -75,10 +75,11 @@ export const GridItem = styled.div<GridItemStylesProps>`
 export default ({ open }: GridProps): React.JSX.Element | null => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
-  const { questionIndex } = session
 
   if (!open || !exam) return null
   // if (exam.test.length === 0) return null
+
+  const { questionIndex } = session
 
   const onClickGridItem = (question: number) => {
     session.update!(SessionActionTypes.SET_QUESTION_INDEX, question)
