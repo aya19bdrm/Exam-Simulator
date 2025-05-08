@@ -32,24 +32,7 @@ export default ({ time, children }: NavigationProps): React.JSX.Element => {
     <>
       <Drawer open={open} />
 
-      {children}
-      {/* <Main $open={open}>
-        {React.Children.map(children, (child) => {
-          if (!React.isValidElement(child)) {
-            return child
-          }
-
-          return React.cloneElement(child as React.ReactElement, {
-            open,
-            confirmPauseTimer,
-            setConfirmReviewExam: () => setConfirmReviewExam(true),
-            setConfirmDeleteExam: () => setConfirmDeleteExam(true),
-            setConfirmDeleteHistory: () => setConfirmDeleteHistory(true),
-            setConfirmStartSession: () => setConfirmStartSession(true),
-            setConfirmDeleteSession: () => setConfirmDeleteSession(true)
-          })
-        })}
-      </Main> */}
+      <Main $open={open}>{children}</Main>
 
       {/* <Footer open={open} {...rest} /> */}
 

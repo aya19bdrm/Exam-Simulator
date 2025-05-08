@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { lighten } from 'polished'
 import { analyzeGridItem } from '../../../utils/analyze'
 import { ExamContext } from '../../../exam'
-import { SessionContext } from '../../../session'
+import { SessionActionTypes, SessionContext } from '../../../session'
 
 export const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 35rem);
@@ -75,16 +75,13 @@ export const GridItem = styled.div<GridItemStylesProps>`
 export default ({ open }: GridProps): React.JSX.Element | null => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
+  const { questionIndex } = session
 
-  const [questionIndex, setQuestionIndex] = useState<number>(session.questionIndex)
-
-  if (!open || !exam) {
-    return null
-  }
+  if (!open || !exam) return null
+  // if (exam.test.length === 0) return null
 
   const onClickGridItem = (question: number) => {
-    session.questionIndex = question
-    setQuestionIndex(question)
+    session.update!({ type: SessionActionTypes.SET_QUESTION_INDEX, payload: question })
   }
 
   return (
