@@ -31,11 +31,12 @@ export interface Session {
   update: SessionDispatch
 }
 
-export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS'
+export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS' | 'SET_TIME'
 export type SessionActions = {
   SET_QUESTION_INDEX: { type: 'SET_QUESTION_INDEX'; payload: number }
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[] }
   SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers }
+  SET_TIME: { type: 'SET_TIME'; payload: number }
 }
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
@@ -53,13 +54,14 @@ export type SessionDispatch<T extends SessionActionTypes = SessionActionTypes> =
 export const SessionActionTypes = {
   SET_QUESTION_INDEX: 'SET_QUESTION_INDEX',
   SET_BOOKMARKS: 'SET_BOOKMARKS',
-  SET_ANSWERS: 'SET_ANSWERS'
+  SET_ANSWERS: 'SET_ANSWERS',
+  SET_TIME: 'SET_TIME'
 } as const
 
 export const defaultSession: Session = {
   questionIndex: 0,
   // question: 0,
-  time: 0,
+  time: 3600,
   // explanation: false,
   bookmarks: [],
   answers: [],
@@ -83,6 +85,11 @@ export const SessionReducer: SessionReducerFunc = (state: Session, action: Sessi
     case SessionActionTypes.SET_ANSWERS: {
       const _action = action as SessionAction<'SET_ANSWERS'>
       return { ...state, answers: _action.payload }
+    }
+
+    case SessionActionTypes.SET_TIME: {
+      const _action = action as SessionAction<'SET_TIME'>
+      return { ...state, time: _action.payload }
     }
 
     default:

@@ -1,6 +1,6 @@
 import type { ThemedStyles } from '../../../types'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { Timer } from '@styled-icons/material/Timer'
@@ -54,7 +54,21 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
 `
 
 export default ({ open, session, questionCount }: ExamFooterProps): React.JSX.Element => {
-  const { questionIndex, time } = session
+  const [timer, setTimer] = React.useState<number>(session.time)
+
+  useEffect(() => {
+    session.update!(SessionActionTypes.SET_TIME, timer)
+    const interval: number = setInterval(() => {
+      setTimer((prev: number) => prev - 1)
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+      session.update!(SessionActionTypes.SET_TIME, timer)
+    }
+  }, [])
+
+  const { questionIndex } = session
 
   const onFirstQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, 0)
   const onPrevQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex - 1)
@@ -62,11 +76,11 @@ export default ({ open, session, questionCount }: ExamFooterProps): React.JSX.El
   const onLastQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionCount - 1)
 
   return (
-    <ExamFooter $open={open} $warning={time < 120}>
+    <ExamFooter $open={open} $warning={timer < 120}>
       <div className="timer">
         <Timer size={30} />
 
-        <div data-test="Timer">{formatTimer(time)}</div>
+        <div data-test="Timer">{formatTimer(timer)}</div>
       </div>
 
       <div className="arrows">

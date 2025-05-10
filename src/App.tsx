@@ -36,7 +36,7 @@ function App() {
   return (
     <ExamContext.Provider value={exam}>
       <SessionContext.Provider value={session}>
-        <Navigation time={0}>
+        <Navigation>
           <Content page={page} open={true} />
         </Navigation>
       </SessionContext.Provider>

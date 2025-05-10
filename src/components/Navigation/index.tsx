@@ -9,7 +9,7 @@ import Footer from './Footer'
 
 // const Navigation: React.FC<NavigationProps> = ({})=>{}
 
-export default ({ time, children }: NavigationProps): React.JSX.Element => {
+export default ({ children }: NavigationProps): React.JSX.Element => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
 
@@ -126,7 +126,5 @@ export default ({ time, children }: NavigationProps): React.JSX.Element => {
 }
 
 export interface NavigationProps {
-  // open: boolean
-  time: number
   children: React.ReactElement | React.ReactElement[]
 }

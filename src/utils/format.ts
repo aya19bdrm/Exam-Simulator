@@ -19,25 +19,14 @@ export function formatDate(date: number | string | Date): string {
 }
 
 /**
- * Format a date string to 'MM/dd/yyyy HH:mm'.
- * @param {number} sec - The number of seconds to convert.
- * @return {string} - The formatted time string.
+ * Format seconds into MM:SS
+ * @param {number} sec - The time in seconds to format.
+ * @returns {string}
  */
 export function formatTimer(sec: number): string {
-  let str = new Date(sec * 1000).toISOString().substring(11, 8)
-  return formatTimeString(str)
-
-  /**
-   * @param {string} str - The string to format.
-   * @returns {string} - The formatted string.
-   */
-  function formatTimeString(str: string): string {
-    var re = /0|:/
-    if (re.test(str[0]) && str.length > 4) {
-      return formatTimeString(str.slice(1))
-    }
-    return str
-  }
+  const minutes = Math.floor(sec / 60)
+  const seconds = sec % 60
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 }
 
 /**
