@@ -1,5 +1,5 @@
 import type { Exam, ThemedStyles } from '../../../types'
-import type { Session } from '../../../session'
+import { SessionActionTypes, type Session } from '../../../session'
 
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -36,7 +36,7 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
 `
 
-function TopDisplay({ exam, session: { questionIndex, bookmarks } }: ExamTopDisplayProps): React.JSX.Element {
+function TopDisplay({ exam, session: { questionIndex, bookmarks, update } }: ExamTopDisplayProps): React.JSX.Element {
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(questionIndex))
 
   useEffect(() => {
@@ -45,11 +45,14 @@ function TopDisplay({ exam, session: { questionIndex, bookmarks } }: ExamTopDisp
 
   const onBookmarkQuestion = (question: number, marked: boolean) => {
     setBookmarked(marked)
+
     if (marked) {
       bookmarks.push(question)
     } else {
       bookmarks.splice(bookmarks.indexOf(question), 1)
     }
+
+    update(SessionActionTypes.SET_BOOKMARKS, bookmarks)
   }
 
   return (

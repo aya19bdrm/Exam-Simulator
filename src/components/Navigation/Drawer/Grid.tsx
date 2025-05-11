@@ -1,6 +1,6 @@
 import type { QuestionFilter, ThemedStyles } from '../../../types'
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { getGridItemBackground } from '../../../utils/analyze'
@@ -72,11 +72,17 @@ export const GridItem = styled.div<GridItemStylesProps>`
   cursor: pointer;
 `
 
-export default ({ open, show }: GridProps): React.JSX.Element | null => {
+export default ({ open, show }: GridProps): React.JSX.Element => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
+  const [bookmarks, setBookmarks] = React.useState<number[]>([])
 
-  if (!open || !exam || exam.test.length === 0) return null
+  useEffect(() => {
+    console.log('📢 | useEffect | useEffect:', useEffect)
+    setBookmarks(session.bookmarks)
+  }, [session])
+
+  if (!open || !exam || exam.test.length === 0) return <></>
 
   const answered = session.answers
     .map((answer, i) => {
@@ -115,7 +121,7 @@ export default ({ open, show }: GridProps): React.JSX.Element | null => {
 
       <div className="grid">
         {show === 'marked'
-          ? session.bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
+          ? bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
           : show === 'answered'
             ? answered.map((index, i) => <GridItemCreator i={i} index={index} />)
             : show === 'incomplete'
@@ -135,7 +141,7 @@ export default ({ open, show }: GridProps): React.JSX.Element | null => {
       <GridItem
         key={i}
         data-test={`Grid Item ${i}`}
-        $background={getGridItemBackground(index, session.bookmarks, answered)}
+        $background={getGridItemBackground(index, bookmarks, answered)}
         $selected={index === session.questionIndex}
         onClick={() => onClickGridItem(i)}
       >
