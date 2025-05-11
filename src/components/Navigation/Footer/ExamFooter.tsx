@@ -71,8 +71,14 @@ export default ({ open, session, questionCount }: ExamFooterProps): React.JSX.El
   const { questionIndex } = session
 
   const onFirstQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, 0)
-  const onPrevQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex - 1)
-  const onNextQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex + 1)
+  const onPrevQuestion = () => {
+    if (questionIndex === 0) return
+    session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex - 1)
+  }
+  const onNextQuestion = () => {
+    if (questionIndex === questionCount - 1) return
+    session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex + 1)
+  }
   const onLastQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionCount - 1)
 
   return (
