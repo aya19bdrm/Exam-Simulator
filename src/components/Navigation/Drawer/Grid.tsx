@@ -1,9 +1,9 @@
-import type { ThemedStyles } from '../../../types'
+import type { QuestionFilter, ThemedStyles } from '../../../types'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { analyzeGridItem } from '../../../utils/analyze'
+import { getGridItemBackground } from '../../../utils/analyze'
 import { ExamContext } from '../../../exam'
 import { SessionActionTypes, SessionContext } from '../../../session'
 
@@ -72,16 +72,25 @@ export const GridItem = styled.div<GridItemStylesProps>`
   cursor: pointer;
 `
 
-export default ({ open }: GridProps): React.JSX.Element | null => {
+export default ({ open, show }: GridProps): React.JSX.Element | null => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
 
-  if (!open || !exam) return null
-  // if (exam.test.length === 0) return null
+  if (!open || !exam || exam.test.length === 0) return null
 
-  const { questionIndex } = session
+  const answered = session.answers
+    .map((answer, i) => {
+      const isMultipleChoiceAnswered = answer !== null && !Number.isNaN(answer)
+      const isMultipleAnswerAnswered = Array.isArray(answer) && answer.length > 0
+
+      if (isMultipleChoiceAnswered || isMultipleAnswerAnswered) {
+        return i
+      }
+    })
+    .filter((i) => i !== undefined)
 
   const onClickGridItem = (question: number) => {
+    if (question === session.questionIndex) return
     session.update!(SessionActionTypes.SET_QUESTION_INDEX, question)
   }
 
@@ -105,30 +114,40 @@ export default ({ open }: GridProps): React.JSX.Element | null => {
       </div>
 
       <div className="grid">
-        {Array(exam.test.length)
-          .fill(null)
-          .map((_, i) => {
-            const background = analyzeGridItem(i, session.answers, session.bookmarks)
-
-            return (
-              <GridItem
-                key={i}
-                data-test={`Grid Item ${i}`}
-                $background={background}
-                $selected={i === questionIndex}
-                onClick={() => onClickGridItem(i)}
-              >
-                {i + 1}
-              </GridItem>
-            )
-          })}
+        {show === 'marked'
+          ? session.bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
+          : show === 'answered'
+            ? answered.map((index, i) => <GridItemCreator i={i} index={index} />)
+            : show === 'incomplete'
+              ? Array(exam.test.length)
+                  .fill(null)
+                  .map((_, i) => (answered.includes(i) ? null : <GridItemCreator i={i} index={i} />))
+                  .filter((item) => item !== null)
+              : Array(exam.test.length)
+                  .fill(null)
+                  .map((_, i) => <GridItemCreator i={i} index={i} />)}
       </div>
     </GridStyles>
   )
+
+  function GridItemCreator({ i, index }) {
+    return (
+      <GridItem
+        key={i}
+        data-test={`Grid Item ${i}`}
+        $background={getGridItemBackground(index, session.bookmarks, answered)}
+        $selected={index === session.questionIndex}
+        onClick={() => onClickGridItem(i)}
+      >
+        {index + 1}
+      </GridItem>
+    )
+  }
 }
 
 export interface GridProps {
   open: boolean
+  show: QuestionFilter
 }
 
 export interface GridItemStylesProps extends ThemedStyles {

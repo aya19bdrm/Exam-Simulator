@@ -2,25 +2,15 @@ import type { Exam, ExamReport } from '../types.ts'
 
 import { dequal } from 'dequal/lite'
 import { lighten } from 'polished'
-import { Answers } from '../session.ts'
 import theme from '../styles/theme.ts'
 
 /**
  * @param {number} questionIndex - The index of the question.
- * @param {Answers} answers - The user's answers to the questions.
+ * @param {number[]} answered - The user's answers to the questions.
  * @param {number[]} marked - The indices of the questions that are marked.
  * @returns {string} - The color for the grid item based on the answer status.
  */
-export function analyzeGridItem(questionIndex: number, answers: Answers, marked: number[]): string {
-  const answered = answers.map((answer, i) => {
-    const isMultipleChoiceAnswered = !Number.isNaN(answer)
-    const isMultipleAnswerAnswered = Array.isArray(answer) && answer.length > 0
-
-    if (isMultipleChoiceAnswered || isMultipleAnswerAnswered) {
-      return i
-    }
-  })
-
+export function getGridItemBackground(questionIndex: number, marked: number[], answered: number[]): string {
   if (marked.includes(questionIndex)) {
     // Bookmarked grid item (question)
     return lighten(0.25, theme.tertiary)

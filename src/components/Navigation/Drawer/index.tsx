@@ -1,4 +1,4 @@
-import type { ThemedStyles } from '../../../types'
+import type { QuestionFilter, ThemedStyles } from '../../../types'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
 // import { Save } from '@styled-icons/material/Save'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
 import { Bookmark } from '@styled-icons/material/Bookmark'
+import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
 // import { Pause } from '@styled-icons/material/Pause'
 // import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
@@ -49,12 +50,13 @@ const MainMenu = styled.div<ThemedStyles>`
   border-right: 1px solid ${(props) => props.theme.grey[1]};
 `
 
-const MenuItem = styled.div<ThemedStyles>`
+const MenuItem = styled.div<MenuItemStylesProps>`
   height: 5rem;
   display: grid;
   grid-template-columns: 5rem 1fr;
   align-items: center;
   justify-items: center;
+  background: ${(props) => (props.$selected ? props.theme.grey[2] : 'none')};
   color: ${(props) => props.theme.black};
   cursor: pointer;
   &:hover {
@@ -73,20 +75,36 @@ const MenuItem = styled.div<ThemedStyles>`
 `
 
 export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
-  const [showQuestionType, setShowQuestionType] = React.useState<'all' | 'marked'>('all')
+  const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
-  const menu = [
+  const menu: MenuSections[] = [
     {
-      type: 'menu',
+      type: 'filter',
       text: 'All Questions',
       icon: <FormatListNumbered size={20} />,
-      onClick: () => setShowQuestionType('all')
+      filter: 'all',
+      onClick: () => setFilter('all')
     },
     {
-      type: 'menu',
+      type: 'filter',
       text: 'Marked Questions',
       icon: <Bookmark size={20} />,
-      onClick: () => setShowQuestionType('marked')
+      filter: 'marked',
+      onClick: () => setFilter('marked')
+    },
+    {
+      type: 'filter',
+      text: 'Answered Questions',
+      icon: <CheckBox size={20} />,
+      filter: 'answered',
+      onClick: () => setFilter('answered')
+    },
+    {
+      type: 'filter',
+      text: 'Unanswered Questions',
+      icon: <CheckBoxOutlineBlank size={20} />,
+      filter: 'incomplete',
+      onClick: () => setFilter('incomplete')
     },
     { type: 'exam-grid' }
     // {
@@ -106,20 +124,21 @@ export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
       </Control>
 
       <MainMenu>
-        {menu.map((section, i) => {
-          if (section.type === 'menu') {
-            return (
-              <MenuItem key={section.text} data-test={section.text} onClick={section.onClick}>
-                {section.icon}
-                <div>{section.text}</div>
-              </MenuItem>
-            )
-            // } else if (section.type === 'stats') {
-            //   return <Stats key={i} open={open} exam={exam} />
-          } else if (section.type === 'exam-grid') {
-            return <Grid key={i} open={open} />
-          }
-        })}
+        {menu.map((section, i) =>
+          section.type === 'filter' ? (
+            <MenuItem
+              key={i}
+              data-test={section.text}
+              $selected={filter === section.filter}
+              onClick={() => setFilter(section.filter)}
+            >
+              {section.icon}
+              <div>{section.text}</div>
+            </MenuItem>
+          ) : section.type === 'exam-grid' ? (
+            <Grid key={i} open={open} show={filter} />
+          ) : null
+        )}
       </MainMenu>
     </DrawerStyles>
   )
@@ -133,3 +152,19 @@ export interface DrawerProps {
 export interface ControlStylesProps extends ThemedStyles {
   $open: boolean
 }
+
+export interface MenuItemStylesProps extends ThemedStyles {
+  $selected: boolean
+}
+
+export type MenuSections =
+  | {
+      type: 'filter'
+      text: string
+      icon: React.ReactNode
+      filter: QuestionFilter
+      onClick: () => void
+    }
+  | {
+      type: 'exam-grid'
+    }

@@ -1,6 +1,6 @@
 {
   "questionIndex": 0,
   "time": 1200,
-  "bookmarks": [0, 1],
-  "answers": [2, [0, 3]]
+  "bookmarks": [0, 4],
+  "answers": [2, 1, null, 1, 0]
 }
