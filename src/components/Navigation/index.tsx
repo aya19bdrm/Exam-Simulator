@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import type { Session, SessionDispatch } from '../../session'
+
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Drawer from './Drawer'
-// import Footer from './Footer'
+import Footer from './Footer'
 // import Confirm from '../Confirm'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
-import { SessionContext } from '../../session'
-import Footer from './Footer'
+import { SessionContext, SessionReducer } from '../../session'
 
 // const Navigation: React.FC<NavigationProps> = ({})=>{}
 
-export default ({ children }: NavigationProps): React.JSX.Element => {
+export default ({ children, startingSession }: NavigationProps): React.JSX.Element => {
+  let [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
-  const session = useContext(SessionContext)
 
   const [open, setOpen] = useState<boolean>(true)
   // const [confirmBeginExam, setConfirmBeginExam] = useState<boolean>(false)
@@ -26,23 +27,34 @@ export default ({ children }: NavigationProps): React.JSX.Element => {
   // const [confirmDeleteSession, setConfirmDeleteSession] = useState<boolean>(false)
   // const [showNotes, setShowNotes] = useState<boolean>(false)
 
+  session.update = ((type, payload) => {
+    updateSession({ type, payload })
+  }) as SessionDispatch
+
   // useEffect(() => {
   //   if (time === 0) {
   //     setConfirmTimeExpired(true)
   //   }
   // }, [time])
 
+  useEffect(() => {
+    session.update = ((type, payload) => {
+      updateSession({ type, payload })
+    }) as SessionDispatch
+  }, [startingSession])
+
   const toggleOpen = () => setOpen(!open)
 
   return (
-    <>
-      <Drawer open={open} toggleOpen={toggleOpen} />
+    <SessionContext.Provider value={session}>
+      <>
+        <Drawer open={open} toggleOpen={toggleOpen} />
 
-      <Main $open={open}>{children}</Main>
+        <Main $open={open}>{children}</Main>
 
-      {exam && <Footer open={open} exam={exam} session={session} />}
+        {exam && <Footer open={open} exam={exam} session={session} />}
 
-      {/* <Confirm
+        {/* <Confirm
         show={confirmBeginExam}
         title="Start Exam"
         message={`Do you want to start ${exam ? exam.title : 'this exam'} ?`}
@@ -121,10 +133,12 @@ export default ({ children }: NavigationProps): React.JSX.Element => {
         onConfirm={handleDeleteSession}
         onClose={() => setConfirmDeleteSession(false)}
       /> */}
-    </>
+      </>
+    </SessionContext.Provider>
   )
 }
 
 export interface NavigationProps {
   children: React.ReactElement | React.ReactElement[]
+  startingSession: Session
 }

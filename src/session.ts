@@ -11,14 +11,8 @@ export interface Session {
   /** the question number */
   questionIndex: number
 
-  // /** the current question number */
-  // question: number
-
   /** the time elapsed */
   time: number
-
-  // /** whether the question is being explained */
-  // explanation: boolean
 
   /** the list of bookmarked questions */
   bookmarks: number[]
@@ -60,9 +54,7 @@ export const SessionActionTypes = {
 
 export const defaultSession: Session = {
   questionIndex: 0,
-  // question: 0,
   time: 3600,
-  // explanation: false,
   bookmarks: [],
   answers: [],
   update: () => {}
