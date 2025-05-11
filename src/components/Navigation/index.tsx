@@ -11,7 +11,7 @@ import { SessionContext, SessionReducer } from '../../session'
 // const Navigation: React.FC<NavigationProps> = ({})=>{}
 
 export default ({ children, startingSession }: NavigationProps): React.JSX.Element => {
-  let [session, updateSession] = useReducer(SessionReducer, startingSession)
+  const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
 
   const [open, setOpen] = useState<boolean>(true)
