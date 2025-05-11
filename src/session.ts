@@ -70,26 +70,26 @@ export const defaultSession: Session = {
 
 export const SessionContext = createContext<Session>(defaultSession)
 
-export const SessionReducer: SessionReducerFunc = (state: Session, action: SessionAction): Session => {
-  switch (action.type) {
+export const SessionReducer: SessionReducerFunc = (state: Session, { type, payload }: SessionAction): Session => {
+  switch (type) {
     case SessionActionTypes.SET_QUESTION_INDEX: {
-      const _action = action as SessionAction<'SET_QUESTION_INDEX'>
-      return { ...state, questionIndex: _action.payload }
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, questionIndex: value }
     }
 
     case SessionActionTypes.SET_BOOKMARKS: {
-      const _action = action as SessionAction<'SET_BOOKMARKS'>
-      return { ...state, bookmarks: _action.payload }
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, bookmarks: value }
     }
 
     case SessionActionTypes.SET_ANSWERS: {
-      const _action = action as SessionAction<'SET_ANSWERS'>
-      return { ...state, answers: _action.payload }
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, answers: value }
     }
 
     case SessionActionTypes.SET_TIME: {
-      const _action = action as SessionAction<'SET_TIME'>
-      return { ...state, time: _action.payload }
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, time: value }
     }
 
     default:
