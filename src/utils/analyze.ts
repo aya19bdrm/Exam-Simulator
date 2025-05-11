@@ -12,11 +12,11 @@ import theme from '../styles/theme.ts'
  * @returns {string} - The color for the grid item based on the answer status.
  */
 export function analyzeGridItem(questionIndex: number, answers: Answers, marked: number[]): string {
-  const incomplete = answers.map((answer, i) => {
-    const isMultipleChoiceNotAnswered = Array.isArray(answer) && answer.length === 0
-    const isMultipleAnswerNotAnswered = answer === null
+  const answered = answers.map((answer, i) => {
+    const isMultipleChoiceAnswered = !Number.isNaN(answer)
+    const isMultipleAnswerAnswered = Array.isArray(answer) && answer.length > 0
 
-    if (isMultipleChoiceNotAnswered || isMultipleAnswerNotAnswered) {
+    if (isMultipleChoiceAnswered || isMultipleAnswerAnswered) {
       return i
     }
   })
@@ -24,12 +24,12 @@ export function analyzeGridItem(questionIndex: number, answers: Answers, marked:
   if (marked.includes(questionIndex)) {
     // Bookmarked grid item (question)
     return lighten(0.25, theme.tertiary)
-  } else if (incomplete.includes(questionIndex)) {
-    // Incompleted grid item (question)
-    return theme.grey[1]
-  } else {
+  } else if (answered.includes(questionIndex)) {
     // Completed grid item (question)
     return lighten(0.1, theme.primary)
+  } else {
+    // Incompleted grid item (question)
+    return theme.grey[1]
   }
 }
 
