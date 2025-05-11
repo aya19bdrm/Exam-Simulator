@@ -1,7 +1,7 @@
 import type { Exam, ThemedStyles } from '../../../types'
 import type { Session } from '../../../session'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
@@ -38,6 +38,10 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
 
 function TopDisplay({ exam, session: { questionIndex, bookmarks } }: ExamTopDisplayProps): React.JSX.Element {
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(questionIndex))
+
+  useEffect(() => {
+    setBookmarked(bookmarks.includes(questionIndex))
+  }, [questionIndex])
 
   const onBookmarkQuestion = (question: number, marked: boolean) => {
     setBookmarked(marked)
