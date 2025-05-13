@@ -76,10 +76,9 @@ export const GridItem = styled.div<GridItemStylesProps>`
 export default ({ open, show }: GridProps): React.JSX.Element => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
-  const [bookmarks, setBookmarks] = React.useState<number[]>([])
+  const [bookmarks, setBookmarks] = React.useState<number[]>(session.bookmarks)
 
   useEffect(() => {
-    console.log('📢 | useEffect | useEffect:', useEffect)
     setBookmarks(session.bookmarks)
   }, [session])
 

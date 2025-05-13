@@ -1,10 +1,10 @@
-import { Exam, ThemedStyles } from '../../../types'
+import type { Exam, ThemedStyles } from '../../../types'
 import type { LangCode } from '../../../settings'
+import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
 import ExamFooter from './ExamFooter'
-import { Session } from '../../../session'
 
 const FooterStyles = styled.div<FooterStylesProps>`
   position: fixed;

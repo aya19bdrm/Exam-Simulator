@@ -21,7 +21,6 @@ export interface Session {
   answers: Answers
 
   /**  */
-  // update?: React.ActionDispatch<[action: SessionAction<SessionActionTypes>]>
   update: SessionDispatch
 }
 

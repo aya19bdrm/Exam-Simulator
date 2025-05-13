@@ -18,7 +18,7 @@ const QuestionStyles = styled.div`
 // `
 
 const NormalText = styled.div`
-  font: 1.4rem 'Open Sans';
+  font: 2rem 'Open Sans';
   margin-bottom: 0.5rem;
 `
 

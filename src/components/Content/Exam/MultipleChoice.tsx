@@ -24,7 +24,7 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
   .text {
     display: flex;
-    font: 1.4rem 'Open Sans';
+    font: 2rem 'Open Sans';
     color: ${(props) =>
       props.$review && props.$correct
         ? darken(0.3, props.theme.quatro)

@@ -15,11 +15,11 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   & > :first-child {
     display: flex;
     align-items: center;
-    font: 2.5rem 'Open Sans';
+    font: 4rem 'Open Sans';
     font-weight: 700;
     color: ${(props) => props.theme.grey[10]};
     .bookmarked {
-      font: 1.1rem 'Open Sans';
+      font: 1.5rem 'Open Sans';
       font-weight: 700;
       color: ${(props) => props.theme.grey[10]};
       margin-left: 0.75rem;
