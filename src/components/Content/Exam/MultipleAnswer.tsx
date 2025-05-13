@@ -5,8 +5,9 @@ import React, { useState } from 'react'
 import { CheckBox } from '@styled-icons/material/CheckBox'
 import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
 import { MultipleStyles } from './MultipleChoice'
+import { type Lang } from '../../../settings'
 
-function MultipleAnswer({ exam, session: { questionIndex, answers } }: MultipleAnswerProps): React.JSX.Element {
+export default ({ exam, session: { questionIndex, answers }, lang }: MultipleAnswerProps): React.JSX.Element => {
   const answer = answers[questionIndex] as AnswerOfMultipleAnswer
   const [values, setValues] = useState<AnswerOfMultipleAnswer>(answer)
 
@@ -26,8 +27,9 @@ function MultipleAnswer({ exam, session: { questionIndex, answers } }: MultipleA
   return (
     <div>
       {exam.test[questionIndex].choices.map(({ label, text }, i) => (
-        // <MultipleStyles key={i} $correct={exam.test[questionIndex].choices[i].correct} onClick={() => onChoose(i)}> NOTE: display correct only if reviewing
-        <MultipleStyles key={i} onClick={() => onChoose(i)}>
+        // NOTE: display correct only if reviewing
+        // <MultipleStyles key={i} $correct={exam.test[questionIndex].choices[i].correct} onClick={() => onChoose(i)}>
+        <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}
 
           <div className="text">
@@ -41,9 +43,8 @@ function MultipleAnswer({ exam, session: { questionIndex, answers } }: MultipleA
   )
 }
 
-export default React.memo(MultipleAnswer)
-
 export interface MultipleAnswerProps {
   exam: Exam
   session: Session
+  lang: Lang
 }

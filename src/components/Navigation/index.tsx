@@ -1,4 +1,5 @@
 import type { Session, SessionDispatch } from '../../session'
+import type { LangCode } from '../../settings'
 
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Drawer from './Drawer'
@@ -10,7 +11,7 @@ import { SessionContext, SessionReducer } from '../../session'
 
 // const Navigation: React.FC<NavigationProps> = ({})=>{}
 
-export default ({ children, startingSession }: NavigationProps): React.JSX.Element => {
+export default ({ children, startingSession, setLang }: NavigationProps): React.JSX.Element => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
 
@@ -52,7 +53,7 @@ export default ({ children, startingSession }: NavigationProps): React.JSX.Eleme
 
         <Main $open={open}>{children}</Main>
 
-        {exam && <Footer open={open} exam={exam} session={session} />}
+        {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 
         {/* <Confirm
         show={confirmBeginExam}
@@ -141,4 +142,5 @@ export default ({ children, startingSession }: NavigationProps): React.JSX.Eleme
 export interface NavigationProps {
   children: React.ReactElement | React.ReactElement[]
   startingSession: Session
+  setLang: (lang: LangCode) => void
 }

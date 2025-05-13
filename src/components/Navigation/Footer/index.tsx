@@ -1,4 +1,5 @@
 import { Exam, ThemedStyles } from '../../../types'
+import type { LangCode } from '../../../settings'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -17,10 +18,10 @@ const FooterStyles = styled.div<FooterStylesProps>`
   border-top: 1px solid ${(props) => props.theme.grey[1]};
 `
 
-export default ({ open, exam, session }: NavigationFooterProps): React.JSX.Element => {
+export default ({ open, exam, session, setLang }: NavigationFooterProps): React.JSX.Element => {
   return (
     <FooterStyles $open={open}>
-      <ExamFooter open={open} session={session} questionCount={exam.test.length} />
+      <ExamFooter open={open} session={session} questionCount={exam.test.length} setLang={setLang} />
     </FooterStyles>
   )
 }
@@ -29,6 +30,7 @@ export interface NavigationFooterProps {
   open: boolean
   exam: Exam
   session: Session
+  setLang: (lang: LangCode) => void
 }
 
 export interface FooterStylesProps extends ThemedStyles {

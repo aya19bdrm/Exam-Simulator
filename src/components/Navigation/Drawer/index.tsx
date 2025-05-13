@@ -13,6 +13,7 @@ import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
 // import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
 // import Stats from './Stats'
+import { translate } from '../../../settings'
 
 const DrawerStyles = styled.div<ThemedStyles>`
   position: fixed;
@@ -80,28 +81,28 @@ export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
   const menu: MenuSections[] = [
     {
       type: 'filter',
-      text: 'All Questions',
+      text: translate('nav.drawer.all'),
       icon: <FormatListNumbered size={20} />,
       filter: 'all',
       onClick: () => setFilter('all')
     },
     {
       type: 'filter',
-      text: 'Marked Questions',
+      text: translate('nav.drawer.marked'),
       icon: <Bookmark size={20} />,
       filter: 'marked',
       onClick: () => setFilter('marked')
     },
     {
       type: 'filter',
-      text: 'Answered Questions',
+      text: translate('nav.drawer.answered'),
       icon: <CheckBox size={20} />,
       filter: 'answered',
       onClick: () => setFilter('answered')
     },
     {
       type: 'filter',
-      text: 'Unanswered Questions',
+      text: translate('nav.drawer.incomplete'),
       icon: <CheckBoxOutlineBlank size={20} />,
       filter: 'incomplete',
       onClick: () => setFilter('incomplete')

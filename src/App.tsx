@@ -6,12 +6,16 @@ import Navigation from './components/Navigation'
 import Content from './components/Content'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
+import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
+import { useForceUpdate, useLocalStorage } from './@mantine/hooks'
 
 export default ({}) => {
+  const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
   const [loading, setLoading] = useState<number>(2)
   const [page, setPage] = useState<PageTypes>('exam')
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
+  const forceUpdate = useForceUpdate()
 
   useEffect(() => {
     import('./exam.json').then((data) => {
@@ -29,15 +33,29 @@ export default ({}) => {
     })
   }, [])
 
+  useEffect(() => {
+    import(`./langs/${lang.code}.json`).then((data) => {
+      const translations: object = data.default as object
+
+      setTranslation(lang, translations)
+      forceUpdate()
+    })
+
+    document.documentElement.lang = lang.code
+    // document.documentElement.dir = lang.dir
+  }, [lang])
+
   if (loading > 0) {
     return <LoadingMain size={100} height={100} />
   }
 
   return (
-    <ExamContext.Provider value={exam}>
-      <Navigation startingSession={session}>
-        <Content page={page} open={true} />
-      </Navigation>
-    </ExamContext.Provider>
+    <LangContext.Provider value={lang}>
+      <ExamContext.Provider value={exam}>
+        <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])}>
+          <Content page={page} open={true} />
+        </Navigation>
+      </ExamContext.Provider>
+    </LangContext.Provider>
   )
 }

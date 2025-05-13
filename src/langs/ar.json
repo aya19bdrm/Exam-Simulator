@@ -1,0 +1,33 @@
+{
+  "loading": "جارٍ التحميل ...",
+  "nav": {
+    "drawer": {
+      "all": "كل الأسئلة",
+      "marked": "الأسئلة المعلّمة",
+      "answered": "الأسئلة المجابة",
+      "incomplete": "الأسئلة الناقصة"
+    },
+    "grid": {
+      "complete": "مكتمل",
+      "marked": "معلّم",
+      "incomplete": "ناقص"
+    }
+  },
+  "content": {
+    "cover": {
+      "logo-alt": "شعار الإختبار"
+    },
+    "exam": {
+      "top-display": {
+        "question": "السؤال $1 من $2"
+      },
+      "explain": {
+        "explain": "التفسير",
+        "yours": "إجابتك ",
+        "answer": "الإجابة الصحيحة ",
+        "correct": "صحيح",
+        "incorrect": "خطأ"
+      }
+    }
+  }
+}

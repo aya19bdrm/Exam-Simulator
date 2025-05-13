@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
 import { createExplanation } from '../../../utils/create'
+import { translate } from '../../../settings'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
   background: ${(props) => lighten(0.25, props.theme.quatro)};
@@ -45,15 +46,19 @@ export default ({ explanationRef, question, answers }: ExplainationProps): React
   return (
     <ExplanationStyles ref={explanationRef} $status={status}>
       <div>
-        Your answer is <span className="status">{status ? 'correct' : 'incorrect'}</span>
+        {translate('content.exam.explain.yours')}
+        <span className="status">
+          {status ? translate('content.exam.explain.correct') : translate('content.exam.explain.incorrect')}
+        </span>
       </div>
 
       <div>
-        The correct answer is <span className="correct">{createExplanation(question)}</span>
+        {translate('content.exam.explain.answer')}
+        <span className="correct">{createExplanation(question)}</span>
       </div>
 
       <div className="explanation">
-        <div>Explanation</div>
+        <div>{translate('content.exam.explain.explain')}</div>
 
         <div>
           {/* {correctChoice.explanation && <Image  src={text} />} */}

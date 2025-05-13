@@ -1,4 +1,5 @@
 import type { ThemedStyles } from '../../../types'
+import type { LangCode } from '../../../settings'
 
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
@@ -7,6 +8,7 @@ import { Timer } from '@styled-icons/material/Timer'
 import { SkipPrevious } from '@styled-icons/material/SkipPrevious'
 import { KeyboardArrowRight } from '@styled-icons/material/KeyboardArrowRight'
 import { KeyboardArrowLeft } from '@styled-icons/material/KeyboardArrowLeft'
+import { Language } from '@styled-icons/material/Language'
 import { SkipNext } from '@styled-icons/material/SkipNext'
 import { formatTimer } from '../../../utils/format'
 import { Session, SessionActionTypes } from '../../../session'
@@ -49,11 +51,26 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     }
     svg {
       color: ${(props) => props.theme.black};
+      margin-right: 0.5rem;
+    }
+  }
+  .language {
+    height: 5rem;
+    display: grid;
+    justify-self: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: ${(props) => lighten(0.1, props.theme.primary)};
+    }
+    svg {
+      color: ${(props) => props.theme.black};
     }
   }
 `
 
-export default ({ open, session, questionCount }: ExamFooterProps): React.JSX.Element => {
+export default ({ open, session, questionCount, setLang }: ExamFooterProps): React.JSX.Element => {
   const [timer, setTimer] = React.useState<number>(session.time)
 
   useEffect(() => {
@@ -106,6 +123,10 @@ export default ({ open, session, questionCount }: ExamFooterProps): React.JSX.El
           <SkipNext size={30} />
         </div>
       </div>
+
+      <div className="language" onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
+        <Language size={30} />
+      </div>
     </ExamFooter>
   )
 }
@@ -114,6 +135,7 @@ export interface ExamFooterProps {
   open: boolean
   session: Session
   questionCount: number
+  setLang: (lang: LangCode) => void
 }
 
 export interface ExamFooterStylesProps extends ThemedStyles {

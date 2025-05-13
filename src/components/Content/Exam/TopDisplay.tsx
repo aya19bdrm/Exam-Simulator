@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Bookmark } from '@styled-icons/material/Bookmark'
 import { BookmarkBorder } from '@styled-icons/material/BookmarkBorder'
+import { type Lang, translate } from '../../../settings'
 
 const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   display: flex;
@@ -36,7 +37,11 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
 `
 
-function TopDisplay({ exam, session: { questionIndex, bookmarks, update } }: ExamTopDisplayProps): React.JSX.Element {
+export default ({
+  exam,
+  session: { questionIndex, bookmarks, update },
+  lang
+}: ExamTopDisplayProps): React.JSX.Element => {
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(questionIndex))
 
   useEffect(() => {
@@ -58,8 +63,8 @@ function TopDisplay({ exam, session: { questionIndex, bookmarks, update } }: Exa
   return (
     <TopDisplayStyles $bookmarked={bookmarked}>
       <div>
-        <div>
-          Question {questionIndex + 1} of {exam.test.length}
+        <div dir={lang.dir}>
+          {translate('content.exam.top-display.question', [questionIndex + 1, exam.test.length])}
         </div>
       </div>
 
@@ -72,11 +77,10 @@ function TopDisplay({ exam, session: { questionIndex, bookmarks, update } }: Exa
   )
 }
 
-export default React.memo(TopDisplay)
-
 export interface ExamTopDisplayProps {
   exam: Exam
   session: Session
+  lang: Lang
 }
 
 export interface ExamTopDisplayStylesProps extends ThemedStyles {

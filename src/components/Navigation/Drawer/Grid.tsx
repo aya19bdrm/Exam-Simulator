@@ -6,6 +6,7 @@ import { lighten } from 'polished'
 import { getGridItemBackground } from '../../../utils/analyze'
 import { ExamContext } from '../../../exam'
 import { SessionActionTypes, SessionContext } from '../../../session'
+import { translate } from '../../../settings'
 
 export const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 35rem);
@@ -105,17 +106,17 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
       <div className="legend">
         <div className="item">
           <div className="complete" />
-          <div>Complete</div>
+          <div>{translate('nav.grid.complete')}</div>
         </div>
 
         <div className="item">
           <div className="bookmarked" />
-          <div>Bookmarked</div>
+          <div>{translate('nav.grid.marked')}</div>
         </div>
 
         <div className="item">
           <div className="incomplete" />
-          <div>Incomplete</div>
+          <div>{translate('nav.grid.incomplete')}</div>
         </div>
       </div>
 

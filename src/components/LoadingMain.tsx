@@ -3,6 +3,7 @@ import type { ThemedStyles } from '../types'
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Repeat } from '@styled-icons/material'
+import { translate } from '../settings'
 
 export const rotate = keyframes`
   from {
@@ -43,7 +44,7 @@ export const LoadingStyles = styled.div<LoadingStylesProps>`
 export default ({ size, height }) => (
   <LoadingStyles color="grey" height={height}>
     <div className="title">
-      <span>Creativity House - محاكي الإختبار</span>
+      <span>{translate('loading')}</span>
     </div>
 
     <Repeat size={size} />

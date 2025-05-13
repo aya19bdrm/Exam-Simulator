@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
+import { type Lang } from '../../../settings'
 
 export const MultipleStyles = styled.div<MultipleStylesProps>`
   display: grid;
@@ -37,7 +38,7 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-function MultipleChoices({ exam, session: { questionIndex, answers } }: MultipleChoiceProps): React.JSX.Element {
+export default ({ exam, session: { questionIndex, answers }, lang }: MultipleChoiceProps): React.JSX.Element => {
   const answer = answers[questionIndex] as AnswerOfMultipleChoice
   const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
 
@@ -49,8 +50,9 @@ function MultipleChoices({ exam, session: { questionIndex, answers } }: Multiple
   return (
     <div>
       {exam.test[questionIndex].choices.map(({ label, text, correct }, i) => (
-        // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}> NOTE: display correct only if reviewing
-        <MultipleStyles dir={'ltr'} key={i} onClick={() => onChoose(i)}>
+        // NOTE: display correct only if reviewing
+        // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}>
+        <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">
@@ -64,11 +66,10 @@ function MultipleChoices({ exam, session: { questionIndex, answers } }: Multiple
   )
 }
 
-export default React.memo(MultipleChoices)
-
 export interface MultipleChoiceProps {
   exam: Exam
   session: Session
+  lang: Lang
 }
 
 export interface MultipleStylesProps extends ThemedStyles {

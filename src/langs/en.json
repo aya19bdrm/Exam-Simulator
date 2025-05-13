@@ -1,0 +1,33 @@
+{
+  "loading": "Loading ...",
+  "nav": {
+    "drawer": {
+      "all": "All Questions",
+      "marked": "Marked Questions",
+      "answered": "Answered Questions",
+      "incomplete": "Unanswered Questions"
+    },
+    "grid": {
+      "complete": "Complete",
+      "marked": "Bookmarked",
+      "incomplete": "Incomplete"
+    }
+  },
+  "content": {
+    "cover": {
+      "logo-alt": "logo exam"
+    },
+    "exam": {
+      "top-display": {
+        "question": "Question $1 of $2"
+      },
+      "explain": {
+        "explain": "Explanation",
+        "yours": "Your answer is ",
+        "answer": "The correct answer is ",
+        "correct": "correct",
+        "incorrect": "incorrect"
+      }
+    }
+  }
+}
