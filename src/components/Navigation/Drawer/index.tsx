@@ -21,6 +21,7 @@ const DrawerStyles = styled.div<ThemedStyles>`
   z-index: 1;
   width: 24rem;
   height: 100%;
+  top: 5rem;
   transition: 0.3s;
   background: ${(props) => props.theme.grey[0]};
 `

@@ -46,6 +46,8 @@ export default ({ children, startingSession, setLang }: NavigationProps): React.
 
   const toggleOpen = () => setOpen(!open)
 
+  if (!exam) return <></>
+
   return (
     <SessionContext.Provider value={session}>
       <>
