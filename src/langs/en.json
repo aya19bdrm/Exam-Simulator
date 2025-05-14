@@ -5,7 +5,10 @@
       "all": "All Questions",
       "marked": "Marked Questions",
       "answered": "Answered Questions",
-      "incomplete": "Unanswered Questions"
+      "incomplete": "Unanswered Questions",
+      "pause": "Pause Exam",
+      "resume": "Resume Exam",
+      "stop": "Stop Exam"
     },
     "grid": {
       "complete": "Complete",

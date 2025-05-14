@@ -1,6 +1,7 @@
 {
   "questionIndex": 0,
   "time": 1200,
+  "timerState": "running",
   "bookmarks": [0, 4],
   "answers": [2, 1, null, 1, 0]
 }

@@ -49,7 +49,7 @@ export default ({ children, startingSession, setLang }: NavigationProps): React.
   return (
     <SessionContext.Provider value={session}>
       <>
-        <Drawer open={open} toggleOpen={toggleOpen} />
+        <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
         <Main $open={open}>{children}</Main>
 

@@ -7,12 +7,17 @@ export type AnswerOfMultipleChoice = Answer<'multiple-choice', number | null>
 export type AnswerOfMultipleAnswer = Answer<'multiple-answer', number[]>
 export type Answers = (Answer<'multiple-choice', number> | Answer<'multiple-answer', number[]>)[]
 
+export type TimerStates = 'running' | 'paused' | 'stopped'
+
 export interface Session {
   /** the question number */
   questionIndex: number
 
   /** the time elapsed */
   time: number
+
+  /** the state of the timer */
+  timerState: TimerStates
 
   /** the list of bookmarked questions */
   bookmarks: number[]
@@ -24,12 +29,13 @@ export interface Session {
   update: SessionDispatch
 }
 
-export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS' | 'SET_TIME'
+export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS' | 'SET_TIME' | 'SET_TIMER_STATE'
 export type SessionActions = {
   SET_QUESTION_INDEX: { type: 'SET_QUESTION_INDEX'; payload: number }
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[] }
   SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers }
   SET_TIME: { type: 'SET_TIME'; payload: number }
+  SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates }
 }
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
@@ -48,12 +54,14 @@ export const SessionActionTypes = {
   SET_QUESTION_INDEX: 'SET_QUESTION_INDEX',
   SET_BOOKMARKS: 'SET_BOOKMARKS',
   SET_ANSWERS: 'SET_ANSWERS',
-  SET_TIME: 'SET_TIME'
+  SET_TIME: 'SET_TIME',
+  SET_TIMER_STATE: 'SET_TIMER_STATE'
 } as const
 
 export const defaultSession: Session = {
   questionIndex: 0,
   time: 3600,
+  timerState: 'running',
   bookmarks: [],
   answers: [],
   update: () => {}
@@ -81,6 +89,11 @@ export const SessionReducer: SessionReducerFunc = (state: Session, { type, paylo
     case SessionActionTypes.SET_TIME: {
       const value = payload as SessionActions[typeof type]['payload']
       return { ...state, time: value }
+    }
+
+    case SessionActionTypes.SET_TIMER_STATE: {
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, timerState: value }
     }
 
     default:

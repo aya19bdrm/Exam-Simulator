@@ -74,16 +74,25 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
   const [timer, setTimer] = React.useState<number>(session.time)
 
   useEffect(() => {
+    let interval: number = 0
+
     session.update!(SessionActionTypes.SET_TIME, timer)
-    const interval: number = setInterval(() => {
-      setTimer((prev: number) => prev - 1)
-    }, 1000)
+
+    if (session.timerState === 'running') {
+      interval = setInterval(() => {
+        setTimer((prev: number) => prev - 1)
+      }, 1000)
+    } else if (session.timerState === 'paused') {
+      clearInterval(interval)
+    } else if (session.timerState === 'stopped') {
+      clearInterval(interval)
+    }
 
     return () => {
       clearInterval(interval)
       session.update!(SessionActionTypes.SET_TIME, timer)
     }
-  }, [])
+  }, [session.timerState])
 
   const { questionIndex } = session
 

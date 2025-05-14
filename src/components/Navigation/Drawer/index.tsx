@@ -5,15 +5,15 @@ import styled from 'styled-components'
 import { lighten } from 'polished'
 import { Menu } from '@styled-icons/material/Menu'
 import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
-// import { Save } from '@styled-icons/material/Save'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
 import { Bookmark } from '@styled-icons/material/Bookmark'
-import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
-// import { Pause } from '@styled-icons/material/Pause'
-// import { Stop } from '@styled-icons/material/Stop'
+import { CheckBox, CheckBoxOutlineBlank, PlayArrow } from '@styled-icons/material'
+import { Pause } from '@styled-icons/material/Pause'
+import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
 // import Stats from './Stats'
 import { translate } from '../../../settings'
+import { type Session, SessionActionTypes } from '../../../session'
 
 const DrawerStyles = styled.div<ThemedStyles>`
   position: fixed;
@@ -75,47 +75,53 @@ const MenuItem = styled.div<MenuItemStylesProps>`
   }
 `
 
-export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
+export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element => {
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   const menu: MenuSections[] = [
     {
       type: 'filter',
-      text: translate('nav.drawer.all'),
-      icon: <FormatListNumbered size={20} />,
       filter: 'all',
-      onClick: () => setFilter('all')
+      text: translate('nav.drawer.all'),
+      icon: <FormatListNumbered size={20} />
     },
     {
       type: 'filter',
-      text: translate('nav.drawer.marked'),
-      icon: <Bookmark size={20} />,
       filter: 'marked',
-      onClick: () => setFilter('marked')
+      text: translate('nav.drawer.marked'),
+      icon: <Bookmark size={20} />
     },
     {
       type: 'filter',
-      text: translate('nav.drawer.answered'),
-      icon: <CheckBox size={20} />,
       filter: 'answered',
-      onClick: () => setFilter('answered')
+      text: translate('nav.drawer.answered'),
+      icon: <CheckBox size={20} />
     },
     {
       type: 'filter',
-      text: translate('nav.drawer.incomplete'),
-      icon: <CheckBoxOutlineBlank size={20} />,
       filter: 'incomplete',
-      onClick: () => setFilter('incomplete')
+      text: translate('nav.drawer.incomplete'),
+      icon: <CheckBoxOutlineBlank size={20} />
     },
-    { type: 'exam-grid' }
-    // {
-    //   type: 'menu',
-    //   text: 'Save Session',
-    //   icon: <Save size={20} />,
-    //   onClick: setConfirmSaveSession
-    // },
-    // { type: 'menu', text: 'Pause Exam', icon: <Pause size={20} />, onClick: pauseExam },
-    // { type: 'menu', text: 'End Exam', icon: <Stop size={20} />, onClick: setConfirmEndExam }
+    { type: 'exam-grid' },
+    {
+      type: 'timer',
+      text: translate('nav.drawer.pause'),
+      icon: <Pause size={20} />,
+      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
+    },
+    {
+      type: 'timer',
+      text: translate('nav.drawer.resume'),
+      icon: <PlayArrow size={20} />,
+      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
+    },
+    {
+      type: 'timer',
+      text: translate('nav.drawer.stop'),
+      icon: <Stop size={20} />,
+      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+    }
   ]
 
   return (
@@ -136,6 +142,11 @@ export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
               {section.icon}
               <div>{section.text}</div>
             </MenuItem>
+          ) : section.type === 'timer' ? (
+            <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
+              {section.icon}
+              <div>{section.text}</div>
+            </MenuItem>
           ) : section.type === 'exam-grid' ? (
             <Grid key={i} open={open} show={filter} />
           ) : null
@@ -148,6 +159,7 @@ export default ({ open, toggleOpen }: DrawerProps): React.JSX.Element => {
 export interface DrawerProps {
   open: boolean
   toggleOpen: () => void
+  session: Session
 }
 
 export interface ControlStylesProps extends ThemedStyles {
@@ -164,8 +176,13 @@ export type MenuSections =
       text: string
       icon: React.ReactNode
       filter: QuestionFilter
-      onClick: () => void
     }
   | {
       type: 'exam-grid'
+    }
+  | {
+      type: 'timer'
+      text: string
+      icon: React.ReactNode
+      onClick: () => void
     }
