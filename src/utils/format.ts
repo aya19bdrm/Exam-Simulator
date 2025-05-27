@@ -1,3 +1,5 @@
+import type { LangCode } from '../settings'
+
 import { formatDistance, format } from 'date-fns'
 
 /**
@@ -34,35 +36,67 @@ export function formatTimer(sec: number): string {
  * @param {number} index - The index to convert.
  * @returns {string} - The letter corresponding to the index.
  */
-export function formatAnswerLabel(index: number): string {
-  const alpha = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z'
-  ]
+export function formatChoiceLabel(index: number, lang: LangCode): string {
+  const labels = {
+    en: [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z'
+    ],
+    ar: [
+      'أ',
+      'ب',
+      'ج',
+      'د',
+      'هـ',
+      'و',
+      'ز',
+      'ح',
+      'ط',
+      'ي',
+      'ك',
+      'ل',
+      'م',
+      'ن',
+      'س',
+      'ع',
+      'ف',
+      'ص',
+      'ق',
+      'ر',
+      'ش',
+      'ت',
+      'ث',
+      'خ',
+      'ذ',
+      'ض',
+      'ظ',
+      'غ'
+    ]
+  }
 
-  return alpha[index]
+  return labels[index]
 }

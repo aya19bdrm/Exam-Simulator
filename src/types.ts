@@ -49,8 +49,6 @@ export interface Question {
 }
 
 export interface Choice {
-  /** choice label text */
-  label: string
   /** content of choice */
   text: string
   /** is the choice correct */

@@ -7,6 +7,7 @@ import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
 import { type Lang } from '../../../settings'
+import { formatChoiceLabel } from '../../../utils/format'
 
 export const MultipleStyles = styled.div<MultipleStylesProps>`
   display: grid;
@@ -49,15 +50,14 @@ export default ({ exam, session: { questionIndex, answers }, lang }: MultipleCho
 
   return (
     <div>
-      {exam.test[questionIndex].choices.map(({ label, text, correct }, i) => (
+      {exam.test[questionIndex].choices.map(({ text, correct }, i) => (
         // NOTE: display correct only if reviewing
         // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}>
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">
-            {/* <div>{formatAnswerLabel(i)}.</div> */}
-            <div>{label}.</div>
+            <div>{formatChoiceLabel(i, lang.code)}.</div>
             <div>{text}</div>
           </div>
         </MultipleStyles>
