@@ -1,6 +1,7 @@
 import type { LangCode } from '../settings'
 
 import { formatDistance, format } from 'date-fns'
+import { Exam } from '../types'
 
 /**
  * Format a date string to a human-readable format.
@@ -29,6 +30,29 @@ export function formatTimer(sec: number): string {
   const minutes = Math.floor(sec / 60)
   const seconds = sec % 60
   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+}
+
+/**
+ * Format the exam object.
+ * @param {Exam} exam - The exam object to format.
+ * @returns {Exam} - The formatted exam object.
+ */
+export function formatExam(exam: Exam): Exam {
+  for (let i = 0; i < exam.test.length; i++) {
+    const question = exam.test[i]
+
+    if (question.type === 'multiple-choice') {
+      question.answer = question.choices.findIndex((c) => c.correct)
+    } else if (question.type === 'multiple-answer') {
+      question.answer = question.choices.filter((c) => c.correct).map((_, i) => i)
+    } else if (question.type === 'fill-in-the-blank') {
+      question.answer = question.choices.map((c) => c.text).join(', ')
+    }
+
+    exam.test[i] = question
+  }
+
+  return exam
 }
 
 /**

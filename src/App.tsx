@@ -9,6 +9,7 @@ import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
 import { useForceUpdate, useLocalStorage } from './@mantine/hooks'
+import { formatExam } from './utils/format'
 
 export default ({}): React.JSX.Element => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
@@ -20,7 +21,9 @@ export default ({}): React.JSX.Element => {
 
   useEffect(() => {
     import('./exam.json').then((data) => {
-      const exam: Exam = data.default as Exam
+      // @ts-expect-error
+      let exam: Exam = data.default as Exam
+      exam = formatExam(exam)
       setExam(exam)
 
       setLoading((prev) => prev - 1)
