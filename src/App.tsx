@@ -20,7 +20,7 @@ export default ({}): React.JSX.Element => {
   const forceUpdate = useForceUpdate()
 
   useEffect(() => {
-    import('./exam.json').then((data) => {
+    import('../public/exams/exam1.json').then((data) => {
       // @ts-expect-error
       let exam: Exam = data.default as Exam
       exam = formatExam(exam)
