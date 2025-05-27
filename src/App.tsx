@@ -30,6 +30,7 @@ export default ({}): React.JSX.Element => {
     })
 
     import('./session.json').then((data) => {
+      // @ts-expect-error
       const session: Session = data.default as Session
       setSession(session)
 
