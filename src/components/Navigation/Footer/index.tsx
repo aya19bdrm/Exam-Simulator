@@ -20,7 +20,7 @@ const FooterStyles = styled.div<FooterStylesProps>`
 
 export default ({ open, exam, session, setLang }: NavigationFooterProps): React.JSX.Element => {
   return (
-    <FooterStyles $open={open}>
+    <FooterStyles id="footer" $open={open}>
       <ExamFooter open={open} session={session} questionCount={exam.test.length} setLang={setLang} />
     </FooterStyles>
   )

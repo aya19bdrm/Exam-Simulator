@@ -30,11 +30,13 @@ export default ({ children, startingSession, setLang }: NavigationProps): React.
 
   return (
     <SessionContext.Provider value={session}>
-      <Drawer open={open} session={session} toggleOpen={toggleOpen} />
+      <div id="navigation">
+        <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
-      <Main $open={open}>{children}</Main>
+        <Main $open={open}>{children}</Main>
 
-      {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
+        {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
+      </div>
     </SessionContext.Provider>
   )
 }

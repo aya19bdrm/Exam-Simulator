@@ -101,7 +101,7 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
   }
 
   return (
-    <GridStyles>
+    <GridStyles id="grid">
       <div className="legend">
         <div className="item">
           <div className="complete" />

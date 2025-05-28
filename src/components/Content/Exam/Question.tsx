@@ -15,5 +15,9 @@ const NormalText = styled.div`
 `
 
 export default ({ text }: Question): React.JSX.Element => {
-  return <QuestionStyles data-test="Question">{text && <NormalText>{text}</NormalText>}</QuestionStyles>
+  return (
+    <QuestionStyles id="question" data-test="Question">
+      {text && <NormalText>{text}</NormalText>}
+    </QuestionStyles>
+  )
 }

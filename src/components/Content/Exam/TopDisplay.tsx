@@ -61,7 +61,7 @@ export default ({
   }
 
   return (
-    <TopDisplayStyles $bookmarked={bookmarked}>
+    <TopDisplayStyles id="top-display" $bookmarked={bookmarked}>
       <div>
         <div dir={lang.dir}>
           {translate('content.exam.top-display.question', [questionIndex + 1, exam.test.length])}

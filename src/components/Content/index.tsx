@@ -15,7 +15,11 @@ const ContentStyles = styled.div<ContentStylesProps>`
 `
 
 export default ({ page, open }: ContentProps): React.JSX.Element => {
-  return <ContentStyles $open={open}>{page === 'cover' ? <Cover /> : page === 'exam' ? <Exam /> : null}</ContentStyles>
+  return (
+    <ContentStyles id="content" $open={open}>
+      {page === 'cover' ? <Cover /> : page === 'exam' ? <Exam /> : null}
+    </ContentStyles>
+  )
 }
 
 export interface ContentProps {

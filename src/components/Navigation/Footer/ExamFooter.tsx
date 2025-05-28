@@ -108,7 +108,7 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
   const onLastQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionCount - 1)
 
   return (
-    <ExamFooter $open={open} $warning={timer < 120}>
+    <ExamFooter id="exam-footer" $open={open} $warning={timer < 120}>
       <div className="timer">
         <Timer size={30} />
 

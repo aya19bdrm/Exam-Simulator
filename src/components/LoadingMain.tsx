@@ -42,7 +42,7 @@ export const LoadingStyles = styled.div<LoadingStylesProps>`
 `
 
 export default ({ size, height }) => (
-  <LoadingStyles color="grey" height={height}>
+  <LoadingStyles id="loading-main" color="grey" height={height}>
     <div className="title">
       <span>{translate('loading')}</span>
     </div>

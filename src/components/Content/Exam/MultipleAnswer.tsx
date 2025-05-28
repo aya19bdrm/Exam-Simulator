@@ -26,7 +26,7 @@ export default ({ exam, session: { questionIndex, answers }, lang }: MultipleAns
   }
 
   return (
-    <div>
+    <div id="multiple-answer">
       {exam.test[questionIndex].choices.map(({ text }, i) => (
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}

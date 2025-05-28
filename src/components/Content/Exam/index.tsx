@@ -27,7 +27,7 @@ export default ({}: object): React.JSX.Element => {
   const question = exam.test[questionIndex]
 
   return (
-    <TestStyles dir={lang.dir}>
+    <TestStyles id="exam" dir={lang.dir}>
       <TopDisplay exam={exam} session={session} lang={lang} />
 
       <Slide key={questionIndex} direction="right">

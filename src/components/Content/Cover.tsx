@@ -24,7 +24,7 @@ export default ({}: object): React.JSX.Element => {
   const { title, description } = exam || {}
 
   return (
-    <CoverStyles>
+    <CoverStyles id="cover">
       {<Image src={Logo} alt={translate('content.cover.logo-alt')} />}
       {title && <BigText>{title}</BigText>}
       {description && <NormalText>{description}</NormalText>}

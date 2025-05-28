@@ -49,7 +49,7 @@ export default ({ exam, session: { questionIndex, answers }, lang }: MultipleCho
   }
 
   return (
-    <div>
+    <div id="multiple-choice">
       {exam.test[questionIndex].choices.map(({ text, correct }, i) => (
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}

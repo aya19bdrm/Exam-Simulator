@@ -36,7 +36,7 @@ export default ({ explanationRef, question, answers }: ExplainationProps): React
   const status: boolean = question.choices[question.answer].correct
 
   return (
-    <ExplanationStyles ref={explanationRef} $status={status}>
+    <ExplanationStyles id="explanation" ref={explanationRef} $status={status}>
       <div>
         {translate('content.exam.explain.yours')}
         <span className="status">

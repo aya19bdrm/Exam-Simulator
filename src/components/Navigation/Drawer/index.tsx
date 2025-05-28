@@ -125,7 +125,7 @@ export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element =
   ]
 
   return (
-    <DrawerStyles>
+    <DrawerStyles id="drawer">
       <Control $open={open} onClick={() => toggleOpen()}>
         {open ? <ChevronLeft className="chevron" size={20} /> : <Menu size={20} />}
       </Control>
