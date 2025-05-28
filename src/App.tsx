@@ -20,7 +20,7 @@ export default ({}): React.JSX.Element => {
   const forceUpdate = useForceUpdate()
 
   useEffect(() => {
-    import('../public/exams/exam1.json').then((data) => {
+    import('./assets/exams/exam1.json').then((data) => {
       // @ts-expect-error
       let exam: Exam = data.default as Exam
       exam = formatExam(exam)
@@ -57,7 +57,7 @@ export default ({}): React.JSX.Element => {
   return (
     <LangContext.Provider value={lang}>
       <ExamContext.Provider value={exam}>
-        <Header open={true} exam={exam} />
+        <Header id="Header" open={true} exam={exam} />
 
         <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])}>
           <Content page={page} open={true} />
