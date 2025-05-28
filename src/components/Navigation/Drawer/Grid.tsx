@@ -9,7 +9,7 @@ import { SessionActionTypes, SessionContext } from '../../../session'
 import { translate } from '../../../settings'
 
 export const GridStyles = styled.div<ThemedStyles>`
-  height: calc(100vh - 35rem);
+  height: calc(100vh - 45rem);
   border-top: 1px solid ${(props) => props.theme.grey[2]};
   border-bottom: 1px solid ${(props) => props.theme.grey[2]};
   .legend {
@@ -47,7 +47,7 @@ export const GridStyles = styled.div<ThemedStyles>`
     }
   }
   .grid {
-    height: calc(100vh - 40rem);
+    height: calc(100vh - 50rem);
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
