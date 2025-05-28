@@ -51,8 +51,6 @@ export default ({ exam, session: { questionIndex, answers }, lang }: MultipleCho
   return (
     <div>
       {exam.test[questionIndex].choices.map(({ text, correct }, i) => (
-        // NOTE: display correct only if reviewing
-        // <MultipleStyles key={i} $correct={correct} onClick={() => onChoose(i)}>
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 

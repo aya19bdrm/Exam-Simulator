@@ -1,5 +1,3 @@
-import type {} from '../../../types'
-
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Slide } from '../../../styles/Slide'
@@ -18,7 +16,7 @@ const TestStyles = styled.div`
   overflow-y: auto;
 `
 
-export default ({}: ExamProps): React.JSX.Element => {
+export default ({}: object): React.JSX.Element => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
   const lang = useContext(LangContext)
@@ -44,5 +42,3 @@ export default ({}: ExamProps): React.JSX.Element => {
     </TestStyles>
   )
 }
-
-export interface ExamProps {}

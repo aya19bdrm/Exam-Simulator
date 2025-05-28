@@ -11,7 +11,6 @@ import { CheckBox, CheckBoxOutlineBlank, PlayArrow } from '@styled-icons/materia
 import { Pause } from '@styled-icons/material/Pause'
 import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
-// import Stats from './Stats'
 import { translate } from '../../../settings'
 import { type Session, SessionActionTypes } from '../../../session'
 

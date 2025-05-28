@@ -28,8 +28,6 @@ export default ({ exam, session: { questionIndex, answers }, lang }: MultipleAns
   return (
     <div>
       {exam.test[questionIndex].choices.map(({ text }, i) => (
-        // NOTE: display correct only if reviewing
-        // <MultipleStyles key={i} $correct={exam.test[questionIndex].choices[i].correct} onClick={() => onChoose(i)}>
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}
 

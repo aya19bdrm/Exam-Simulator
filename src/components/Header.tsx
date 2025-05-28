@@ -1,5 +1,4 @@
 import type { Exam, ThemedStyles } from '../types'
-import type { LangDir } from '../settings'
 
 import React from 'react'
 import styled from 'styled-components'
@@ -15,7 +14,6 @@ const HeaderStyles = styled.div<HeaderStylesProps>`
   transition: 0.3s;
   background: ${(props) => props.theme.primary};
 `
-// ${(props) => (props.$dir === 'rtl' ? 'right' : 'left')}: ${(props) => (props.$open ? '24rem' : '5rem')};
 
 export const InnerHeader = styled.div<ThemedStyles>`
   height: 5rem;
@@ -32,13 +30,6 @@ export const InnerHeader = styled.div<ThemedStyles>`
     justify-self: center;
     width: 6rem;
     height: 6rem;
-  }
-  .subtitle {
-    font: 1.1rem 'Open Sans';
-    font-weight: 700;
-    color: ${(props) => props.theme.grey[10]};
-    margin-top: 0.5rem;
-    margin-left: 1rem;
   }
 `
 
