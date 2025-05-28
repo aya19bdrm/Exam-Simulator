@@ -7,7 +7,7 @@ import { createExplanation } from '../../../utils/create'
 import { translate } from '../../../settings'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
-  background: ${(props) => lighten(0.25, props.theme.quatro)};
+  background: ${(props) => props.theme.quatro};
   border: 1px solid ${(props) => props.theme.grey[2]};
   margin-top: 5rem;
   padding: 1rem;
@@ -15,7 +15,7 @@ const ExplanationStyles = styled.div<ExplanationStylesProps>`
   .status {
     text-transform: uppercase;
     font-weight: 700;
-    color: ${(props) => (props.$status ? darken(0.1, props.theme.quatro) : props.theme.secondary)};
+    color: ${(props) => (props.$status ? darken(0.1, props.theme.quatro) : lighten(0.1, props.theme.secondary))};
   }
   .correct {
     font-weight: 700;

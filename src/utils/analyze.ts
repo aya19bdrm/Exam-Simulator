@@ -13,10 +13,10 @@ import theme from '../styles/theme.ts'
 export function getGridItemBackground(questionIndex: number, marked: number[], answered: number[]): string {
   if (marked.includes(questionIndex)) {
     // Bookmarked grid item (question)
-    return lighten(0.25, theme.tertiary)
+    return theme.quatro
   } else if (answered.includes(questionIndex)) {
     // Completed grid item (question)
-    return lighten(0.1, theme.primary)
+    return lighten(0.2, theme.primary)
   } else {
     // Incompleted grid item (question)
     return theme.grey[1]
@@ -31,9 +31,9 @@ export function getGridItemBackground(questionIndex: number, marked: number[], a
  */
 export function analyzeReviewGridItem(i: number, { correct, incorrect }: ExamReport) {
   if (correct.indexOf(i) !== -1) {
-    return lighten(0.1, theme.primary)
+    return lighten(0.2, theme.primary)
   } else if (incorrect.indexOf(i) !== -1) {
-    return lighten(0.25, theme.secondary)
+    return theme.quatro
   } else {
     return theme.grey[1]
   }

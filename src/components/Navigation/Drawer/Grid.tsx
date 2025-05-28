@@ -34,13 +34,13 @@ export const GridStyles = styled.div<ThemedStyles>`
     }
     .complete,
     .correct {
-      background: ${(props) => lighten(0.1, props.theme.primary)};
+      background: ${(props) => lighten(0.2, props.theme.primary)};
     }
     .bookmarked {
-      background: ${(props) => lighten(0.25, props.theme.tertiary)};
+      background: ${(props) => props.theme.quatro};
     }
     .incorrect {
-      background: ${(props) => lighten(0.25, props.theme.secondary)};
+      background: ${(props) => lighten(0.2, props.theme.secondary)};
     }
     .incomplete {
       background: ${(props) => props.theme.grey[2]};

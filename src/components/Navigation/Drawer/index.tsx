@@ -62,7 +62,7 @@ const MenuItem = styled.div<MenuItemStylesProps>`
   color: ${(props) => props.theme.black};
   cursor: pointer;
   &:hover {
-    background: ${(props) => lighten(0.1, props.theme.primary)};
+    background: ${(props) => lighten(0.2, props.theme.primary)};
   }
   & > :first-child {
     color: inherit;

@@ -47,7 +47,7 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     transition: 0.3s;
     cursor: pointer;
     &:hover {
-      background: ${(props) => lighten(0.1, props.theme.primary)};
+      background: ${(props) => lighten(0.2, props.theme.primary)};
     }
     svg {
       color: ${(props) => props.theme.black};
@@ -62,7 +62,7 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     transition: 0.3s;
     cursor: pointer;
     &:hover {
-      background: ${(props) => lighten(0.1, props.theme.primary)};
+      background: ${(props) => lighten(0.2, props.theme.primary)};
     }
     svg {
       color: ${(props) => props.theme.black};

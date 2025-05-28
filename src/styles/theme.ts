@@ -1,3 +1,5 @@
+const colors = ['#b5965d', '#593752', '#301e2c', '#f8e3e0', '#000000', '#ffffff']
+
 const grey = [
   '#FAFAFA',
   '#F2F2F2',
@@ -48,10 +50,10 @@ const shadows = [
 export default {
   grey,
   black: '#333333',
-  primary: '#FFF28F',
-  secondary: '#DE4545',
-  tertiary: '#2484EB',
-  quatro: '#7AFF6B',
+  primary: colors[0],
+  secondary: colors[1],
+  tertiary: colors[2],
+  quatro: colors[3],
   borderRadius: '2px',
   shadows,
   scrollbar: '8px',
