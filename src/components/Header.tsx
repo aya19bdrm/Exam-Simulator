@@ -3,8 +3,8 @@ import type { LangDir } from '../settings'
 
 import React from 'react'
 import styled from 'styled-components'
-
-// import { BLUE_LOGO_PATH } from '../../../utils/filepaths'
+// @ts-expect-error
+import Logo from '../assets/logo.png'
 
 const HeaderStyles = styled.div<HeaderStylesProps>`
   position: fixed;
@@ -21,7 +21,7 @@ export const InnerHeader = styled.div<ThemedStyles>`
   height: 5rem;
   display: grid;
   align-items: center;
-  grid-template-columns: 6rem 1fr;
+  grid-template-columns: 8rem 1fr;
   .title {
     font: 2rem 'Open Sans';
     font-weight: 700;
@@ -30,8 +30,8 @@ export const InnerHeader = styled.div<ThemedStyles>`
   }
   .image {
     justify-self: center;
-    width: 3rem;
-    height: 3rem;
+    width: 6rem;
+    height: 6rem;
   }
   .subtitle {
     font: 1.1rem 'Open Sans';
@@ -48,7 +48,7 @@ export default ({ open, exam }: HeaderProps): React.JSX.Element => {
   return (
     <HeaderStyles $open={open} $dir={'rtl'}>
       <InnerHeader dir={'rtl'}>
-        <img className="image" src={exam.image} />
+        <img className="image" src={Logo} />
         <div className="title">{exam.title}</div>
       </InnerHeader>
     </HeaderStyles>

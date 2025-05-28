@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import { Image, BigText, NormalText } from '../../styles/repeated'
 import { ExamContext } from '../../exam'
 import { translate } from '../../settings'
+// @ts-expect-error
+import Logo from '../../assets/logo.png'
 
 const CoverStyles = styled.div<ThemedStyles>`
   width: 50vw;
@@ -19,11 +21,11 @@ const CoverStyles = styled.div<ThemedStyles>`
 
 export default ({}: object): React.JSX.Element => {
   const exam = React.useContext(ExamContext)
-  const { image, title, description } = exam || {}
+  const { title, description } = exam || {}
 
   return (
     <CoverStyles>
-      {image && <Image src={image} alt={translate('content.cover.logo-alt')} />}
+      {<Image src={Logo} alt={translate('content.cover.logo-alt')} />}
       {title && <BigText>{title}</BigText>}
       {description && <NormalText>{description}</NormalText>}
     </CoverStyles>

@@ -29,8 +29,6 @@ export interface Exam {
   pass: number
   /** time limit in minutes */
   time: number
-  /** URL of exam logo, 1:1 size is best */
-  image: string
   /** exam content */
   test: Test
 }
