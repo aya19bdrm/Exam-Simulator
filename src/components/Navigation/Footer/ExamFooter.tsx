@@ -80,7 +80,17 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
 
     if (session.timerState === 'running') {
       interval = setInterval(() => {
-        setTimer((prev: number) => prev - 1)
+        setTimer((prev: number) => {
+          const newTime = prev - 1
+          session.update!(SessionActionTypes.SET_TIME, newTime)
+
+          if (newTime <= 0) {
+            clearInterval(interval)
+            return 0
+          }
+
+          return newTime
+        })
       }, 1000)
     } else if (session.timerState === 'paused') {
       clearInterval(interval)
