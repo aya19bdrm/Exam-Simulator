@@ -65,7 +65,7 @@ export const defaultSession: Session = {
   questionIndex: 0,
   maxTime: 13800,
   time: 13800,
-  timerState: 'running',
+  timerState: 'stopped',
   bookmarks: [],
   answers: [],
   update: () => {}

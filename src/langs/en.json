@@ -31,5 +31,29 @@
         "incorrect": "incorrect"
       }
     }
+  },
+  "confirm": {
+    "start": {
+      "title": "Start Exam",
+      "message": "Are you ready to start exam?",
+      "button0": "Start",
+      "button1": "Cancel"
+    },
+    "pause": {
+      "title": "Exam Paused",
+      "message": "Exam paused. Click to resume.",
+      "button0": "Resume"
+    },
+    "end": {
+      "title": "End Exam",
+      "message": "Do you want to end exam?",
+      "button0": "End",
+      "button1": "Cancel"
+    },
+    "expired": {
+      "title": "Time Expired",
+      "message": "Time has expired. Your exam has ended.",
+      "button0": "Okay"
+    }
   }
 }
