@@ -7,7 +7,7 @@ import { Menu } from '@styled-icons/material/Menu'
 import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
 import { Bookmark } from '@styled-icons/material/Bookmark'
-import { CheckBox, CheckBoxOutlineBlank, PlayArrow } from '@styled-icons/material'
+import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
 import { Pause } from '@styled-icons/material/Pause'
 import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
@@ -109,12 +109,6 @@ export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element =
       text: translate('nav.drawer.pause'),
       icon: <Pause size={20} />,
       onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
-    },
-    {
-      type: 'timer',
-      text: translate('nav.drawer.resume'),
-      icon: <PlayArrow size={20} />,
-      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
     },
     {
       type: 'timer',
