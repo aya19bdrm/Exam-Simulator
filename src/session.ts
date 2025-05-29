@@ -14,6 +14,9 @@ export interface Session {
   questionIndex: number
 
   /** the time elapsed */
+  maxTime: number
+
+  /** the time elapsed */
   time: number
 
   /** the state of the timer */
@@ -60,7 +63,8 @@ export const SessionActionTypes = {
 
 export const defaultSession: Session = {
   questionIndex: 0,
-  time: 3600,
+  maxTime: 13800,
+  time: 13800,
   timerState: 'running',
   bookmarks: [],
   answers: [],
