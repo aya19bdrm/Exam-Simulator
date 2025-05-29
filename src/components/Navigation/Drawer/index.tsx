@@ -13,6 +13,7 @@ import { Stop } from '@styled-icons/material/Stop'
 import Grid from './Grid'
 import { translate } from '../../../settings'
 import { type Session, SessionActionTypes } from '../../../session'
+import { isRunning } from '../../../utils/state'
 
 const DrawerStyles = styled.div<ThemedStyles>`
   position: fixed;
@@ -108,13 +109,21 @@ export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element =
       type: 'timer',
       text: translate('nav.drawer.pause'),
       icon: <Pause size={20} />,
-      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
+      onClick: () => {
+        if (isRunning(session)) {
+          session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
+        }
+      }
     },
     {
       type: 'timer',
       text: translate('nav.drawer.stop'),
       icon: <Stop size={20} />,
-      onClick: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+      onClick: () => {
+        if (isRunning(session)) {
+          session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+        }
+      }
     }
   ]
 
