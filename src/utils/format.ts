@@ -27,9 +27,10 @@ export function formatDate(date: number | string | Date): string {
  * @returns {string}
  */
 export function formatTimer(sec: number): string {
-  const minutes = Math.floor(sec / 60)
+  const hours = Math.floor(sec / 3600) % 24
+  const minutes = Math.floor(sec / 60) % 60
   const seconds = sec % 60
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 }
 
 /**
