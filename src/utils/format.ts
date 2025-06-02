@@ -47,8 +47,6 @@ export function formatExam(exam: Exam): Exam {
       q.answer = q.choices.findIndex((c) => c.correct)
     } else if (q.type === 'multiple-answer') {
       q.answer = q.choices.filter((c) => c.correct).map((_, i) => i)
-    } else if (q.type === 'fill-in-the-blank') {
-      q.answer = q.choices.map((c) => c.text).join(', ')
     }
 
     exam.test[i] = q
