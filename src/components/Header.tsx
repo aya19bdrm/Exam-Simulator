@@ -33,11 +33,11 @@ export const InnerHeader = styled.div<ThemedStyles>`
   }
 `
 
-export default ({ open, exam }: HeaderProps): React.JSX.Element => {
+export default ({ exam }: HeaderProps): React.JSX.Element => {
   if (!exam) return <></>
 
   return (
-    <HeaderStyles id="header" $open={open} $dir={'rtl'}>
+    <HeaderStyles id="header" $dir={'rtl'}>
       <InnerHeader id="inner-header" dir={'rtl'}>
         <img className="image" src={Logo} />
         <div className="title">{exam.title}</div>
@@ -47,11 +47,9 @@ export default ({ open, exam }: HeaderProps): React.JSX.Element => {
 }
 
 export interface HeaderStylesProps extends ThemedStyles {
-  $open: boolean
   $dir: 'rtl' | 'ltr'
 }
 
 export interface HeaderProps {
-  open: boolean
   exam: Exam | null
 }
