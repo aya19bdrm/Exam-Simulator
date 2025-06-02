@@ -71,6 +71,7 @@ export function formatSession(session: Session, exam: Exam): Session {
 /**
  * Convert an index to a letter
  * @param {number} index - The index to convert.
+ * @param {LangCode} lang - The language code to use for the conversion.
  * @returns {string} - The letter corresponding to the index.
  */
 export function formatChoiceLabel(index: number, lang: LangCode): string {
@@ -135,5 +136,5 @@ export function formatChoiceLabel(index: number, lang: LangCode): string {
     ]
   }
 
-  return labels[index]
+  return labels[lang][index]
 }
