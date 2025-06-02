@@ -3,6 +3,7 @@ import type { PageTypes, ThemedStyles } from '../../types'
 import React from 'react'
 import styled from 'styled-components'
 import Exam from './Exam'
+import Review from './Review'
 
 const ContentStyles = styled.div<ThemedStyles>`
   display: grid;
@@ -14,7 +15,9 @@ const ContentStyles = styled.div<ThemedStyles>`
 `
 
 export default ({ page }: ContentProps): React.JSX.Element => {
-  return <ContentStyles id="content">{page === 'exam' ? <Exam /> : null}</ContentStyles>
+  return (
+    <ContentStyles id="content">{page === 'exam' ? <Exam /> : page === 'review' ? <Review /> : null}</ContentStyles>
+  )
 }
 
 export interface ContentProps {

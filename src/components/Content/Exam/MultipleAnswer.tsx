@@ -27,8 +27,8 @@ export default ({ exam, session: { index, answers }, lang }: MultipleAnswerProps
 
   return (
     <div id="multiple-answer">
-      {exam.test[index].choices.map(({ text }, i) => (
-        <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
+      {exam.test[index].choices.map(({ text, correct }, i) => (
+        <MultipleStyles key={i} dir={lang.dir} $review={false} $correct={correct} onClick={() => onChoose(i)}>
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}
 
           <div className="text">

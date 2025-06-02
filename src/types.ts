@@ -18,7 +18,7 @@ export interface ThemedStyles {
 
 export type QuestionFilter = 'all' | 'marked' | 'answered' | 'incomplete'
 
-export type PageTypes = 'cover' | 'exam' | 'result' | 'settings'
+export type PageTypes = 'exam' | 'review'
 
 export interface Exam {
   /** exam title */

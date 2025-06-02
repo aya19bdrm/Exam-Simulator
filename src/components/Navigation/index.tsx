@@ -79,7 +79,7 @@ export default ({ startingSession, setLang }: NavigationProps): React.JSX.Elemen
       <div id="navigation">
         <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
-        <Main $open={open}>{<Content page={'exam'} />}</Main>
+        <Main $open={open}>{<Content page={examFinished(session) ? 'review' : 'exam'} />}</Main>
 
         {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 

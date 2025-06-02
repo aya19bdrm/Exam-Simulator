@@ -27,6 +27,21 @@
         "correct": "صحيح",
         "incorrect": "خطأ"
       }
+    },
+    "review": {
+      "summary": {
+        "title": "إحصائيات الاختبار",
+        "status": "الحالة",
+        "pass": "نجح",
+        "fail": "فشل",
+        "passing": "النجاح",
+        "time": "الوقت",
+        "date": "التاريخ",
+        "score": "الدرجة",
+        "correct": "صحيح",
+        "incorrect": "خطأ",
+        "incomplete": "ناقص"
+      }
     }
   },
   "confirm": {

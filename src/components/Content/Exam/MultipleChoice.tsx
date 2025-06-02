@@ -16,22 +16,14 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   cursor: pointer;
   svg {
     color: ${(props) =>
-      props.$review && props.$correct
-        ? darken(0.3, props.theme.quatro)
-        : props.$review && !props.$correct
-          ? props.theme.grey[5]
-          : props.theme.grey[10]};
+      props.$review ? (props.$correct ? darken(0.3, props.theme.quatro) : props.theme.grey[5]) : props.theme.grey[10]};
     margin-right: 0.5rem;
   }
   .text {
     display: flex;
     font: 2rem 'Open Sans';
     color: ${(props) =>
-      props.$review && props.$correct
-        ? darken(0.3, props.theme.quatro)
-        : props.$review && !props.$correct
-          ? props.theme.grey[5]
-          : props.theme.black};
+      props.$review ? (props.$correct ? darken(0.3, props.theme.quatro) : props.theme.grey[5]) : props.theme.black};
     & > :first-child {
       font-weight: 600;
       ${(props) => (props.dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
@@ -51,7 +43,7 @@ export default ({ exam, session: { index, answers }, lang }: MultipleChoiceProps
   return (
     <div id="multiple-choice">
       {exam.test[index].choices.map(({ text, correct }, i) => (
-        <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
+        <MultipleStyles key={i} dir={lang.dir} $review={false} $correct={correct} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
           <div className="text">
@@ -71,6 +63,6 @@ export interface MultipleChoiceProps {
 }
 
 export interface MultipleStylesProps extends ThemedStyles {
-  $review?: boolean
-  $correct?: boolean
+  $review: boolean
+  $correct: boolean
 }

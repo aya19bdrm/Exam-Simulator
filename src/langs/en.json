@@ -27,6 +27,21 @@
         "correct": "correct",
         "incorrect": "incorrect"
       }
+    },
+    "review": {
+      "summary": {
+        "title": "Exam Statistics",
+        "status": "Status",
+        "pass": "PASS",
+        "fail": "FAIL",
+        "passing": "Passing",
+        "time": "Time",
+        "date": "Date",
+        "score": "Score",
+        "correct": "Correct",
+        "incorrect": "Incorrect",
+        "incomplete": "Incomplete"
+      }
     }
   },
   "confirm": {
