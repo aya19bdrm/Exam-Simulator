@@ -9,12 +9,12 @@ export const InnerModal = styled.div<ThemedStyles>`
   display: grid;
   grid-template-rows: 3rem 1fr 5rem;
   background: white;
-  box-shadow: ${(props) => props.theme.shadows[1]};
+  box-shadow: ${({ theme }) => theme.shadows[1]};
   .title {
     height: 5rem;
     display: flex;
     align-items: center;
-    background: ${(props) => props.theme.primary};
+    background: ${({ theme }) => theme.primary};
     padding-left: 1rem;
     img {
       width: 3.5rem;
@@ -40,8 +40,8 @@ export const InnerModal = styled.div<ThemedStyles>`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-top: 1px solid ${(props) => props.theme.grey[2]};
-    background: ${(props) => props.theme.grey[0]};
+    border-top: 1px solid ${({ theme }) => theme.grey[2]};
+    background: ${({ theme }) => theme.grey[0]};
     .action {
       display: flex;
       align-items: center;
@@ -51,22 +51,22 @@ export const InnerModal = styled.div<ThemedStyles>`
       text-transform: uppercase;
       padding: 0.75rem 1rem;
       margin-right: 1rem;
-      border-radius: ${(props) => props.theme.borderRadius};
+      border-radius: ${({ theme }) => theme.borderRadius};
       transition: 0.3s;
       cursor: pointer;
     }
     .confirm {
       color: white;
-      background: ${(props) => props.theme.secondary};
+      background: ${({ theme }) => theme.secondary};
       &:hover {
-        background: ${(props) => darken(0.1, props.theme.secondary)};
+        background: ${({ theme }) => darken(0.1, theme.secondary)};
       }
     }
     .cancel {
-      color: ${(props) => props.theme.grey[10]};
-      background: ${(props) => props.theme.grey[1]};
+      color: ${({ theme }) => theme.grey[10]};
+      background: ${({ theme }) => theme.grey[1]};
       &:hover {
-        background: ${(props) => props.theme.grey[2]};
+        background: ${({ theme }) => theme.grey[2]};
       }
     }
   }

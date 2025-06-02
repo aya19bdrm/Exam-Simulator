@@ -12,12 +12,12 @@ const TopDisplayStyles = styled.div<ThemedStyles>`
   & > :first-child {
     font: 2.5rem 'Open Sans';
     font-weight: 700;
-    color: ${(props) => props.theme.grey[10]};
+    color: ${({ theme }) => theme.grey[10]};
   }
   & > :last-child {
     font: 1.1rem 'Open Sans';
     font-weight: 700;
-    color: ${(props) => props.theme.grey[10]};
+    color: ${({ theme }) => theme.grey[10]};
     margin-left: 0.75rem;
     margin-top: 0.75rem;
   }

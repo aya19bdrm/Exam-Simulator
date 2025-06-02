@@ -23,22 +23,22 @@ const DrawerStyles = styled.div<ThemedStyles>`
   height: 100%;
   top: 5rem;
   transition: 0.3s;
-  background: ${(props) => props.theme.grey[0]};
+  background: ${({ theme }) => theme.grey[0]};
 `
 
 const Control = styled.div<ControlStylesProps>`
-  width: ${(props) => (props.$open ? '24em' : '5rem')};
+  width: ${({ $open }) => ($open ? '24em' : '5rem')};
   height: 5rem;
   display: flex;
-  justify-content: ${(props) => (props.$open ? 'flex-end' : 'center')};
+  justify-content: ${({ $open }) => ($open ? 'flex-end' : 'center')};
   align-items: center;
-  border: 1px solid ${(props) => props.theme.grey[1]};
+  border: 1px solid ${({ theme }) => theme.grey[1]};
   border-left: 0;
   border-top: 0;
   transition: 0.3s;
   cursor: pointer;
   svg {
-    color: ${(props) => props.theme.black};
+    color: ${({ theme }) => theme.black};
   }
   .chevron {
     margin-right: 1rem;
@@ -49,7 +49,7 @@ const MainMenu = styled.div<ThemedStyles>`
   height: calc(100vh - 5rem);
   display: flex;
   flex-direction: column;
-  border-right: 1px solid ${(props) => props.theme.grey[1]};
+  border-right: 1px solid ${({ theme }) => theme.grey[1]};
 `
 
 const MenuItem = styled.div<MenuItemStylesProps>`
@@ -58,11 +58,11 @@ const MenuItem = styled.div<MenuItemStylesProps>`
   grid-template-columns: 5rem 1fr;
   align-items: center;
   justify-items: center;
-  background: ${(props) => (props.$selected ? props.theme.grey[2] : 'none')};
-  color: ${(props) => props.theme.black};
+  background: ${({ $selected, theme }) => ($selected ? theme.grey[2] : 'none')};
+  color: ${({ theme }) => theme.black};
   cursor: pointer;
   &:hover {
-    background: ${(props) => lighten(0.2, props.theme.primary)};
+    background: ${({ theme }) => lighten(0.2, theme.primary)};
   }
   & > :first-child {
     color: inherit;

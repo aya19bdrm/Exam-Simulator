@@ -15,7 +15,7 @@ const SummaryStyles = styled.div<SummaryStylesProps>`
     justify-self: center;
     font: 2rem 'Open Sans';
     font-weight: 700;
-    color: ${(props) => props.theme.black};
+    color: ${({ theme }) => theme.black};
     transform: translateX(-3rem);
   }
   .summary {
@@ -33,7 +33,7 @@ const SummaryStyles = styled.div<SummaryStylesProps>`
         & > :first-child {
           font: 1.2rem 'Open Sans';
           font-weight: 700;
-          color: ${(props) => props.theme.grey[10]};
+          color: ${({ theme }) => theme.grey[10]};
         }
         .image {
           width: 4rem;
@@ -42,10 +42,10 @@ const SummaryStyles = styled.div<SummaryStylesProps>`
         .data {
           font: 1.25rem 'Open Sans';
           font-weight: 700;
-          color: ${(props) => props.theme.black};
+          color: ${({ theme }) => theme.black};
         }
         .status {
-          color: ${(props) => (props.$status ? props.theme.quatro : props.theme.secondary)};
+          color: ${({ $status, theme }) => ($status ? theme.quatro : theme.secondary)};
         }
       }
     }

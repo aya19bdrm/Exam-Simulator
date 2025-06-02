@@ -14,7 +14,7 @@ import { formatTimer } from '../../../utils/format'
 import { Session, SessionActionTypes } from '../../../session'
 
 const ExamFooter = styled.div<ExamFooterStylesProps>`
-  width: ${(props) => (props.$open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
+  width: ${({ $open }) => ($open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
   height: 100%;
   display: grid;
   grid-template-columns: 10rem 1fr 5rem;
@@ -24,7 +24,7 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${(props) => (props.$warning ? props.theme.secondary : props.theme.black)};
+    color: ${({ $warning, theme }) => ($warning ? theme.secondary : theme.black)};
     svg {
       color: inherit;
       margin-right: 0.5rem;
@@ -47,10 +47,10 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     transition: 0.3s;
     cursor: pointer;
     &:hover {
-      background: ${(props) => lighten(0.2, props.theme.primary)};
+      background: ${({ theme }) => lighten(0.2, theme.primary)};
     }
     svg {
-      color: ${(props) => props.theme.black};
+      color: ${({ theme }) => theme.black};
       margin-right: 0.5rem;
     }
   }
@@ -62,10 +62,10 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
     transition: 0.3s;
     cursor: pointer;
     &:hover {
-      background: ${(props) => lighten(0.2, props.theme.primary)};
+      background: ${({ theme }) => lighten(0.2, theme.primary)};
     }
     svg {
-      color: ${(props) => props.theme.black};
+      color: ${({ theme }) => theme.black};
     }
   }
 `

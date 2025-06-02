@@ -11,11 +11,11 @@ const FooterStyles = styled.div<FooterStylesProps>`
   width: 100%;
   height: 5rem;
   bottom: 0;
-  left: ${(props) => (props.$open ? '24rem' : '5rem')};
+  left: ${({ $open }) => ($open ? '24rem' : '5rem')};
   z-index: 2;
   transition: 0.3s;
-  background: ${(props) => props.theme.grey[0]};
-  border-top: 1px solid ${(props) => props.theme.grey[1]};
+  background: ${({ theme }) => theme.grey[0]};
+  border-top: 1px solid ${({ theme }) => theme.grey[1]};
 `
 
 export default ({ open, exam, session, setLang }: NavigationFooterProps): React.JSX.Element => {

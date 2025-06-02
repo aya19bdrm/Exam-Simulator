@@ -17,22 +17,22 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
     align-items: center;
     font: 4rem 'Open Sans';
     font-weight: 700;
-    color: ${(props) => props.theme.grey[10]};
+    color: ${({ theme }) => theme.grey[10]};
     .bookmarked {
       font: 1.5rem 'Open Sans';
       font-weight: 700;
-      color: ${(props) => props.theme.grey[10]};
+      color: ${({ theme }) => theme.grey[10]};
       margin-left: 0.75rem;
       margin-top: 0.75rem;
     }
   }
   & > :last-child {
     margin-right: 5rem;
-    color: ${(props) => (props.$bookmarked ? props.theme.tertiary : props.theme.grey[10])};
+    color: ${({ $bookmarked, theme }) => ($bookmarked ? theme.tertiary : theme.grey[10])};
     transition: 0.3s;
     cursor: pointer;
     &:hover {
-      color: ${(props) => props.theme.tertiary};
+      color: ${({ theme }) => theme.tertiary};
     }
   }
 `

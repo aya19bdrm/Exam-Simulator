@@ -7,15 +7,15 @@ import { createExplanation } from '../../../utils/create'
 import { translate } from '../../../settings'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
-  background: ${(props) => props.theme.quatro};
-  border: 1px solid ${(props) => props.theme.grey[2]};
+  background: ${({ theme }) => theme.quatro};
+  border: 1px solid ${({ theme }) => theme.grey[2]};
   margin-top: 5rem;
   padding: 1rem;
   font: 1.4rem 'Open Sans';
   .status {
     text-transform: uppercase;
     font-weight: 700;
-    color: ${(props) => (props.$status ? darken(0.1, props.theme.quatro) : lighten(0.1, props.theme.secondary))};
+    color: ${({ $status, theme }) => ($status ? darken(0.1, theme.quatro) : lighten(0.1, theme.secondary))};
   }
   .correct {
     font-weight: 700;

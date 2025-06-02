@@ -20,12 +20,8 @@ const ModalWindow = styled.div<ThemedStyles>`
   z-index: 3;
   width: 100%;
   height: 100%;
-  background: ${(props) =>
-    props.color === 'light'
-      ? 'rgba(255, 255, 255, 0.5)'
-      : props.color === 'dark'
-        ? 'rgba(0, 0, 0, 0.5)'
-        : 'transparent'};
+  background: ${({ color }) =>
+    color === 'light' ? 'rgba(255, 255, 255, 0.5)' : color === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'transparent'};
 `
 
 const ModalMain = styled.div`

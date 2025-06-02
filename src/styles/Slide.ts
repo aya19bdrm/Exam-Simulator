@@ -22,8 +22,8 @@ const slideFromBottom = keyframes`
 
 export const Slide = styled.div<SlideProps>`
   width: 100%;
-  animation: ${(props) =>
-      props.direction === 'right' ? slideFromRight : props.direction === 'bottom' ? slideFromBottom : null}
+  animation: ${({ direction }) =>
+      direction === 'right' ? slideFromRight : direction === 'bottom' ? slideFromBottom : null}
     0.5s;
 `
 export interface SlideProps {

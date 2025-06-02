@@ -12,7 +12,7 @@ const HeaderStyles = styled.div<HeaderStylesProps>`
   top: 0;
   z-index: 2;
   transition: 0.3s;
-  background: ${(props) => props.theme.primary};
+  background: ${({ theme }) => theme.primary};
 `
 
 export const InnerHeader = styled.div<ThemedStyles>`
@@ -23,7 +23,7 @@ export const InnerHeader = styled.div<ThemedStyles>`
   .title {
     font: 2rem 'Open Sans';
     font-weight: 700;
-    color: ${(props) => props.theme.black};
+    color: ${({ theme }) => theme.black};
     margin-left: 1rem;
   }
   .image {

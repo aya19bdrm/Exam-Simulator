@@ -8,9 +8,9 @@ const ListItem = styled.div<ListItemStylesProps>`
   width: 50%;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
-  background: ${(props) => (props.$correct ? lighten(0.2, props.theme.primary) : lighten(0.4, props.theme.secondary))};
-  color: ${(props) => props.theme.grey[10]};
-  border: 2px dashed ${(props) => props.theme.grey[5]};
+  background: ${({ $correct, theme }) => ($correct ? lighten(0.2, theme.primary) : lighten(0.4, theme.secondary))};
+  color: ${({ theme }) => theme.grey[10]};
+  border: 2px dashed ${({ theme }) => theme.grey[5]};
   font: 1.25rem 'Open Sans';
   font-weight: 700;
 `

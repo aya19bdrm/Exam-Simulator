@@ -10,8 +10,8 @@ import { translate } from '../../../settings'
 
 export const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 45rem);
-  border-top: 1px solid ${(props) => props.theme.grey[2]};
-  border-bottom: 1px solid ${(props) => props.theme.grey[2]};
+  border-top: 1px solid ${({ theme }) => theme.grey[2]};
+  border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
   .legend {
     height: 3rem;
     display: flex;
@@ -25,7 +25,7 @@ export const GridStyles = styled.div<ThemedStyles>`
         width: 1rem;
         height: 1rem;
         margin-right: 0.25rem;
-        border: 0.5px solid ${(props) => props.theme.grey[2]};
+        border: 0.5px solid ${({ theme }) => theme.grey[2]};
       }
       & > :last-child {
         font: 0.9rem 'Open Sans';
@@ -34,16 +34,16 @@ export const GridStyles = styled.div<ThemedStyles>`
     }
     .complete,
     .correct {
-      background: ${(props) => lighten(0.2, props.theme.primary)};
+      background: ${({ theme }) => lighten(0.2, theme.primary)};
     }
     .bookmarked {
-      background: ${(props) => props.theme.quatro};
+      background: ${({ theme }) => theme.quatro};
     }
     .incorrect {
-      background: ${(props) => lighten(0.2, props.theme.secondary)};
+      background: ${({ theme }) => lighten(0.2, theme.secondary)};
     }
     .incomplete {
-      background: ${(props) => props.theme.grey[2]};
+      background: ${({ theme }) => theme.grey[2]};
     }
   }
   .grid {
@@ -64,12 +64,12 @@ export const GridItem = styled.div<GridItemStylesProps>`
   align-items: center;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  background: ${(props) => props.$background};
+  background: ${({ $background }) => $background};
   color: #333;
-  border: 1px solid ${(props) => props.theme.grey[3]};
+  border: 1px solid ${({ theme }) => theme.grey[3]};
   font: 1rem 'Open Sans';
   font-weight: 700;
-  outline: 3px solid ${(props) => (props.$selected ? props.theme.grey[10] : 'transparent')};
+  outline: 3px solid ${({ $selected, theme }) => ($selected ? theme.grey[10] : 'transparent')};
   cursor: pointer;
 `
 

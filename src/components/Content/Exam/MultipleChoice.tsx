@@ -15,18 +15,18 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   margin-bottom: 0.5rem;
   cursor: pointer;
   svg {
-    color: ${(props) =>
-      props.$review ? (props.$correct ? darken(0.3, props.theme.quatro) : props.theme.grey[5]) : props.theme.grey[10]};
+    color: ${({ $review, $correct, theme }) =>
+      $review ? ($correct ? darken(0.3, theme.quatro) : theme.grey[5]) : theme.grey[10]};
     margin-right: 0.5rem;
   }
   .text {
     display: flex;
     font: 2rem 'Open Sans';
-    color: ${(props) =>
-      props.$review ? (props.$correct ? darken(0.3, props.theme.quatro) : props.theme.grey[5]) : props.theme.black};
+    color: ${({ $review, $correct, theme }) =>
+      $review ? ($correct ? darken(0.3, theme.quatro) : theme.grey[5]) : theme.black};
     & > :first-child {
       font-weight: 600;
-      ${(props) => (props.dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
+      ${({ dir }) => (dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
     }
   }
 `
