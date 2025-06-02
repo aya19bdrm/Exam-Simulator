@@ -8,7 +8,7 @@ import { MultipleStyles } from './MultipleChoice'
 import { type Lang } from '../../../settings'
 import { formatChoiceLabel } from '../../../utils/format'
 
-export default ({ exam, session: { index, answers }, lang }: MultipleAnswerProps): React.JSX.Element => {
+export default ({ exam, session: { index, answers, examState }, lang }: MultipleAnswerProps): React.JSX.Element => {
   const answer = answers[index] as AnswerOfMultipleAnswer
   const [values, setValues] = useState<AnswerOfMultipleAnswer>(answer)
 
@@ -28,7 +28,13 @@ export default ({ exam, session: { index, answers }, lang }: MultipleAnswerProps
   return (
     <div id="multiple-answer">
       {exam.test[index].choices.map(({ text, correct }, i) => (
-        <MultipleStyles key={i} dir={lang.dir} $review={false} $correct={correct} onClick={() => onChoose(i)}>
+        <MultipleStyles
+          key={i}
+          dir={lang.dir}
+          $review={examState === 'completed'}
+          $correct={correct}
+          onClick={() => onChoose(i)}
+        >
           {values.includes(i) ? <CheckBox size={20} /> : <CheckBoxOutlineBlank size={20} />}
 
           <div className="text">

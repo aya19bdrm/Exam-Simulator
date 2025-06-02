@@ -29,9 +29,9 @@ export default ({ exam, session, lang }: ReviewExamProps): React.JSX.Element => 
       <Slide key={index} direction="right">
         <Question {...question} />
         {question.type === 'multiple-choice' ? (
-          <MultipleChoice exam={exam} session={session} lang={lang} review={true} />
+          <MultipleChoice exam={exam} session={session} lang={lang} />
         ) : question.type === 'multiple-answer' ? (
-          <MultipleAnswer exam={exam} session={session} lang={lang} review={true} />
+          <MultipleAnswer exam={exam} session={session} lang={lang} />
         ) : // : question.type === '' ? (
         //   <StaticList choices={question.choices} />
         // )
