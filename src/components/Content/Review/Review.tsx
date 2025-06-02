@@ -37,7 +37,7 @@ export default ({ exam, session, lang }: ReviewExamProps): React.JSX.Element => 
         // )
         null}
         <Slide direction="bottom">
-          <Explanation question={question} />
+          <Explanation question={question} answer={session.answers[session.index]} lang={lang} />
         </Slide>
       </Slide>
     </ReviewExamStyles>

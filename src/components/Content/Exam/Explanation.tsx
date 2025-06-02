@@ -1,10 +1,11 @@
-import type { Choice, Question, ThemedStyles } from '../../../types'
+import type { Choice, Question, QuestionTypes, ThemedStyles } from '../../../types'
+import type { Answer } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
-import { createExplanation } from '../../../utils/create'
-import { translate } from '../../../settings'
+import { type Lang, translate } from '../../../settings'
+import { formatAnswerLabel } from '../../../utils/format'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
   background: ${({ theme }) => theme.quatro};
@@ -31,9 +32,9 @@ const NormalText = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export default ({ question }: ExplainationProps): React.JSX.Element => {
+export default ({ question, answer, lang }: ExplainationProps): React.JSX.Element => {
   const correctChoice: Choice = question.choices.find((choice: Choice) => choice.correct) as Choice
-  const status: boolean = question.choices[question.answer].correct
+  const status: boolean = question.answer === answer
 
   return (
     <ExplanationStyles id="explanation" $status={status}>
@@ -46,7 +47,7 @@ export default ({ question }: ExplainationProps): React.JSX.Element => {
 
       <div>
         {translate('content.exam.explain.answer')}
-        <span className="correct">{createExplanation(question)}</span>
+        <span className="correct">{formatAnswerLabel(question, lang.code)}</span>
       </div>
 
       {correctChoice.explanation && (
@@ -64,6 +65,8 @@ export default ({ question }: ExplainationProps): React.JSX.Element => {
 
 export interface ExplainationProps {
   question: Question
+  answer: Answer<QuestionTypes>
+  lang: Lang
 }
 
 export interface ExplanationStylesProps extends ThemedStyles {

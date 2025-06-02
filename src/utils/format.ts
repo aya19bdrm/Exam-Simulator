@@ -1,4 +1,4 @@
-import type { Exam } from '../types'
+import type { Exam, Question } from '../types'
 import type { Session } from '../session'
 import type { LangCode } from '../settings'
 
@@ -46,7 +46,11 @@ export function formatExam(exam: Exam): Exam {
     if (q.type === 'multiple-choice') {
       q.answer = q.choices.findIndex((c) => c.correct)
     } else if (q.type === 'multiple-answer') {
-      q.answer = q.choices.filter((c) => c.correct).map((_, i) => i)
+      q.answer = q.choices
+        .map((_, i) => {
+          return q.choices[i].correct ? i : null
+        })
+        .filter((c) => c !== null)
     }
 
     exam.test[i] = q
@@ -66,6 +70,22 @@ export function formatSession(session: Session, exam: Exam): Session {
   session.answers = session.answers.concat(nullArr)
 
   return session
+}
+
+/**
+ * Format the answer label.
+ * @param {Question} question - The question object.
+ * @param {LangCode} lang - The language code.
+ * @returns {string} - The formatted answer label.
+ */
+export function formatAnswerLabel({ type, answer }: Question, lang: LangCode): string {
+  if (type === 'multiple-choice' && typeof answer === 'number') {
+    return answer === null ? '..' : formatChoiceLabel(answer, lang)
+  } else if (type === 'multiple-answer' && Array.isArray(answer)) {
+    return answer.map((i: number) => formatChoiceLabel(i, lang)).join(', ')
+  }
+
+  return answer?.toString() || '....'
 }
 
 /**
