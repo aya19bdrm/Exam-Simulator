@@ -147,7 +147,7 @@ export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element =
               {section.icon}
               <div>{section.text}</div>
             </MenuItem>
-          ) : section.type === 'timer' ? (
+          ) : section.type === 'timer' && session.examState !== 'completed' ? (
             <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
               {section.icon}
               <div>{section.text}</div>
