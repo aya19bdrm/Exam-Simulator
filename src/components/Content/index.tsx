@@ -2,31 +2,21 @@ import type { PageTypes, ThemedStyles } from '../../types'
 
 import React from 'react'
 import styled from 'styled-components'
-import Cover from './Cover'
 import Exam from './Exam'
 
-const ContentStyles = styled.div<ContentStylesProps>`
+const ContentStyles = styled.div<ThemedStyles>`
   display: grid;
   justify-items: center;
   align-items: center;
   padding: 2rem;
-  padding-right: ${(props) => (props.$open ? '28rem' : '7rem')};
+  padding-right: 28rem;
   transition: 0.3s;
 `
 
-export default ({ page, open }: ContentProps): React.JSX.Element => {
-  return (
-    <ContentStyles id="content" $open={open}>
-      {page === 'cover' ? <Cover /> : page === 'exam' ? <Exam /> : null}
-    </ContentStyles>
-  )
+export default ({ page }: ContentProps): React.JSX.Element => {
+  return <ContentStyles id="content">{page === 'exam' ? <Exam /> : null}</ContentStyles>
 }
 
 export interface ContentProps {
   page: PageTypes
-  open: boolean
-}
-
-export interface ContentStylesProps extends ThemedStyles {
-  $open: boolean
 }

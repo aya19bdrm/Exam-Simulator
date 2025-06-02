@@ -5,12 +5,13 @@ import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Drawer from './Drawer'
 import Footer from './Footer'
 import Confirm, { type ConfirmProps } from '../Confirm'
+import Content from '../Content'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
 import { haveExpired, isPaused, wantsToEnd, canBegin } from '../../utils/state'
 
-export default ({ children, startingSession, setLang }: NavigationProps): React.JSX.Element => {
+export default ({ startingSession, setLang }: NavigationProps): React.JSX.Element => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
 
@@ -69,7 +70,7 @@ export default ({ children, startingSession, setLang }: NavigationProps): React.
       <div id="navigation">
         <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
-        <Main $open={open}>{children}</Main>
+        <Main $open={open}>{<Content page={'exam'} />}</Main>
 
         {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 
@@ -92,7 +93,6 @@ export default ({ children, startingSession, setLang }: NavigationProps): React.
 }
 
 export interface NavigationProps {
-  children: React.ReactElement | React.ReactElement[]
   startingSession: Session
   setLang: (lang: LangCode) => void
 }

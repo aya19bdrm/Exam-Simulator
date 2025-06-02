@@ -1,10 +1,9 @@
-import type { Exam, PageTypes } from './types'
+import type { Exam } from './types'
 
 import React, { useEffect, useState } from 'react'
 import LoadingMain from './components/LoadingMain'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
-import Content from './components/Content'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
@@ -14,7 +13,6 @@ import { formatExam } from './utils/format'
 export default ({}): React.JSX.Element => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
   const [loading, setLoading] = useState<number>(2)
-  const [page, setPage] = useState<PageTypes>('exam')
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
   const forceUpdate = useForceUpdate()
@@ -59,9 +57,7 @@ export default ({}): React.JSX.Element => {
       <ExamContext.Provider value={exam}>
         <Header exam={exam} />
 
-        <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])}>
-          <Content page={page} open={true} />
-        </Navigation>
+        <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])} />
       </ExamContext.Provider>
     </LangContext.Provider>
   )
