@@ -1,7 +1,8 @@
+import type { Exam } from '../types'
+import type { Session } from '../session'
 import type { LangCode } from '../settings'
 
 import { formatDistance, format } from 'date-fns'
-import { Exam } from '../types'
 
 /**
  * Format a date string to a human-readable format.
@@ -40,20 +41,33 @@ export function formatTimer(sec: number): string {
  */
 export function formatExam(exam: Exam): Exam {
   for (let i = 0; i < exam.test.length; i++) {
-    const question = exam.test[i]
+    const q = exam.test[i]
 
-    if (question.type === 'multiple-choice') {
-      question.answer = question.choices.findIndex((c) => c.correct)
-    } else if (question.type === 'multiple-answer') {
-      question.answer = question.choices.filter((c) => c.correct).map((_, i) => i)
-    } else if (question.type === 'fill-in-the-blank') {
-      question.answer = question.choices.map((c) => c.text).join(', ')
+    if (q.type === 'multiple-choice') {
+      q.answer = q.choices.findIndex((c) => c.correct)
+    } else if (q.type === 'multiple-answer') {
+      q.answer = q.choices.filter((c) => c.correct).map((_, i) => i)
+    } else if (q.type === 'fill-in-the-blank') {
+      q.answer = q.choices.map((c) => c.text).join(', ')
     }
 
-    exam.test[i] = question
+    exam.test[i] = q
   }
 
   return exam
+}
+
+/**
+ * Format the Session object.
+ * @param {Session} session - The session object to format.
+ * @param {Exam} exam - The exam object to format.
+ * @returns {Session} - The formatted exam object.
+ */
+export function formatSession(session: Session, exam: Exam): Session {
+  const nullArr = Array(exam.test.length - session.answers.length).fill(null)
+  session.answers = session.answers.concat(nullArr)
+
+  return session
 }
 
 /**

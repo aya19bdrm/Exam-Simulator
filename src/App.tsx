@@ -8,7 +8,7 @@ import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
 import { useForceUpdate, useLocalStorage } from './@mantine/hooks'
-import { formatExam } from './utils/format'
+import { formatExam, formatSession } from './utils/format'
 
 export default ({}): React.JSX.Element => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
@@ -24,13 +24,19 @@ export default ({}): React.JSX.Element => {
       exam = formatExam(exam)
       setExam(exam)
 
+      setSession(formatSession(session, exam))
+
       setLoading((prev) => prev - 1)
     })
 
     import('./session.json').then((data) => {
       // @ts-expect-error
       const session: Session = data.default as Session
-      setSession(session)
+      if (exam) {
+        setSession(formatSession(session, exam))
+      } else {
+        setSession(session)
+      }
 
       setLoading((prev) => prev - 1)
     })
