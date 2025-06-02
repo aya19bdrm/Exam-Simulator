@@ -143,7 +143,7 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
         data-test={`Grid Item ${i}`}
         $background={getGridItemBackground(index, bookmarks, answered)}
         $selected={index === session.index}
-        onClick={() => onClickGridItem(i)}
+        onClick={() => onClickGridItem(index)}
       >
         {index + 1}
       </GridItem>
