@@ -2,10 +2,15 @@ import type { QuestionTypes } from './types'
 
 import React, { createContext } from 'react'
 
-export type Answer<Q extends QuestionTypes, A> = A
-export type AnswerOfMultipleChoice = Answer<'multiple-choice', number | null>
-export type AnswerOfMultipleAnswer = Answer<'multiple-answer', number[]>
-export type Answers = (Answer<'multiple-choice', number> | Answer<'multiple-answer', number[]>)[]
+export type Answer<QT extends QuestionTypes> = AnswerOf[QT]
+// export type Answer<Q extends QuestionTypes, A> = A
+export type AnswerOfMultipleChoice = Answer<'multiple-choice'>
+export type AnswerOfMultipleAnswer = Answer<'multiple-answer'>
+export type Answers = (AnswerOfMultipleChoice | AnswerOfMultipleAnswer)[]
+export type AnswerOf = {
+  ['multiple-choice']: number | null
+  ['multiple-answer']: number[]
+}
 
 export type TimerStates = 'running' | 'paused' | 'stopped'
 export type ExamState = 'not-started' | 'in-progress' | 'completed'

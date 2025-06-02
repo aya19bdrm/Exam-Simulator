@@ -1,3 +1,5 @@
+import type { Answer } from './session'
+
 export interface Theme {
   grey: string[]
   black: string
@@ -37,15 +39,17 @@ export interface Exam {
 
 export type Test = Question[]
 
-export interface Question {
+export type QuestionTypes = 'multiple-choice' | 'multiple-answer'
+
+export interface Question<QT extends QuestionTypes = QuestionTypes> {
   /** question type */
-  type: QuestionTypes
+  type: QT
   /** question content */
   text: string
   /** choices of the question */
   choices: Choice[]
   /** index of the correct choice for quick access */
-  answer: number
+  answer: Answer<QT>
 }
 
 export interface Choice {
@@ -56,8 +60,6 @@ export interface Choice {
   /** explaination of why this answer is correct/wrong */
   explanation: string
 }
-
-export type QuestionTypes = 'multiple-choice' | 'multiple-answer' | 'fill-in-the-blank'
 
 export interface ExamReport {
   /** the exam being reported */
