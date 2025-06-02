@@ -16,9 +16,6 @@
     }
   },
   "content": {
-    "cover": {
-      "logo-alt": "logo exam"
-    },
     "exam": {
       "top-display": {
         "question": "Question $1 of $2"

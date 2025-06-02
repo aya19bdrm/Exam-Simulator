@@ -1,5 +1,4 @@
 import type { Session, SessionDispatch } from '../../session'
-import { translate, type LangCode } from '../../settings'
 
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Drawer from './Drawer'
@@ -10,6 +9,7 @@ import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
 import { timerHaveExpired, timerIsPaused, examWantsToFinish, examNotStarted, examFinished } from '../../utils/state'
+import { translate, type LangCode } from '../../settings'
 
 export default ({ startingSession, setLang }: NavigationProps): React.JSX.Element => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
@@ -83,19 +83,18 @@ export default ({ startingSession, setLang }: NavigationProps): React.JSX.Elemen
 
         {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 
-        {newConfirms.map(
-          (c, i) =>
-            c.show && (
-              <Confirm
-                key={i}
-                title={c.title}
-                message={c.message}
-                buttons={c.buttons}
-                onConfirm={c.onConfirm}
-                onClose={c.onClose}
-              />
-            )
-        )}
+        {newConfirms
+          .filter((c) => c.show)
+          .map((c, i) => (
+            <Confirm
+              key={i}
+              title={c.title}
+              message={c.message}
+              buttons={c.buttons}
+              onConfirm={c.onConfirm}
+              onClose={c.onClose}
+            />
+          ))}
       </div>
     </SessionContext.Provider>
   )

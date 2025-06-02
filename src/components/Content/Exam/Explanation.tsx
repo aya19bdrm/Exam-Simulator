@@ -31,12 +31,12 @@ const NormalText = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export default ({ explanationRef, question, answers }: ExplainationProps): React.JSX.Element => {
+export default ({ question }: ExplainationProps): React.JSX.Element => {
   const correctChoice: Choice = question.choices.find((choice: Choice) => choice.correct) as Choice
   const status: boolean = question.choices[question.answer].correct
 
   return (
-    <ExplanationStyles id="explanation" ref={explanationRef} $status={status}>
+    <ExplanationStyles id="explanation" $status={status}>
       <div>
         {translate('content.exam.explain.yours')}
         <span className="status">
@@ -63,9 +63,7 @@ export default ({ explanationRef, question, answers }: ExplainationProps): React
 }
 
 export interface ExplainationProps {
-  explanationRef: React.RefObject<HTMLDivElement> | null
   question: Question
-  answers: number[]
 }
 
 export interface ExplanationStylesProps extends ThemedStyles {

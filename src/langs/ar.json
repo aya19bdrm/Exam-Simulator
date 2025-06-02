@@ -16,9 +16,6 @@
     }
   },
   "content": {
-    "cover": {
-      "logo-alt": "شعار الإختبار"
-    },
     "exam": {
       "top-display": {
         "question": "السؤال $1 من $2"
