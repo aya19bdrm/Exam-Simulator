@@ -3,7 +3,6 @@ import type { AnswerOfMultipleChoice, Session } from '../../../session'
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { darken } from 'polished'
 import { RadioButtonChecked } from '@styled-icons/material/RadioButtonChecked'
 import { RadioButtonUnchecked } from '@styled-icons/material/RadioButtonUnchecked'
 import { type Lang } from '../../../settings'
@@ -15,19 +14,20 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   margin-bottom: 0.5rem;
   cursor: pointer;
   svg {
-    color: ${({ $review, $correct, theme }) =>
-      $review ? ($correct ? darken(0.3, theme.quatro) : theme.grey[5]) : theme.grey[10]};
+    color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.grey[10])};
     margin-right: 0.5rem;
   }
   .text {
     display: flex;
     font: 2rem 'Open Sans';
-    color: ${({ $review, $correct, theme }) =>
-      $review ? ($correct ? darken(0.3, theme.quatro) : theme.grey[5]) : theme.black};
+    color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.black)};
     & > :first-child {
       font-weight: 600;
       ${({ dir }) => (dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
     }
+  }
+  .selected {
+    color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.incorrect) : theme.black)};
   }
 `
 
@@ -50,9 +50,9 @@ export default ({ exam, session: { index, answers, examState }, lang }: Multiple
           $correct={correct}
           onClick={() => onChoose(i)}
         >
-          {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
+          {value === i ? <RadioButtonChecked className="selected" size={20} /> : <RadioButtonUnchecked size={20} />}
 
-          <div className="text">
+          <div className={`text ${value === i ? 'selected' : ''}`}>
             <div>{formatChoiceLabel(i, lang.code)}.</div>
             <div>{text}</div>
           </div>

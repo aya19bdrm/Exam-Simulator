@@ -5,6 +5,8 @@ export interface Theme {
   secondary: string
   tertiary: string
   quatro: string
+  correct: string
+  incorrect: string
   borderRadius: string
   shadows: string[]
   scrollbar: string

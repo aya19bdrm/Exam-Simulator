@@ -57,5 +57,7 @@ export default {
   borderRadius: '2px',
   shadows,
   scrollbar: '8px',
-  fontSize: '10px'
+  fontSize: '10px',
+  correct: '#4CAF50',
+  incorrect: '#F44336'
 }
