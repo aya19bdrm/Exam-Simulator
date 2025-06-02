@@ -96,8 +96,8 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
     .filter((i) => i !== undefined)
 
   const onClickGridItem = (question: number) => {
-    if (question === session.questionIndex) return
-    session.update!(SessionActionTypes.SET_QUESTION_INDEX, question)
+    if (question === session.index) return
+    session.update!(SessionActionTypes.SET_INDEX, question)
   }
 
   return (
@@ -142,7 +142,7 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
         key={i}
         data-test={`Grid Item ${i}`}
         $background={getGridItemBackground(index, bookmarks, answered)}
-        $selected={index === session.questionIndex}
+        $selected={index === session.index}
         onClick={() => onClickGridItem(i)}
       >
         {index + 1}

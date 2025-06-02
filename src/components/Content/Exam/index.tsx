@@ -23,14 +23,13 @@ export default ({}: object): React.JSX.Element => {
 
   if (!exam) return <></>
 
-  const { questionIndex } = session
-  const question = exam.test[questionIndex]
+  const question = exam.test[session.index]
 
   return (
     <TestStyles id="exam" dir={lang.dir}>
       <TopDisplay exam={exam} session={session} lang={lang} />
 
-      <Slide key={questionIndex} direction="right">
+      <Slide key={session.index} direction="right">
         <Question {...question} />
 
         {question.type === 'multiple-choice' ? (

@@ -9,7 +9,7 @@ import Content from '../Content'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
-import { haveExpired, isPaused, wantsToEnd, canBegin } from '../../utils/state'
+import { timerHaveExpired, timerIsPaused, examWantsToFinish, examNotStarted, examFinished } from '../../utils/state'
 
 export default ({ startingSession, setLang }: NavigationProps): React.JSX.Element => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
@@ -34,25 +34,34 @@ export default ({ startingSession, setLang }: NavigationProps): React.JSX.Elemen
   const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = [
     {
       id: 'start',
-      show: canBegin(session),
+      show: examNotStarted(session),
       onConfirm: () => {
         session.update!(SessionActionTypes.SET_TIME, session.maxTime)
         session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
+        session.update!(SessionActionTypes.SET_EXAM_STATE, 'in-progress')
       }
     },
     {
       id: 'expired',
-      show: haveExpired(session),
-      onConfirm: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+      show: timerHaveExpired(session),
+      onConfirm: () => {
+        session.update!(SessionActionTypes.SET_TIME, 0)
+        session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+        session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
+      }
     },
     {
       id: 'end',
-      show: wantsToEnd(session),
-      onConfirm: () => session.update!(SessionActionTypes.SET_TIME, session.maxTime + session.time)
+      show: examWantsToFinish(session),
+      onConfirm: () => {
+        session.update!(SessionActionTypes.SET_TIME, session.time)
+        session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+        session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
+      }
     },
     {
       id: 'pause',
-      show: isPaused(session),
+      show: timerIsPaused(session),
       onConfirm: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
     }
   ]

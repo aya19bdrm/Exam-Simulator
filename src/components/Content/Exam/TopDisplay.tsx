@@ -37,16 +37,12 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
 `
 
-export default ({
-  exam,
-  session: { questionIndex, bookmarks, update },
-  lang
-}: ExamTopDisplayProps): React.JSX.Element => {
-  const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(questionIndex))
+export default ({ exam, session: { index, bookmarks, update }, lang }: ExamTopDisplayProps): React.JSX.Element => {
+  const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(index))
 
   useEffect(() => {
-    setBookmarked(bookmarks.includes(questionIndex))
-  }, [questionIndex])
+    setBookmarked(bookmarks.includes(index))
+  }, [index])
 
   const onBookmarkQuestion = (question: number, marked: boolean) => {
     setBookmarked(marked)
@@ -63,15 +59,13 @@ export default ({
   return (
     <TopDisplayStyles id="top-display" $bookmarked={bookmarked}>
       <div>
-        <div dir={lang.dir}>
-          {translate('content.exam.top-display.question', [questionIndex + 1, exam.test.length])}
-        </div>
+        <div dir={lang.dir}>{translate('content.exam.top-display.question', [index + 1, exam.test.length])}</div>
       </div>
 
       {bookmarked ? (
-        <Bookmark size={40} onClick={() => onBookmarkQuestion(questionIndex, false)} />
+        <Bookmark size={40} onClick={() => onBookmarkQuestion(index, false)} />
       ) : (
-        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(questionIndex, true)} />
+        <BookmarkBorder size={40} onClick={() => onBookmarkQuestion(index, true)} />
       )}
     </TopDisplayStyles>
   )

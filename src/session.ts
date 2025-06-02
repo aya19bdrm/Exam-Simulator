@@ -8,10 +8,11 @@ export type AnswerOfMultipleAnswer = Answer<'multiple-answer', number[]>
 export type Answers = (Answer<'multiple-choice', number> | Answer<'multiple-answer', number[]>)[]
 
 export type TimerStates = 'running' | 'paused' | 'stopped'
+export type ExamState = 'not-started' | 'in-progress' | 'completed'
 
 export interface Session {
   /** the question number */
-  questionIndex: number
+  index: number
 
   /** the time elapsed */
   maxTime: number
@@ -21,6 +22,9 @@ export interface Session {
 
   /** the state of the timer */
   timerState: TimerStates
+
+  /** the state of the exam */
+  examState: ExamState
 
   /** the list of bookmarked questions */
   bookmarks: number[]
@@ -32,13 +36,20 @@ export interface Session {
   update: SessionDispatch
 }
 
-export type SessionActionTypes = 'SET_QUESTION_INDEX' | 'SET_BOOKMARKS' | 'SET_ANSWERS' | 'SET_TIME' | 'SET_TIMER_STATE'
+export type SessionActionTypes =
+  | 'SET_INDEX'
+  | 'SET_BOOKMARKS'
+  | 'SET_ANSWERS'
+  | 'SET_TIME'
+  | 'SET_TIMER_STATE'
+  | 'SET_EXAM_STATE'
 export type SessionActions = {
-  SET_QUESTION_INDEX: { type: 'SET_QUESTION_INDEX'; payload: number }
+  SET_INDEX: { type: 'SET_INDEX'; payload: number }
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[] }
   SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers }
   SET_TIME: { type: 'SET_TIME'; payload: number }
   SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates }
+  SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState }
 }
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
@@ -53,19 +64,21 @@ export type SessionDispatch<T extends SessionActionTypes = SessionActionTypes> =
   payload: SessionActions[T]['payload']
 ) => void
 
-export const SessionActionTypes = {
-  SET_QUESTION_INDEX: 'SET_QUESTION_INDEX',
+export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
+  SET_INDEX: 'SET_INDEX',
   SET_BOOKMARKS: 'SET_BOOKMARKS',
   SET_ANSWERS: 'SET_ANSWERS',
   SET_TIME: 'SET_TIME',
-  SET_TIMER_STATE: 'SET_TIMER_STATE'
+  SET_TIMER_STATE: 'SET_TIMER_STATE',
+  SET_EXAM_STATE: 'SET_EXAM_STATE'
 } as const
 
 export const defaultSession: Session = {
-  questionIndex: 0,
+  index: 0,
   maxTime: 13800,
   time: 13800,
   timerState: 'stopped',
+  examState: 'not-started',
   bookmarks: [],
   answers: [],
   update: () => {}
@@ -75,9 +88,9 @@ export const SessionContext = createContext<Session>(defaultSession)
 
 export const SessionReducer: SessionReducerFunc = (state: Session, { type, payload }: SessionAction): Session => {
   switch (type) {
-    case SessionActionTypes.SET_QUESTION_INDEX: {
+    case SessionActionTypes.SET_INDEX: {
       const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, questionIndex: value }
+      return { ...state, index: value }
     }
 
     case SessionActionTypes.SET_BOOKMARKS: {
@@ -98,6 +111,11 @@ export const SessionReducer: SessionReducerFunc = (state: Session, { type, paylo
     case SessionActionTypes.SET_TIMER_STATE: {
       const value = payload as SessionActions[typeof type]['payload']
       return { ...state, timerState: value }
+    }
+
+    case SessionActionTypes.SET_EXAM_STATE: {
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, examState: value }
     }
 
     default:

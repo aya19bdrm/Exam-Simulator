@@ -92,10 +92,9 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
           return newTime
         })
       }, 1000)
-    } else if (session.timerState === 'paused') {
+    } else if (session.timerState === 'paused' || session.timerState === 'stopped') {
       clearInterval(interval)
-    } else if (session.timerState === 'stopped') {
-      clearInterval(interval)
+      session.update!(SessionActionTypes.SET_TIME, timer)
     }
 
     return () => {
@@ -104,18 +103,18 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
     }
   }, [session.timerState])
 
-  const { questionIndex } = session
+  const { index } = session
 
-  const onFirstQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, 0)
+  const onFirstQuestion = () => session.update!(SessionActionTypes.SET_INDEX, 0)
   const onPrevQuestion = () => {
-    if (questionIndex === 0) return
-    session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex - 1)
+    if (index === 0) return
+    session.update!(SessionActionTypes.SET_INDEX, index - 1)
   }
   const onNextQuestion = () => {
-    if (questionIndex === questionCount - 1) return
-    session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionIndex + 1)
+    if (index === questionCount - 1) return
+    session.update!(SessionActionTypes.SET_INDEX, index + 1)
   }
-  const onLastQuestion = () => session.update!(SessionActionTypes.SET_QUESTION_INDEX, questionCount - 1)
+  const onLastQuestion = () => session.update!(SessionActionTypes.SET_INDEX, questionCount - 1)
 
   return (
     <ExamFooter id="exam-footer" $open={open} $warning={timer < 120}>

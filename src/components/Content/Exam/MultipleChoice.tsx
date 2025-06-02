@@ -39,18 +39,18 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-export default ({ exam, session: { questionIndex, answers }, lang }: MultipleChoiceProps): React.JSX.Element => {
-  const answer = answers[questionIndex] as AnswerOfMultipleChoice
+export default ({ exam, session: { index, answers }, lang }: MultipleChoiceProps): React.JSX.Element => {
+  const answer = answers[index] as AnswerOfMultipleChoice
   const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
 
   const onChoose = (i: number): void => {
     setValue(i)
-    answers[questionIndex] = i
+    answers[index] = i
   }
 
   return (
     <div id="multiple-choice">
-      {exam.test[questionIndex].choices.map(({ text, correct }, i) => (
+      {exam.test[index].choices.map(({ text, correct }, i) => (
         <MultipleStyles key={i} dir={lang.dir} onClick={() => onChoose(i)}>
           {value === i ? <RadioButtonChecked size={20} /> : <RadioButtonUnchecked size={20} />}
 
