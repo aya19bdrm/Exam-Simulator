@@ -14,11 +14,13 @@ const ContentStyles = styled.div<ThemedStyles>`
   transition: 0.3s;
 `
 
-export default ({ page }: ContentProps): React.JSX.Element => {
+const ContentComponent: React.FC<ContentProps> = ({ page }) => {
   return (
     <ContentStyles id="content">{page === 'exam' ? <Exam /> : page === 'review' ? <Review /> : null}</ContentStyles>
   )
 }
+
+export default ContentComponent
 
 export interface ContentProps {
   page: PageTypes

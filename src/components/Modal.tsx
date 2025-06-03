@@ -36,7 +36,7 @@ const ModalMain = styled.div`
   animation: ${grow} 200ms ease;
 `
 
-export default ({ children, color, onClose }: ModalProps): React.JSX.Element => {
+const ModalComponent: React.FC<ModalProps> = ({ children, color, onClose }) => {
   const modal = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -60,6 +60,8 @@ export default ({ children, color, onClose }: ModalProps): React.JSX.Element => 
     </ModalWindow>
   )
 }
+
+export default ModalComponent
 
 export interface ModalProps {
   children: React.JSX.Element | React.JSX.Element[]

@@ -15,7 +15,7 @@ const ListItem = styled.div<ListItemStylesProps>`
   font-weight: 700;
 `
 
-export default ({ choices }: StaticListProps): React.JSX.Element => {
+const StaticListComponent: React.FC<StaticListProps> = ({ choices }) => {
   return (
     <div>
       {choices.map(({ text, correct }, i) => (
@@ -26,6 +26,8 @@ export default ({ choices }: StaticListProps): React.JSX.Element => {
     </div>
   )
 }
+
+export default StaticListComponent
 
 export interface StaticListProps {
   choices: Choice[]

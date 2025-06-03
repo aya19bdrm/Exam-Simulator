@@ -37,7 +37,7 @@ const TopDisplayStyles = styled.div<ExamTopDisplayStylesProps>`
   }
 `
 
-export default ({ exam, session: { index, bookmarks, update }, lang }: ExamTopDisplayProps): React.JSX.Element => {
+const TopDisplayComponent: React.FC<ExamTopDisplayProps> = ({ exam, session: { index, bookmarks, update }, lang }) => {
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarks.includes(index))
 
   useEffect(() => {
@@ -70,6 +70,8 @@ export default ({ exam, session: { index, bookmarks, update }, lang }: ExamTopDi
     </TopDisplayStyles>
   )
 }
+
+export default TopDisplayComponent
 
 export interface ExamTopDisplayProps {
   exam: Exam

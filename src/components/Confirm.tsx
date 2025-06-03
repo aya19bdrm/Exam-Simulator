@@ -4,7 +4,7 @@ import { InnerModal } from '../styles/InnerModal'
 // @ts-expect-error
 import Logo from '../assets/logo.png'
 
-export default ({ title, message, buttons, onConfirm, onClose }: ConfirmProps): React.JSX.Element => (
+const ConfirmComponent: React.FC<ConfirmProps> = ({ title, message, buttons, onConfirm, onClose }) => (
   <Modal color="dark" onClose={onClose}>
     <InnerModal id="inner-modal">
       <div id="title" className="title">
@@ -31,6 +31,8 @@ export default ({ title, message, buttons, onConfirm, onClose }: ConfirmProps): 
     </InnerModal>
   </Modal>
 )
+
+export default ConfirmComponent
 
 export interface ConfirmProps {
   title: string

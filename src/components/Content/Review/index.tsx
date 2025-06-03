@@ -5,7 +5,7 @@ import { ExamContext } from '../../../exam'
 import { SessionContext } from '../../../session'
 import { LangContext } from '../../../settings'
 
-export default ({}: object): React.JSX.Element => {
+const ReviewComponent: React.FC<object> = ({}) => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
   const lang = useContext(LangContext)
@@ -18,3 +18,5 @@ export default ({}: object): React.JSX.Element => {
   return <ReviewExam exam={exam} session={session} lang={lang} />
   // }
 }
+
+export default ReviewComponent

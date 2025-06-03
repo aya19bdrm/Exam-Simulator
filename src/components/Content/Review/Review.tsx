@@ -19,7 +19,7 @@ const ReviewExamStyles = styled.div`
   overflow-y: auto;
 `
 
-export default ({ exam, session, lang }: ReviewExamProps): React.JSX.Element => {
+const ReviewComponent: React.FC<ReviewExamProps> = ({ exam, session, lang }) => {
   const { index } = session
   const question = exam.test[index]
 
@@ -43,6 +43,8 @@ export default ({ exam, session, lang }: ReviewExamProps): React.JSX.Element => 
     </ReviewExamStyles>
   )
 }
+
+export default ReviewComponent
 
 export interface ReviewExamProps {
   exam: Exam

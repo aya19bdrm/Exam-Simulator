@@ -33,7 +33,7 @@ export const InnerHeader = styled.div<ThemedStyles>`
   }
 `
 
-export default ({ exam }: HeaderProps): React.JSX.Element => {
+const HeaderComponent: React.FC<HeaderProps> = ({ exam }) => {
   if (!exam) return <></>
 
   return (
@@ -45,6 +45,8 @@ export default ({ exam }: HeaderProps): React.JSX.Element => {
     </HeaderStyles>
   )
 }
+
+export default HeaderComponent
 
 export interface HeaderStylesProps extends ThemedStyles {
   $dir: 'rtl' | 'ltr'

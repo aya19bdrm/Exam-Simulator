@@ -10,7 +10,7 @@ import { type Lang, LangContext, setTranslation, langs, LangCode } from './setti
 import { useForceUpdate, useLocalStorage } from './@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
-export default ({}): React.JSX.Element => {
+const AppComponent: React.FC<object> = ({}) => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
   const [loading, setLoading] = useState<number>(2)
   const [exam, setExam] = useState<Exam | null>(null)
@@ -68,3 +68,5 @@ export default ({}): React.JSX.Element => {
     </LangContext.Provider>
   )
 }
+
+export default AppComponent

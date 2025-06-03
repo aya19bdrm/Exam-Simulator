@@ -76,7 +76,7 @@ const MenuItem = styled.div<MenuItemStylesProps>`
   }
 `
 
-export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element => {
+const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) => {
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
 
   const menu: MenuSections[] = [
@@ -160,6 +160,8 @@ export default ({ open, toggleOpen, session }: DrawerProps): React.JSX.Element =
     </DrawerStyles>
   )
 }
+
+export default DrawerComponent
 
 export interface DrawerProps {
   open: boolean

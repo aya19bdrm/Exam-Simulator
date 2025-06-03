@@ -31,7 +31,11 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
   }
 `
 
-export default ({ exam, session: { index, answers, examState }, lang }: MultipleChoiceProps): React.JSX.Element => {
+const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({
+  exam,
+  session: { index, answers, examState },
+  lang
+}) => {
   const answer = answers[index] as AnswerOfMultipleChoice
   const [value, setValue] = useState<AnswerOfMultipleChoice>(answer)
 
@@ -61,6 +65,8 @@ export default ({ exam, session: { index, answers, examState }, lang }: Multiple
     </div>
   )
 }
+
+export default MultipleChoiceComponent
 
 export interface MultipleChoiceProps {
   exam: Exam

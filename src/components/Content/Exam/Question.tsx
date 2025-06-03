@@ -14,10 +14,12 @@ const NormalText = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export default ({ text }: Question): React.JSX.Element => {
+const QuestionComponent: React.FC<Question> = ({ text }) => {
   return (
     <QuestionStyles id="question" data-test="Question">
       {text && <NormalText>{text}</NormalText>}
     </QuestionStyles>
   )
 }
+
+export default QuestionComponent

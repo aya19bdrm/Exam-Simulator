@@ -18,13 +18,15 @@ const FooterStyles = styled.div<FooterStylesProps>`
   border-top: 1px solid ${({ theme }) => theme.grey[1]};
 `
 
-export default ({ open, exam, session, setLang }: NavigationFooterProps): React.JSX.Element => {
+const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session, setLang }) => {
   return (
     <FooterStyles id="footer" $open={open}>
       <ExamFooter open={open} session={session} questionCount={exam.test.length} setLang={setLang} />
     </FooterStyles>
   )
 }
+
+export default FooterComponent
 
 export interface NavigationFooterProps {
   open: boolean

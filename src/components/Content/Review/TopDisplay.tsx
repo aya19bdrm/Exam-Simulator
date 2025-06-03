@@ -23,11 +23,13 @@ const TopDisplayStyles = styled.div<ThemedStyles>`
   }
 `
 
-export default ({ exam, session: { index } }: ReviewTopDisplayProps): React.JSX.Element => (
+const TopDisplayComponent: React.FC<ReviewTopDisplayProps> = ({ exam, session: { index } }) => (
   <TopDisplayStyles>
     <div>{translate('content.exam.top-display.question', [index + 1, exam.test.length])}</div>
   </TopDisplayStyles>
 )
+
+export default TopDisplayComponent
 
 export interface ReviewTopDisplayProps {
   exam: Exam

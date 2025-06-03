@@ -52,7 +52,7 @@ const SummaryStyles = styled.div<SummaryStylesProps>`
   }
 `
 
-export default ({ exam, session }: SummaryProps): React.JSX.Element => {
+const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
   const incompleteQuestions = session.answers.filter((a) => a === null)
   const completedQuestions = session.answers.filter((a) => a !== null)
   const conrrectQuestions = completedQuestions.filter((a, i) => a === exam.test[i].answer)
@@ -90,6 +90,8 @@ export default ({ exam, session }: SummaryProps): React.JSX.Element => {
     </SummaryStyles>
   )
 }
+
+export default SummaryComponent
 
 const SummaryRow = (key: string, value: string) => {
   return (

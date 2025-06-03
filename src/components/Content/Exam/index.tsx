@@ -16,7 +16,7 @@ const TestStyles = styled.div`
   overflow-y: auto;
 `
 
-export default ({}: object): React.JSX.Element => {
+const ExamComponent: React.FC<object> = ({}) => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
   const lang = useContext(LangContext)
@@ -41,3 +41,5 @@ export default ({}: object): React.JSX.Element => {
     </TestStyles>
   )
 }
+
+export default ExamComponent

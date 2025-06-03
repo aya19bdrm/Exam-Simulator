@@ -41,7 +41,7 @@ export const LoadingStyles = styled.div<LoadingStylesProps>`
   }
 `
 
-export default ({ size, height }) => (
+const LoadingMainComponent: React.FC<LoadingMainProps> = ({ size, height }) => (
   <LoadingStyles id="loading-main" color="grey" height={height}>
     <div className="title">
       <span>{translate('loading')}</span>
@@ -50,6 +50,13 @@ export default ({ size, height }) => (
     <Repeat size={size} />
   </LoadingStyles>
 )
+
+export default LoadingMainComponent
+
+export interface LoadingMainProps {
+  size: number
+  height: number
+}
 
 export interface LoadingStylesProps extends ThemedStyles {
   color: string

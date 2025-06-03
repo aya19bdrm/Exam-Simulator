@@ -70,7 +70,7 @@ const ExamFooter = styled.div<ExamFooterStylesProps>`
   }
 `
 
-export default ({ open, session, questionCount, setLang }: ExamFooterProps): React.JSX.Element => {
+const ExamFooterComponent: React.FC<ExamFooterProps> = ({ open, session, questionCount, setLang }) => {
   const [timer, setTimer] = React.useState<number>(session.time)
 
   useEffect(() => {
@@ -148,6 +148,8 @@ export default ({ open, session, questionCount, setLang }: ExamFooterProps): Rea
     </ExamFooter>
   )
 }
+
+export default ExamFooterComponent
 
 export interface ExamFooterProps {
   open: boolean

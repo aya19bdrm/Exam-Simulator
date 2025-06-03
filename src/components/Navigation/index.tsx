@@ -11,7 +11,7 @@ import { SessionActionTypes, SessionContext, SessionReducer } from '../../sessio
 import { timerHaveExpired, timerIsPaused, examWantsToFinish, examNotStarted, examFinished } from '../../utils/state'
 import { translate, type LangCode } from '../../settings'
 
-export default ({ startingSession, setLang }: NavigationProps): React.JSX.Element => {
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLang }) => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
 
@@ -99,6 +99,8 @@ export default ({ startingSession, setLang }: NavigationProps): React.JSX.Elemen
     </SessionContext.Provider>
   )
 }
+
+export default NavigationComponent
 
 export interface NavigationProps {
   startingSession: Session

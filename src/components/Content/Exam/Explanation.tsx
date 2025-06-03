@@ -32,7 +32,7 @@ const NormalText = styled.div`
   margin-bottom: 0.5rem;
 `
 
-export default ({ question, answer, lang }: ExplainationProps): React.JSX.Element => {
+const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, lang }) => {
   const correctChoice: Choice = question.choices.find((choice: Choice) => choice.correct) as Choice
   const status: boolean = question.answer === answer
 
@@ -62,6 +62,8 @@ export default ({ question, answer, lang }: ExplainationProps): React.JSX.Elemen
     </ExplanationStyles>
   )
 }
+
+export default ExplainationComponent
 
 export interface ExplainationProps {
   question: Question

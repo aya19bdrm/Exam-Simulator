@@ -73,7 +73,7 @@ export const GridItem = styled.div<GridItemStylesProps>`
   cursor: pointer;
 `
 
-export default ({ open, show }: GridProps): React.JSX.Element => {
+const GridComponent: React.FC<GridProps> = ({ open, show }) => {
   const exam = useContext(ExamContext)
   const session = useContext(SessionContext)
   const [bookmarks, setBookmarks] = React.useState<number[]>(session.bookmarks)
@@ -150,6 +150,8 @@ export default ({ open, show }: GridProps): React.JSX.Element => {
     )
   }
 }
+
+export default GridComponent
 
 export interface GridProps {
   open: boolean

@@ -8,7 +8,11 @@ import { MultipleStyles } from './MultipleChoice'
 import { type Lang } from '../../../settings'
 import { formatChoiceLabel } from '../../../utils/format'
 
-export default ({ exam, session: { index, answers, examState }, lang }: MultipleAnswerProps): React.JSX.Element => {
+const MultipleAnswerComponent: React.FC<MultipleAnswerProps> = ({
+  exam,
+  session: { index, answers, examState },
+  lang
+}) => {
   const answer = answers[index] as AnswerOfMultipleAnswer
   const [values, setValues] = useState<AnswerOfMultipleAnswer>(answer)
 
@@ -46,6 +50,8 @@ export default ({ exam, session: { index, answers, examState }, lang }: Multiple
     </div>
   )
 }
+
+export default MultipleAnswerComponent
 
 export interface MultipleAnswerProps {
   exam: Exam
