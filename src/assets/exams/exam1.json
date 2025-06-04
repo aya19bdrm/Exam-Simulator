@@ -6,7 +6,7 @@
   "test": [
     {
       "type": "multiple-choice",
-      "text": "A project team received training on the technology involved with a project deliverable. In nine months of working on the project, several team members have been replaced. Productivity has slowed because new team members are not familiar with the technology and the project schedule is at risk of delay.nnWhat should the project manager do?",
+      "text": "A project team received training on the technology involved with a project deliverable. In nine months of working on the project, several team members have been replaced. Productivity has slowed because new team members are not familiar with the technology and the project schedule is at risk of delay. What should the project manager do?",
       "choices": [
         {
           "text": "Meet with the entire team and ask existing members to train the new team members.",
@@ -32,7 +32,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "The day before construction is scheduled to begin, the project manager learns that the structure blueprint was not accepted by the customer.nnWhat should the project manager do first to ensure that the project timeline is met?",
+      "text": "The day before construction is scheduled to begin, the project manager learns that the structure blueprint was not accepted by the customer. What should the project manager do first to ensure that the project timeline is met?",
       "choices": [
         {
           "text": "Meet with the customer as soon as possible to discuss changes to the blueprint.",
@@ -396,7 +396,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "After success in a particulary challenging project phase, a project manager reassigned a high-performing team member to a more strategic task.nn\tThis is an example of what?",
+      "text": "After success in a particulary challenging project phase, a project manager reassigned a high-performing team member to a more strategic task. \tThis is an example of what?",
       "choices": [
         {
           "text": "Recognition",
