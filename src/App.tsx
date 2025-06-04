@@ -18,8 +18,9 @@ const AppComponent: React.FC<object> = ({}) => {
   const forceUpdate = useForceUpdate()
 
   useEffect(() => {
-    import('./assets/exams/exam1.json').then((data) => {
-      // @ts-expect-error
+    const randNum = Math.floor(Math.random() * 5)
+
+    import(`./assets/exams/${lang.code}/${randNum}.json`).then((data) => {
       let exam: Exam = data.default as Exam
       exam = formatExam(exam)
       setExam(exam)
