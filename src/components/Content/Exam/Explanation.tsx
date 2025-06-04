@@ -8,7 +8,7 @@ import { type Lang, translate } from '../../../settings'
 import { formatAnswerLabel } from '../../../utils/format'
 
 const ExplanationStyles = styled.div<ExplanationStylesProps>`
-  background: ${({ theme }) => theme.quatro};
+  background: ${({ $correct, theme }) => ($correct ? lighten(0.4, theme.correct) : lighten(0.4, theme.incorrect))};
   border: 1px solid ${({ theme }) => theme.grey[2]};
   margin-top: 5rem;
   padding: 1rem;
@@ -16,10 +16,11 @@ const ExplanationStyles = styled.div<ExplanationStylesProps>`
   .status {
     text-transform: uppercase;
     font-weight: 700;
-    color: ${({ $status, theme }) => ($status ? darken(0.1, theme.quatro) : lighten(0.1, theme.secondary))};
+    color: ${({ $correct, theme }) => ($correct ? darken(0.1, theme.correct) : darken(0.1, theme.incorrect))};
   }
   .correct {
     font-weight: 700;
+    color: ${({ theme }) => darken(0.1, theme.correct)};
   }
   .explanation {
     font-weight: 700;
@@ -34,14 +35,14 @@ const NormalText = styled.div`
 
 const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, lang }) => {
   const correctChoice: Choice = question.choices.find((choice: Choice) => choice.correct) as Choice
-  const status: boolean = question.answer === answer
+  const correct: boolean = question.answer === answer
 
   return (
-    <ExplanationStyles id="explanation" $status={status}>
+    <ExplanationStyles id="explanation" $correct={correct}>
       <div>
         {translate('content.exam.explain.yours')}
         <span className="status">
-          {status ? translate('content.exam.explain.correct') : translate('content.exam.explain.incorrect')}
+          {correct ? translate('content.exam.explain.correct') : translate('content.exam.explain.incorrect')}
         </span>
       </div>
 
@@ -72,5 +73,5 @@ export interface ExplainationProps {
 }
 
 export interface ExplanationStylesProps extends ThemedStyles {
-  $status: boolean
+  $correct: boolean
 }
