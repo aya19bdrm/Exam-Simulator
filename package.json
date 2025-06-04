@@ -2,7 +2,7 @@
   "private": true,
   "name": "exam-simulator",
   "version": "1.0.0",
-  "description": "مبادرة محاضرات طلابية تفاعلية متنوعة",
+  "description": "محاكي الاختبارات الإحترافية لمركز الإبداع",
   "type": "module",
   "main": "index.html",
   "scripts": {
