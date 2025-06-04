@@ -57,7 +57,7 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
-  /** explaination of why this answer is correct/wrong */
+  /** explanation of why this answer is correct/wrong */
   explanation: string
 }
 
