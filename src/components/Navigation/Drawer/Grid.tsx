@@ -120,7 +120,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
                   .filter((item) => item !== null)
               : Array(exam.test.length)
                   .fill(null)
-                  .map((_, i) => <GridItemCreator i={i} key={i} index={i} />)}
+                      .map((_, i) => <GridItemCreator i={i} index={i} />)}
       </div>
     </GridStyles>
   )

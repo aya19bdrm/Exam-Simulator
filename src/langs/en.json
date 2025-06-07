@@ -11,9 +11,9 @@
       "stop": "Stop Exam"
     },
     "grid": {
-      "marked": "Bookmarked",
-      "incomplete": "Incomplete",
-      "complete": "Complete"
+      "marked": "Marked",
+      "incomplete": "Unanswered",
+      "complete": "Answered"
     }
   },
   "content": {
