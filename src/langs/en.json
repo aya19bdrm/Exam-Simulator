@@ -6,6 +6,8 @@
       "marked": "Marked Questions",
       "incomplete": "Unanswered Questions",
       "complete": "Answered Questions",
+      "incorrect": "Wrong Questions",
+      "correct": "Correct Questions",
       "summary": "Report Summary",
       "pause": "Pause Exam",
       "stop": "Stop Exam"
@@ -13,7 +15,9 @@
     "grid": {
       "marked": "Marked",
       "incomplete": "Unanswered",
-      "complete": "Answered"
+      "complete": "Answered",
+      "incorrect": "Wrong",
+      "correct": "Correct"
     }
   },
   "content": {

@@ -79,38 +79,46 @@ const MenuItem = styled.div<MenuItemStylesProps>`
 
 const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) => {
   const [filter, setFilter] = React.useState<QuestionFilter>('all')
+  const menu: MenuSections[] = []
 
-  const menu: MenuSections[] = [
-    {
+  menu.push({
+    type: 'filter',
+    filter: 'all',
+    icon: <FormatListNumbered size={20} />
+  })
+  menu.push({
+    type: 'filter',
+    filter: 'marked',
+    icon: <Bookmark size={20} />
+  })
+  menu.push({
+    type: 'filter',
+    filter: 'incomplete',
+    icon: <CheckBoxOutlineBlank size={20} />
+  })
+  menu.push({
+    type: 'filter',
+    filter: 'complete',
+    icon: <CheckBox size={20} />
+  })
+
+  if (session.examState === 'completed') {
+    menu.push({
       type: 'filter',
-      filter: 'all',
-      icon: <FormatListNumbered size={20} />
-    },
-    {
-      type: 'filter',
-      filter: 'marked',
-      icon: <Bookmark size={20} />
-    },
-    {
-      type: 'filter',
-      filter: 'complete',
+      filter: 'incorrect',
       icon: <CheckBox size={20} />
-    },
-    {
+    })
+    menu.push({
       type: 'filter',
-      filter: 'incomplete',
-      icon: <CheckBoxOutlineBlank size={20} />
-    },
-    {
-      type: 'review',
-      text: translate('nav.drawer.summary'),
-      icon: <Report size={20} />,
-      onClick: () => {
-        session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
-      }
-    },
-    { type: 'exam-grid' },
-    {
+      filter: 'correct',
+      icon: <CheckBox size={20} />
+    })
+  }
+
+  menu.push({ type: 'exam-grid' })
+
+  if (session.examState === 'in-progress') {
+    menu.push({
       type: 'timer',
       text: translate('nav.drawer.pause'),
       icon: <Pause size={20} />,
@@ -120,8 +128,9 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
           session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
         }
       }
-    },
-    {
+    })
+
+    menu.push({
       type: 'timer',
       text: translate('nav.drawer.stop'),
       icon: <Stop size={20} />,
@@ -131,8 +140,19 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
           session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
         }
       }
-    }
-  ]
+    })
+  } else if (session.examState === 'completed') {
+    menu.push({
+      type: 'review',
+      text: translate('nav.drawer.summary'),
+      icon: <Report size={20} />,
+      onClick: () => {
+        if (timerIsRunning(session)) {
+          session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
+        }
+      }
+    })
+  }
 
   return (
     <DrawerStyles id="drawer">
@@ -152,12 +172,12 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
               {section.icon}
               <div>{translate(`nav.drawer.${section.filter}`)}</div>
             </MenuItem>
-          ) : section.type === 'timer' && session.examState === 'in-progress' ? (
+          ) : section.type === 'timer' ? (
             <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
               {section.icon}
               <div>{section.text}</div>
             </MenuItem>
-          ) : section.type === 'review' && session.examState === 'completed' ? (
+          ) : section.type === 'review' ? (
             <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
               {section.icon}
               <div>{section.text}</div>

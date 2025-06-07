@@ -6,6 +6,8 @@
       "marked": "الأسئلة المعلّمة",
       "incomplete": "الأسئلة المتروكة",
       "complete": "الأسئلة المجابة",
+      "incorrect": "الأسئلة الخاطئة",
+      "correct": "الأسئلة الصحيحة",
       "summary": "ملخص التقرير",
       "pause": "إيقاف مؤقت",
       "stop": "إنهاء الامتحان"
@@ -13,7 +15,9 @@
     "grid": {
       "marked": "معلّم",
       "incomplete": "متروك",
-      "complete": "مكتمل"
+      "complete": "مكتمل",
+      "incorrect": "خطأ",
+      "correct": "صحيح"
     }
   },
   "content": {

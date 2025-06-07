@@ -21,7 +21,7 @@ export interface ThemedStyles {
 }
 
 export type QuestionFilter = 'all' | GridTagTypes
-export type GridTagTypes = 'marked' | 'incomplete' | 'complete'
+export type GridTagTypes = 'marked' | 'incomplete' | 'complete' | 'incorrect' | 'correct'
 
 export type PageTypes = 'exam' | 'review'
 

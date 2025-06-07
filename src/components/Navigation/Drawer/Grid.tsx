@@ -94,6 +94,13 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
       }
     })
     .filter((i) => i !== undefined)
+  const answeredCorrectly = session.answers
+    .map((answer, i) => {
+      const isCorrect = answer === exam.test[i].answer
+      if (isCorrect) return i
+    })
+    .filter((i) => i !== undefined)
+  const answeredIncorrectly = answered.filter((i) => !answeredCorrectly.includes(i))
 
   const onClickGridItem = (question: number) => {
     if (question === session.index) return
@@ -106,6 +113,12 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
         <GridTag type="marked" />
         <GridTag type="incomplete" />
         <GridTag type="complete" />
+        {session.examState === 'completed' && (
+          <>
+            <GridTag type="incorrect" />
+            <GridTag type="correct" />
+          </>
+        )}
       </div>
 
       <div className="grid">
@@ -113,13 +126,17 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
           ? bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
           : show === 'complete'
             ? answered.map((index, i) => <GridItemCreator i={i} index={index} />)
-            : show === 'incomplete'
-              ? Array(exam.test.length)
-                  .fill(null)
-                  .map((_, i) => (answered.includes(i) ? null : <GridItemCreator i={i} index={i} />))
-                  .filter((item) => item !== null)
-              : Array(exam.test.length)
-                  .fill(null)
+            : show === 'incorrect'
+              ? answeredIncorrectly.map((index, i) => <GridItemCreator i={i} index={index} />)
+              : show === 'correct'
+                ? answeredCorrectly.map((index, i) => <GridItemCreator i={i} index={index} />)
+                : show === 'incomplete'
+                  ? Array(exam.test.length)
+                      .fill(null)
+                      .map((_, i) => (answered.includes(i) ? null : <GridItemCreator i={i} index={i} />))
+                      .filter((item) => item !== null)
+                  : Array(exam.test.length)
+                      .fill(null)
                       .map((_, i) => <GridItemCreator i={i} index={i} />)}
       </div>
     </GridStyles>
