@@ -102,7 +102,7 @@ const SummaryRow = (key: string, value: string) => {
   )
 }
 
-export interface SummaryProps extends ThemedStyles {
+export interface SummaryProps {
   exam: Exam
   session: Session
 }
