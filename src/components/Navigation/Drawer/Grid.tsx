@@ -105,6 +105,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
   const onClickGridItem = (question: number) => {
     if (question === session.index) return
     session.update!(SessionActionTypes.SET_INDEX, question)
+    session.update!(SessionActionTypes.SET_REVIEW_STATE, 'question')
   }
 
   return (
