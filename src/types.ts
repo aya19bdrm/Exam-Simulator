@@ -59,35 +59,3 @@ export interface Choice {
   /** is the choice correct */
   correct: boolean
 }
-
-export interface ExamReport {
-  /** the exam being reported */
-  exam: Exam
-
-  /** */
-  status: boolean
-  /**  */
-  score: number | string
-  /**  */
-  correct: number[]
-  /**  */
-  incorrect: number[]
-  /**  */
-  incomplete: number[]
-  /**  */
-  testLength: number
-  /**  */
-  elapsed: number
-  /**  */
-  date: number | string | Date
-  /**  */
-  intervals: number[]
-  /**  */
-  answers: number[][]
-  /**  */
-  fillIns: string[]
-  /**  */
-  orders: number[][]
-  /**  */
-  marked: unknown
-}
