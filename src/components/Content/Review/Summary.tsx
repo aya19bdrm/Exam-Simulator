@@ -45,7 +45,7 @@ const SummaryStyles = styled.div<SummaryStylesProps>`
           color: ${({ theme }) => theme.black};
         }
         .status {
-          color: ${({ $status, theme }) => ($status ? theme.quatro : theme.secondary)};
+          color: ${({ $status, theme }) => ($status ? theme.correct : theme.incorrect)};
         }
       }
     }
@@ -73,7 +73,8 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
         <div className="column">
           {SummaryRow(
             'status',
-            status ? translate('content.review.summary.pass') : translate('content.review.summary.fail')
+            status ? translate('content.review.summary.pass') : translate('content.review.summary.fail'),
+            true
           )}
           {SummaryRow('passing', `${exam.pass} %`)}
           {SummaryRow('time', formatTimer(elapsed))}
@@ -93,11 +94,11 @@ const SummaryComponent: React.FC<SummaryProps> = ({ exam, session }) => {
 
 export default SummaryComponent
 
-const SummaryRow = (key: string, value: string) => {
+const SummaryRow = (key: string, value: string, status?: boolean) => {
   return (
-    <div className="row">
+    <div className="row" data-test={`summary-row-${key}`}>
       <div>{translate(`content.review.summary.${key}`)}</div>
-      <div className="data">{value}</div>
+      <div className={`data ${status ? 'status' : ''}`}>{value}</div>
     </div>
   )
 }
