@@ -122,7 +122,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
       <div className="grid">
         {show === 'marked'
           ? bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
-          : show === 'answered'
+          : show === 'complete'
             ? answered.map((index, i) => <GridItemCreator i={i} index={index} />)
             : show === 'incomplete'
               ? Array(exam.test.length)

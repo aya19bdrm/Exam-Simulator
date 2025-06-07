@@ -95,8 +95,8 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
     },
     {
       type: 'filter',
-      filter: 'answered',
-      text: translate('nav.drawer.answered'),
+      filter: 'complete',
+      text: translate('nav.drawer.complete'),
       icon: <CheckBox size={20} />
     },
     {

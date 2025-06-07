@@ -4,7 +4,7 @@
     "drawer": {
       "all": "All Questions",
       "marked": "Marked Questions",
-      "answered": "Answered Questions",
+      "complete": "Answered Questions",
       "incomplete": "Unanswered Questions",
       "summary": "Report Summary",
       "pause": "Pause Exam",

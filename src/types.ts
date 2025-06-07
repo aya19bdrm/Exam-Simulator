@@ -20,7 +20,7 @@ export interface ThemedStyles {
   theme: Theme
 }
 
-export type QuestionFilter = 'all' | 'marked' | 'answered' | 'incomplete'
+export type QuestionFilter = 'all' | 'marked' | 'complete' | 'incomplete'
 
 export type PageTypes = 'exam' | 'review'
 
