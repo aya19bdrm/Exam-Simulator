@@ -5,6 +5,20 @@ import type { LangCode } from '../settings'
 import { formatDistance, format } from 'date-fns'
 
 /**
+ * Shuffle an array using Fisher-Yates algorithm
+ * @param {T[]} array - The array to shuffle
+ * @returns {T[]} - The shuffled array
+ */
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
+/**
  * Format a date string to a human-readable format.
  * @param {string} date - The date string to format.
  * @returns {string} - The formatted date string.
@@ -40,15 +54,28 @@ export function formatTimer(sec: number): string {
  * @returns {Exam} - The formatted exam object.
  */
 export function formatExam(exam: Exam): Exam {
+  // Randomize the order of questions
+  exam.test = shuffleArray(exam.test)
+
   for (let i = 0; i < exam.test.length; i++) {
     const q = exam.test[i]
 
+    // Create a mapping of original indices to new indices for choices
+    const originalIndices = q.choices.map((_, index) => index)
+    const shuffledIndices = shuffleArray(originalIndices)
+
+    // Randomize the order of choices
+    const shuffledChoices = shuffledIndices.map((originalIndex) => q.choices[originalIndex])
+    q.choices = shuffledChoices
+
+    // Update the answer indices to reflect the new order
     if (q.type === 'multiple-choice') {
-      q.answer = q.choices.findIndex((c) => c.correct)
+      const originalCorrectIndex = q.choices.findIndex((c) => c.correct)
+      q.answer = originalCorrectIndex
     } else if (q.type === 'multiple-answer') {
       q.answer = q.choices
-        .map((_, i) => {
-          return q.choices[i].correct ? i : null
+        .map((_, index) => {
+          return q.choices[index].correct ? index : null
         })
         .filter((c) => c !== null)
     }
