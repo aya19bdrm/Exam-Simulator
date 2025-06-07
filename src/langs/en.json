@@ -44,8 +44,8 @@
         "date": "Date",
         "score": "Score",
         "correct": "Correct",
-        "incorrect": "Incorrect",
-        "incomplete": "Incomplete"
+        "incorrect": "Wrong",
+        "incomplete": "Unanswered"
       }
     }
   },
