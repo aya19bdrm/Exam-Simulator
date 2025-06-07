@@ -28,14 +28,13 @@ const ReviewComponent: React.FC<ReviewExamProps> = ({ exam, session, lang }) => 
       <TopDisplay exam={exam} session={session} />
       <Slide key={index} direction="right">
         <Question {...question} />
+
         {question.type === 'multiple-choice' ? (
           <MultipleChoice exam={exam} session={session} lang={lang} />
         ) : question.type === 'multiple-answer' ? (
           <MultipleAnswer exam={exam} session={session} lang={lang} />
-        ) : // : question.type === '' ? (
-        //   <StaticList choices={question.choices} />
-        // )
-        null}
+        ) : null}
+
         <Slide direction="bottom">
           <Explanation question={question} answer={session.answers[session.index]} lang={lang} />
         </Slide>
