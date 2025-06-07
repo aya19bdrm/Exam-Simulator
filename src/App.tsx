@@ -7,7 +7,7 @@ import Navigation from './components/Navigation'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
-import { useForceUpdate, useLocalStorage } from './@mantine/hooks'
+import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
 const AppComponent: React.FC<object> = ({}) => {
