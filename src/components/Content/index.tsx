@@ -16,9 +16,7 @@ const ContentStyles = styled.div<ThemedStyles>`
 
 const ContentComponent: React.FC<ContentProps> = ({ page }) => {
   return (
-    <ContentStyles id="content">
-      {page === 'exam' ? <Exam /> : page === 'review' ? <Review summary={false} /> : null}
-    </ContentStyles>
+    <ContentStyles id="content">{page === 'exam' ? <Exam /> : page === 'review' ? <Review /> : null}</ContentStyles>
   )
 }
 

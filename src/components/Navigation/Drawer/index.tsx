@@ -10,6 +10,7 @@ import { Bookmark } from '@styled-icons/material/Bookmark'
 import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
 import { Pause } from '@styled-icons/material/Pause'
 import { Stop } from '@styled-icons/material/Stop'
+import { Report } from '@styled-icons/boxicons-solid/Report'
 import Grid from './Grid'
 import { translate } from '../../../settings'
 import { type Session, SessionActionTypes } from '../../../session'
@@ -104,6 +105,14 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       text: translate('nav.drawer.incomplete'),
       icon: <CheckBoxOutlineBlank size={20} />
     },
+    {
+      type: 'review',
+      text: translate('nav.drawer.summary'),
+      icon: <Report size={20} />,
+      onClick: () => {
+        session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
+      }
+    },
     { type: 'exam-grid' },
     {
       type: 'timer',
@@ -147,7 +156,12 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
               {section.icon}
               <div>{section.text}</div>
             </MenuItem>
-          ) : section.type === 'timer' && session.examState !== 'completed' ? (
+          ) : section.type === 'timer' && session.examState === 'in-progress' ? (
+            <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
+              {section.icon}
+              <div>{section.text}</div>
+            </MenuItem>
+          ) : section.type === 'review' && session.examState === 'completed' ? (
             <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
               {section.icon}
               <div>{section.text}</div>
@@ -189,6 +203,12 @@ export type MenuSections =
     }
   | {
       type: 'timer'
+      text: string
+      icon: React.ReactNode
+      onClick: () => void
+    }
+  | {
+      type: 'review'
       text: string
       icon: React.ReactNode
       onClick: () => void

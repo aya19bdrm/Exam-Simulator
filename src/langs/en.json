@@ -6,6 +6,7 @@
       "marked": "Marked Questions",
       "answered": "Answered Questions",
       "incomplete": "Unanswered Questions",
+      "summary": "Report Summary",
       "pause": "Pause Exam",
       "stop": "Stop Exam"
     },
