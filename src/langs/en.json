@@ -4,16 +4,16 @@
     "drawer": {
       "all": "All Questions",
       "marked": "Marked Questions",
-      "complete": "Answered Questions",
       "incomplete": "Unanswered Questions",
+      "complete": "Answered Questions",
       "summary": "Report Summary",
       "pause": "Pause Exam",
       "stop": "Stop Exam"
     },
     "grid": {
-      "complete": "Complete",
       "marked": "Bookmarked",
-      "incomplete": "Incomplete"
+      "incomplete": "Incomplete",
+      "complete": "Complete"
     }
   },
   "content": {

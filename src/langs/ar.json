@@ -4,16 +4,16 @@
     "drawer": {
       "all": "كل الأسئلة",
       "marked": "الأسئلة المعلّمة",
-      "complete": "الأسئلة المجابة",
       "incomplete": "الأسئلة المتروكة",
+      "complete": "الأسئلة المجابة",
       "summary": "ملخص التقرير",
       "pause": "إيقاف مؤقت",
       "stop": "إنهاء الامتحان"
     },
     "grid": {
-      "complete": "مكتمل",
       "marked": "معلّم",
-      "incomplete": "ناقص"
+      "incomplete": "ناقص",
+      "complete": "مكتمل"
     }
   },
   "content": {

@@ -1,4 +1,4 @@
-import type { QuestionFilter, ThemedStyles } from '../../../types'
+import type { GridTagTypes, QuestionFilter, ThemedStyles } from '../../../types'
 
 import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
@@ -103,20 +103,9 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
   return (
     <GridStyles id="grid">
       <div className="legend">
-        <div className="item">
-          <div className="complete" />
-          <div>{translate('nav.grid.complete')}</div>
-        </div>
-
-        <div className="item">
-          <div className="bookmarked" />
-          <div>{translate('nav.grid.marked')}</div>
-        </div>
-
-        <div className="item">
-          <div className="incomplete" />
-          <div>{translate('nav.grid.incomplete')}</div>
-        </div>
+        <GridTag type="marked" />
+        <GridTag type="incomplete" />
+        <GridTag type="complete" />
       </div>
 
       <div className="grid">
@@ -153,9 +142,22 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
 
 export default GridComponent
 
+const GridTag: React.FC<GridTagProps> = ({ type }) => {
+  return (
+    <div className="item">
+      <div className={type} />
+      <div>{translate(`nav.grid.${type}`)}</div>
+    </div>
+  )
+}
+
 export interface GridProps {
   open: boolean
   show: QuestionFilter
+}
+
+export interface GridTagProps {
+  type: GridTagTypes
 }
 
 export interface GridItemStylesProps extends ThemedStyles {

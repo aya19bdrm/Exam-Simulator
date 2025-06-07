@@ -84,25 +84,21 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
     {
       type: 'filter',
       filter: 'all',
-      text: translate('nav.drawer.all'),
       icon: <FormatListNumbered size={20} />
     },
     {
       type: 'filter',
       filter: 'marked',
-      text: translate('nav.drawer.marked'),
       icon: <Bookmark size={20} />
     },
     {
       type: 'filter',
       filter: 'complete',
-      text: translate('nav.drawer.complete'),
       icon: <CheckBox size={20} />
     },
     {
       type: 'filter',
       filter: 'incomplete',
-      text: translate('nav.drawer.incomplete'),
       icon: <CheckBoxOutlineBlank size={20} />
     },
     {
@@ -149,12 +145,12 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
           section.type === 'filter' ? (
             <MenuItem
               key={i}
-              data-test={section.text}
+              data-test={translate(`nav.drawer.${section.filter}`)}
               $selected={filter === section.filter}
               onClick={() => setFilter(section.filter)}
             >
               {section.icon}
-              <div>{section.text}</div>
+              <div>{translate(`nav.drawer.${section.filter}`)}</div>
             </MenuItem>
           ) : section.type === 'timer' && session.examState === 'in-progress' ? (
             <MenuItem key={i} data-test={section.text} $selected={false} onClick={section.onClick}>
@@ -194,7 +190,6 @@ export interface MenuItemStylesProps extends ThemedStyles {
 export type MenuSections =
   | {
       type: 'filter'
-      text: string
       icon: React.ReactNode
       filter: QuestionFilter
     }
