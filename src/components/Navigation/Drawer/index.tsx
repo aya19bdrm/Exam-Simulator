@@ -146,11 +146,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       type: 'review',
       text: translate('nav.drawer.summary'),
       icon: <Report size={20} />,
-      onClick: () => {
-        if (timerIsRunning(session)) {
-          session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
-        }
-      }
+      onClick: () => session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
     })
   }
 
