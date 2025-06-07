@@ -9,7 +9,6 @@ import TopDisplay from './TopDisplay'
 import Question from '../Exam/Question'
 import MultipleChoice from '../Exam/MultipleChoice'
 import MultipleAnswer from '../Exam/MultipleAnswer'
-import StaticList from './StaticList'
 import Explanation from '../Exam/Explanation'
 
 const ReviewExamStyles = styled.div`
