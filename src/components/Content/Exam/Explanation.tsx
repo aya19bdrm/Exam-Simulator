@@ -34,7 +34,6 @@ const NormalText = styled.div`
 `
 
 const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, lang }) => {
-  const correctChoice: Choice = question.choices.find((choice: Choice) => choice.correct) as Choice
   const correct: boolean = question.answer === answer
 
   return (
@@ -51,12 +50,12 @@ const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, 
         <span className="correct">{formatAnswerLabel(question, lang.code)}</span>
       </div>
 
-      {correctChoice.explanation && (
+      {question.explanation && (
         <div className="explanation">
           <div>{translate('content.exam.explain.explain')}</div>
 
           <div>
-            <NormalText>{correctChoice.explanation}</NormalText>
+            <NormalText>{question.explanation}</NormalText>
           </div>
         </div>
       )}

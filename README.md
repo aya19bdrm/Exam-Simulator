@@ -30,7 +30,7 @@
   - [X] **All answer choices provided.**
   - [X] **Their selected answer.**
   - [X] **The correct answer.**
-  - [ ] **Explanations for each question.**
+  - [X] **Explanations for each question.**
 
 ### Question & Answer Order:
 

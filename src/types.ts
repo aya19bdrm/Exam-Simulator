@@ -45,6 +45,8 @@ export interface Question<QT extends QuestionTypes = QuestionTypes> {
   type: QT
   /** question content */
   text: string
+  /** explanation of why the correct answer is correct */
+  explanation: string
   /** choices of the question */
   choices: Choice[]
   /** index of the correct choice for quick access */
@@ -56,8 +58,6 @@ export interface Choice {
   text: string
   /** is the choice correct */
   correct: boolean
-  /** explanation of why this answer is correct/wrong */
-  explanation: string
 }
 
 export interface ExamReport {
