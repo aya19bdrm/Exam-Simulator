@@ -13,6 +13,7 @@ export type AnswerOf = {
 
 export type TimerStates = 'running' | 'paused' | 'stopped'
 export type ExamState = 'not-started' | 'in-progress' | 'completed'
+export type ReviewState = 'summary' | 'question'
 
 export interface Session {
   /** the question number */
@@ -29,6 +30,9 @@ export interface Session {
 
   /** the state of the exam */
   examState: ExamState
+
+  /** the state of the review */
+  reviewState: ReviewState
 
   /** the list of bookmarked questions */
   bookmarks: number[]
@@ -47,6 +51,7 @@ export type SessionActionTypes =
   | 'SET_TIME'
   | 'SET_TIMER_STATE'
   | 'SET_EXAM_STATE'
+  | 'SET_REVIEW_STATE'
 export type SessionActions = {
   SET_INDEX: { type: 'SET_INDEX'; payload: number }
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[] }
@@ -54,6 +59,7 @@ export type SessionActions = {
   SET_TIME: { type: 'SET_TIME'; payload: number }
   SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates }
   SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState }
+  SET_REVIEW_STATE: { type: 'SET_REVIEW_STATE'; payload: ReviewState }
 }
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
@@ -74,7 +80,8 @@ export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
   SET_ANSWERS: 'SET_ANSWERS',
   SET_TIME: 'SET_TIME',
   SET_TIMER_STATE: 'SET_TIMER_STATE',
-  SET_EXAM_STATE: 'SET_EXAM_STATE'
+  SET_EXAM_STATE: 'SET_EXAM_STATE',
+  SET_REVIEW_STATE: 'SET_REVIEW_STATE'
 } as const
 
 export const defaultSession: Session = {
@@ -83,6 +90,7 @@ export const defaultSession: Session = {
   time: 13800,
   timerState: 'stopped',
   examState: 'not-started',
+  reviewState: 'summary',
   bookmarks: [],
   answers: [],
   update: () => {}
@@ -120,6 +128,11 @@ export const SessionReducer: SessionReducerFunc = (state: Session, { type, paylo
     case SessionActionTypes.SET_EXAM_STATE: {
       const value = payload as SessionActions[typeof type]['payload']
       return { ...state, examState: value }
+    }
+
+    case SessionActionTypes.SET_REVIEW_STATE: {
+      const value = payload as SessionActions[typeof type]['payload']
+      return { ...state, reviewState: value }
     }
 
     default:
