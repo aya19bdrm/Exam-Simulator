@@ -5,6 +5,7 @@ import TopDisplay from './TopDisplay'
 import Question from './Question'
 import MultipleChoice from './MultipleChoice'
 import MultipleAnswer from './MultipleAnswer'
+import Progress from './Progress'
 import { ExamContext } from '../../../exam'
 import { SessionContext } from '../../../session'
 import { LangContext } from '../../../settings'
@@ -28,6 +29,8 @@ const ExamComponent: React.FC<object> = ({}) => {
   return (
     <TestStyles id="exam" dir={lang.dir}>
       <TopDisplay exam={exam} session={session} lang={lang} />
+
+      <Progress exam={exam} session={session} />
 
       <Slide key={session.index} direction="right">
         <Question {...question} />

@@ -15,9 +15,9 @@
 ### Question Functionality
 
 - [X] **Question numbering (numeration)** should be clear.
-- [ ] Users should be able to track:
-  - [ ] **The number or percentage of remaining questions.**
-  - [ ] **The number of solved questions.**
+- [X] Users should be able to track:
+  - [X] **The number or percentage of remaining questions.**
+  - [X] **The number of solved questions.**
 
 ### Exam Review & Analysis
 
