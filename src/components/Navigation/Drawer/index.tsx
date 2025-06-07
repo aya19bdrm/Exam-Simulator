@@ -7,7 +7,10 @@ import { Menu } from '@styled-icons/material/Menu'
 import { ChevronLeft } from '@styled-icons/material/ChevronLeft'
 import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered'
 import { Bookmark } from '@styled-icons/material/Bookmark'
-import { CheckBox, CheckBoxOutlineBlank } from '@styled-icons/material'
+import { CheckBoxOutlineBlank } from '@styled-icons/material/CheckBoxOutlineBlank'
+import { CheckBox } from '@styled-icons/material/CheckBox'
+import { DoneAll } from '@styled-icons/material/DoneAll'
+import { Cancel } from '@styled-icons/material/Cancel'
 import { Pause } from '@styled-icons/material/Pause'
 import { Stop } from '@styled-icons/material/Stop'
 import { Report } from '@styled-icons/boxicons-solid/Report'
@@ -106,12 +109,12 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
     menu.push({
       type: 'filter',
       filter: 'incorrect',
-      icon: <CheckBox size={20} />
+      icon: <Cancel size={20} />
     })
     menu.push({
       type: 'filter',
       filter: 'correct',
-      icon: <CheckBox size={20} />
+      icon: <DoneAll size={20} />
     })
   }
 
