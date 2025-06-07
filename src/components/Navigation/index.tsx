@@ -79,7 +79,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
       <div id="navigation">
         <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
-        <Main $open={open}>{<Content page={examFinished(session) ? 'review' : 'exam'} />}</Main>
+        <Main $open={open}>{<Content session={session} />}</Main>
 
         {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 
