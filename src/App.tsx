@@ -77,7 +77,7 @@ const AppComponent: React.FC<object> = ({}) => {
   // Format session when exam changes
   useEffect(() => {
     if (exam && session) {
-      setSession((prevSession) => formatSession(prevSession, exam))
+      setSession((prev) => formatSession(prev, exam))
     }
   }, [exam]) // Remove session from dependency to avoid infinite loops
 

@@ -59,11 +59,7 @@ const CoverComponent: React.FC<CoverProps> = ({ exam, onStart }) => {
       {title && <Title>{title}</Title>}
       {description && <Description>{description}</Description>}
 
-      {onStart && (
-        <StartButton className="start-exam-button" onClick={() => onStart()}>
-          {translate('cover.start')}
-        </StartButton>
-      )}
+      {onStart && <StartButton onClick={onStart}>{translate('cover.start')}</StartButton>}
     </CoverStyles>
   )
 }

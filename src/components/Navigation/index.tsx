@@ -14,7 +14,6 @@ import { translate, type LangCode } from '../../settings'
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLang }) => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
-
   const [open, setOpen] = useState<boolean>(true)
 
   session.update = ((type, payload) => {
