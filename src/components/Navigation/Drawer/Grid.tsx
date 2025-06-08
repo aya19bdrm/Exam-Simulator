@@ -113,7 +113,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
       <div className="legend">
         <GridTag type="marked" />
         <GridTag type="incomplete" />
-        <GridTag type="complete" />
+        {session.examState === 'in-progress' && <GridTag type="complete" />}
         {session.examState === 'completed' && (
           <>
             <GridTag type="incorrect" />

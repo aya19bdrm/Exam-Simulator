@@ -99,13 +99,14 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
     filter: 'incomplete',
     icon: <CheckBoxOutlineBlank size={20} />
   })
-  menu.push({
-    type: 'filter',
-    filter: 'complete',
-    icon: <CheckBox size={20} />
-  })
 
-  if (session.examState === 'completed') {
+  if (session.examState === 'in-progress') {
+    menu.push({
+      type: 'filter',
+      filter: 'complete',
+      icon: <CheckBox size={20} />
+    })
+  } else if (session.examState === 'completed') {
     menu.push({
       type: 'filter',
       filter: 'incorrect',
