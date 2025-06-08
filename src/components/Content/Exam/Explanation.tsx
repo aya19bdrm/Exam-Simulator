@@ -13,19 +13,22 @@ const ExplanationStyles = styled.div<ExplanationStylesProps>`
   margin-top: 5rem;
   padding: 1rem;
   font: 1.4rem 'Open Sans';
-  .status {
-    text-transform: uppercase;
-    font-weight: 700;
-    color: ${({ $correct, theme }) => ($correct ? darken(0.1, theme.correct) : darken(0.1, theme.incorrect))};
-  }
-  .correct {
-    font-weight: 700;
-    color: ${({ theme }) => darken(0.1, theme.correct)};
-  }
-  .explanation {
-    font-weight: 700;
-    margin-top: 1rem;
-  }
+`
+
+const StatusStyles = styled.span<ExplanationStylesProps>`
+  text-transform: uppercase;
+  font-weight: 700;
+  color: ${({ $correct, theme }) => ($correct ? darken(0.1, theme.correct) : darken(0.1, theme.incorrect))};
+`
+
+const CorrectStyles = styled.span<ThemedStyles>`
+  font-weight: 700;
+  color: ${({ theme }) => darken(0.1, theme.correct)};
+`
+
+const ExplanationTextStyles = styled.div`
+  font-weight: 700;
+  margin-top: 1rem;
 `
 
 const NormalText = styled.div`
@@ -40,24 +43,24 @@ const ExplainationComponent: React.FC<ExplainationProps> = ({ question, answer, 
     <ExplanationStyles id="explanation" $correct={correct}>
       <div>
         {translate('content.exam.explain.yours')}
-        <span className="status">
+        <StatusStyles $correct={correct}>
           {correct ? translate('content.exam.explain.correct') : translate('content.exam.explain.incorrect')}
-        </span>
+        </StatusStyles>
       </div>
 
       <div>
         {translate('content.exam.explain.answer')}
-        <span className="correct">{formatAnswerLabel(question, lang.code)}</span>
+        <CorrectStyles>{formatAnswerLabel(question, lang.code)}</CorrectStyles>
       </div>
 
       {question.explanation && (
-        <div className="explanation">
+        <ExplanationTextStyles>
           <div>{translate('content.exam.explain.explain')}</div>
 
           <div>
             <NormalText>{question.explanation}</NormalText>
           </div>
-        </div>
+        </ExplanationTextStyles>
       )}
     </ExplanationStyles>
   )

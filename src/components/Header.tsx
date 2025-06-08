@@ -20,17 +20,19 @@ export const InnerHeader = styled.div<ThemedStyles>`
   display: grid;
   align-items: center;
   grid-template-columns: 8rem 1fr;
-  .title {
-    font: 2rem 'Open Sans';
-    font-weight: 700;
-    color: ${({ theme }) => theme.black};
-    margin-left: 1rem;
-  }
-  .image {
-    justify-self: center;
-    width: 6rem;
-    height: 6rem;
-  }
+`
+
+export const TitleStyles = styled.div<ThemedStyles>`
+  font: 2rem 'Open Sans';
+  font-weight: 700;
+  color: ${({ theme }) => theme.black};
+  margin-left: 1rem;
+`
+
+export const ImageStyles = styled.img<ThemedStyles>`
+  justify-self: center;
+  width: 6rem;
+  height: 6rem;
 `
 
 const HeaderComponent: React.FC<HeaderProps> = ({ exam }) => {
@@ -39,8 +41,8 @@ const HeaderComponent: React.FC<HeaderProps> = ({ exam }) => {
   return (
     <HeaderStyles id="header" $dir={'rtl'}>
       <InnerHeader id="inner-header" dir={'rtl'}>
-        <img className="image" src={Logo} />
-        <div className="title">{exam.title}</div>
+        <ImageStyles src={Logo} />
+        <TitleStyles>{exam.title}</TitleStyles>
       </InnerHeader>
     </HeaderStyles>
   )

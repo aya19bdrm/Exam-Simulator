@@ -12,48 +12,51 @@ export const GridStyles = styled.div<ThemedStyles>`
   height: calc(100vh - 45rem);
   border-top: 1px solid ${({ theme }) => theme.grey[2]};
   border-bottom: 1px solid ${({ theme }) => theme.grey[2]};
-  .legend {
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .item {
-      display: flex;
-      align-items: center;
-      margin-right: 1rem;
-      & > :first-child {
-        width: 1rem;
-        height: 1rem;
-        margin-right: 0.25rem;
-        border: 0.5px solid ${({ theme }) => theme.grey[2]};
-      }
-      & > :last-child {
-        font: 0.9rem 'Open Sans';
-        font-weight: 600;
-      }
-    }
-    .complete,
-    .correct {
-      background: ${({ theme }) => lighten(0.2, theme.primary)};
-    }
-    .bookmarked {
-      background: ${({ theme }) => theme.quatro};
-    }
-    .incorrect {
-      background: ${({ theme }) => lighten(0.2, theme.secondary)};
-    }
-    .incomplete {
-      background: ${({ theme }) => theme.grey[2]};
-    }
+`
+
+export const LegendStyles = styled.div<ThemedStyles>`
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .complete,
+  .correct {
+    background: ${({ theme }) => lighten(0.2, theme.primary)};
   }
-  .grid {
-    height: calc(100vh - 50rem);
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    padding: 1rem;
-    overflow-y: auto;
+  .bookmarked {
+    background: ${({ theme }) => theme.quatro};
   }
+  .incorrect {
+    background: ${({ theme }) => lighten(0.2, theme.secondary)};
+  }
+  .incomplete {
+    background: ${({ theme }) => theme.grey[2]};
+  }
+`
+
+export const LegendItemStyles = styled.div<ThemedStyles>`
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  & > :first-child {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+    border: 0.5px solid ${({ theme }) => theme.grey[2]};
+  }
+  & > :last-child {
+    font: 0.9rem 'Open Sans';
+    font-weight: 600;
+  }
+`
+
+export const InnerGridStyles = styled.div`
+  height: calc(100vh - 50rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 1rem;
+  overflow-y: auto;
 `
 
 export const GridItem = styled.div<GridItemStylesProps>`
@@ -110,19 +113,19 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
 
   return (
     <GridStyles id="grid">
-      <div className="legend">
-        <GridTag type="marked" />
-        <GridTag type="incomplete" />
-        {session.examState === 'in-progress' && <GridTag type="complete" />}
+      <LegendStyles>
+        <LegendItem type="marked" />
+        <LegendItem type="incomplete" />
+        {session.examState === 'in-progress' && <LegendItem type="complete" />}
         {session.examState === 'completed' && (
           <>
-            <GridTag type="incorrect" />
-            <GridTag type="correct" />
+            <LegendItem type="incorrect" />
+            <LegendItem type="correct" />
           </>
         )}
-      </div>
+      </LegendStyles>
 
-      <div className="grid">
+      <InnerGridStyles>
         {show === 'marked'
           ? bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
           : show === 'complete'
@@ -139,7 +142,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
                   : Array(exam.test.length)
                       .fill(null)
                       .map((_, i) => <GridItemCreator i={i} index={i} />)}
-      </div>
+      </InnerGridStyles>
     </GridStyles>
   )
 
@@ -160,12 +163,12 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
 
 export default GridComponent
 
-const GridTag: React.FC<GridTagProps> = ({ type }) => {
+const LegendItem: React.FC<GridTagProps> = ({ type }) => {
   return (
-    <div className="item">
+    <LegendItemStyles>
       <div className={type} />
       <div>{translate(`nav.grid.${type}`)}</div>
-    </div>
+    </LegendItemStyles>
   )
 }
 

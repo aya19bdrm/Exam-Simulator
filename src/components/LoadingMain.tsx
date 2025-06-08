@@ -22,30 +22,31 @@ export const LoadingStyles = styled.div<LoadingStylesProps>`
   justify-content: center;
   align-items: center;
   background: ${({ color, theme }) => (color === 'grey' ? theme.grey[0] : 'white')};
-  .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: 6rem 'Open Sans';
-    font-weight: 700;
-    color: ${({ theme }) => theme.black};
-    margin-bottom: 5rem;
-    img {
-      width: 5rem;
-      height: 5rem;
-    }
-  }
   svg {
     color: ${({ theme }) => theme.secondary};
     animation: ${rotate} 1s infinite;
   }
 `
 
+export const TitleStyles = styled.div<ThemedStyles>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 6rem 'Open Sans';
+  font-weight: 700;
+  color: ${({ theme }) => theme.black};
+  margin-bottom: 5rem;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+`
+
 const LoadingMainComponent: React.FC<LoadingMainProps> = ({ size, height }) => (
   <LoadingStyles id="loading-main" color="grey" height={height}>
-    <div className="title">
+    <TitleStyles>
       <span>{translate('loading')}</span>
-    </div>
+    </TitleStyles>
 
     <Repeat size={size} />
   </LoadingStyles>

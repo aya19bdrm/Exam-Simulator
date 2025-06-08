@@ -17,17 +17,18 @@ export const MultipleStyles = styled.div<MultipleStylesProps>`
     color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.grey[10])};
     margin-right: 0.5rem;
   }
-  .text {
-    display: flex;
-    font: 2rem 'Open Sans';
-    color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.black)};
-    & > :first-child {
-      font-weight: 600;
-      ${({ dir }) => (dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
-    }
-  }
   .selected {
     color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.incorrect) : theme.black)};
+  }
+`
+
+export const TextStyles = styled.div<MultipleStylesProps>`
+  display: flex;
+  font: 2rem 'Open Sans';
+  color: ${({ $review, $correct, theme }) => ($review ? ($correct ? theme.correct : theme.grey[5]) : theme.black)};
+  & > :first-child {
+    font-weight: 600;
+    ${({ dir }) => (dir === 'rtl' ? 'margin-left: 0.5rem;' : 'margin-right: 0.5rem;')}
   }
 `
 
@@ -56,10 +57,15 @@ const MultipleChoiceComponent: React.FC<MultipleChoiceProps> = ({
         >
           {value === i ? <RadioButtonChecked className="selected" size={20} /> : <RadioButtonUnchecked size={20} />}
 
-          <div className={`text ${value === i ? 'selected' : ''}`}>
+          <TextStyles
+            className={`${value === i ? 'selected' : ''}`}
+            dir={lang.dir}
+            $review={examState === 'completed'}
+            $correct={correct}
+          >
             <div>{formatChoiceLabel(i, lang.code)}.</div>
             <div>{text}</div>
-          </div>
+          </TextStyles>
         </MultipleStyles>
       ))}
     </div>
