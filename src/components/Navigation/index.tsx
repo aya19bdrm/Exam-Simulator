@@ -33,15 +33,6 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
 
   const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = [
     {
-      id: 'start',
-      show: session.examState === 'not-started',
-      onConfirm: () => {
-        session.update!(SessionActionTypes.SET_TIME, session.maxTime)
-        session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
-        session.update!(SessionActionTypes.SET_EXAM_STATE, 'in-progress')
-      }
-    },
-    {
       id: 'expired',
       show: timerHaveExpired(session),
       onConfirm: () => {

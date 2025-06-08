@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import LoadingMain from './components/LoadingMain'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
+import Cover from './components/Cover'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
@@ -18,6 +19,7 @@ const AppComponent: React.FC<object> = ({}) => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
+  const [coverVisible, setCoverVisible] = useState(true)
 
   const loadExam = useCallback(
     async (randNum: number) => {
@@ -109,7 +111,11 @@ const AppComponent: React.FC<object> = ({}) => {
       <ExamContext.Provider value={exam}>
         <Header exam={exam} />
 
-        <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])} />
+        {coverVisible ? (
+          <Cover exam={exam} onStart={() => setCoverVisible(false)} />
+        ) : (
+          <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])} />
+        )}
       </ExamContext.Provider>
     </LangContext.Provider>
   )

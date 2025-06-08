@@ -1,5 +1,9 @@
 {
   "loading": "Loading ...",
+  "cover": {
+    "logo-alt": "Logo",
+    "start": "Start Exam"
+  },
   "nav": {
     "drawer": {
       "all": "All Questions",
@@ -50,12 +54,6 @@
     }
   },
   "confirm": {
-    "start": {
-      "title": "Start Exam",
-      "message": "Are you ready to start exam?",
-      "button0": "Start",
-      "button1": "Cancel"
-    },
     "pause": {
       "title": "Exam Paused",
       "message": "Exam paused. Click to resume.",
