@@ -16,7 +16,6 @@ const examNumber = Math.floor(Math.random() * 5)
 
 const AppComponent: React.FC<object> = ({}) => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
-  const [loading, setLoading] = useState<number>(2)
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
 
@@ -35,7 +34,6 @@ const AppComponent: React.FC<object> = ({}) => {
 
       const exam: Exam = formatExam(examData as Exam)
       setExam(exam)
-      setLoading((prev) => Math.max(0, prev - 1))
     },
     [lang.code]
   )
@@ -54,7 +52,6 @@ const AppComponent: React.FC<object> = ({}) => {
 
     const session: Session = sessionData as Session
     setSession(session)
-    setLoading((prev) => Math.max(0, prev - 1))
   }, [])
 
   const loadTranslation = useCallback(
@@ -103,7 +100,7 @@ const AppComponent: React.FC<object> = ({}) => {
     loadLanguageData()
   }, [lang.code, loadTranslation])
 
-  if (loading > 0) {
+  if (!exam || !session) {
     return <LoadingMain size={100} height={100} />
   }
 
