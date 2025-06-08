@@ -31,19 +31,17 @@ const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
 `
 
 const LanguageStyles = styled.div<ThemedStyles>`
-  .language {
-    height: 5rem;
-    display: grid;
-    justify-self: center;
-    align-items: center;
-    transition: 0.3s;
-    cursor: pointer;
-    &:hover {
-      background: ${({ theme }) => lighten(0.2, theme.primary)};
-    }
-    svg {
-      color: ${({ theme }) => theme.black};
-    }
+  height: 5rem;
+  display: grid;
+  justify-self: center;
+  align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background: ${({ theme }) => lighten(0.2, theme.primary)};
+  }
+  svg {
+    color: ${({ theme }) => theme.black};
   }
 `
 
@@ -55,10 +53,7 @@ const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session,
 
         <Arrows session={session} questionCount={exam.test.length} />
 
-        <LanguageStyles
-          className="language"
-          onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}
-        >
+        <LanguageStyles onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}>
           <Language size={30} />
         </LanguageStyles>
       </InnerFooterStyles>

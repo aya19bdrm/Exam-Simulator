@@ -10,25 +10,24 @@ import { SkipNext } from '@styled-icons/material/SkipNext'
 import { Session, SessionActionTypes } from '../../../session'
 
 const ArrowsStyles = styled.div<ThemedStyles>`
-  .arrows {
-    justify-self: center;
-    display: grid;
-    grid-template-columns: repeat(4, 5rem);
+  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(4, 5rem);
+`
+
+const ArrowStyles = styled.div<ThemedStyles>`
+  height: 5rem;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background: ${({ theme }) => lighten(0.2, theme.primary)};
   }
-  .arrow {
-    height: 5rem;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    transition: 0.3s;
-    cursor: pointer;
-    &:hover {
-      background: ${({ theme }) => lighten(0.2, theme.primary)};
-    }
-    svg {
-      color: ${({ theme }) => theme.black};
-      margin-right: 0.5rem;
-    }
+  svg {
+    color: ${({ theme }) => theme.black};
+    margin-right: 0.5rem;
   }
 `
 
@@ -40,7 +39,7 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
   const onNextQuestion = () => session.update!(SessionActionTypes.SET_INDEX, index + 1)
   const onLastQuestion = () => session.update!(SessionActionTypes.SET_INDEX, questionCount - 1)
 
-  const arrows = [
+  const arrows: ArrowProps[] = [
     {
       func: onFirstQuestion,
       Icon: SkipPrevious
@@ -60,23 +59,17 @@ const ArrowsComponent: React.FC<ArrowsProps> = ({ session, questionCount }) => {
   ]
 
   return (
-    <ArrowsStyles id="arrows" className="arrows">
-      {arrows.map((x) => {
-        return <Arrow {...x} />
-      })}
+    <ArrowsStyles id="arrows">
+      {arrows.map(({ func, Icon }) => (
+        <ArrowStyles onClick={func}>
+          <Icon size={30} />
+        </ArrowStyles>
+      ))}
     </ArrowsStyles>
   )
 }
 
 export default ArrowsComponent
-
-const Arrow: React.FC<ArrowProps> = ({ func, Icon }) => {
-  return (
-    <div className="arrow" onClick={func}>
-      <Icon size={30} />
-    </div>
-  )
-}
 
 export interface ArrowsProps {
   session: Session

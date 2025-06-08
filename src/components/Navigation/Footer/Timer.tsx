@@ -7,19 +7,17 @@ import { formatTimer } from '../../../utils/format'
 import { Session, SessionActionTypes } from '../../../session'
 
 const TimerStyles = styled.div<TimerStylesProps>`
-  .timer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${({ $warning, theme }) => ($warning ? theme.secondary : theme.black)};
-    svg {
-      color: inherit;
-      margin-right: 0.5rem;
-    }
-    & > :last-child {
-      font: 2rem 'Open Sans';
-      font-weight: 700;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ $warning, theme }) => ($warning ? theme.secondary : theme.black)};
+  svg {
+    color: inherit;
+    margin-right: 0.5rem;
+  }
+  & > :last-child {
+    font: 2rem 'Open Sans';
+    font-weight: 700;
   }
 `
 
@@ -57,7 +55,7 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
   }, [session.timerState])
 
   return (
-    <TimerStyles id="timer" className="timer" $warning={timer < 120}>
+    <TimerStyles id="timer" $warning={timer < 120}>
       <Timer size={30} />
 
       <div data-test="Timer">{formatTimer(timer)}</div>
