@@ -1,13 +1,5 @@
 import type { Session } from '../session'
 
-export function examNotStarted({ examState }: Session): boolean {
-  return examState === 'not-started'
-}
-
-export function examFinished({ examState }: Session): boolean {
-  return examState === 'completed'
-}
-
 export function timerIsPaused({ examState, timerState, time, maxTime }: Session): boolean {
   return examState === 'in-progress' && timerState === 'paused' && timerHasRan(time, maxTime)
 }

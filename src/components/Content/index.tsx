@@ -5,7 +5,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Exam from './Exam'
 import Review from './Review'
-import { examFinished } from '../../utils/state'
 
 const ContentStyles = styled.div<ThemedStyles>`
   display: grid;
@@ -17,7 +16,9 @@ const ContentStyles = styled.div<ThemedStyles>`
 `
 
 const ContentComponent: React.FC<ContentProps> = ({ session }) => {
-  return <ContentStyles id="content">{examFinished(session) ? <Review /> : <Exam />}</ContentStyles>
+  const finished = session.examState === 'completed'
+
+  return <ContentStyles id="content">{finished ? <Review /> : <Exam />}</ContentStyles>
 }
 
 export default ContentComponent

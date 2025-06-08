@@ -8,7 +8,7 @@ import Content from '../Content'
 import { Main } from '../../styles/Main'
 import { ExamContext } from '../../exam'
 import { SessionActionTypes, SessionContext, SessionReducer } from '../../session'
-import { timerHaveExpired, timerIsPaused, examWantsToFinish, examNotStarted, examFinished } from '../../utils/state'
+import { timerHaveExpired, timerIsPaused, examWantsToFinish } from '../../utils/state'
 import { translate, type LangCode } from '../../settings'
 
 const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLang }) => {
@@ -34,7 +34,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
   const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = [
     {
       id: 'start',
-      show: examNotStarted(session),
+      show: session.examState === 'not-started',
       onConfirm: () => {
         session.update!(SessionActionTypes.SET_TIME, session.maxTime)
         session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
