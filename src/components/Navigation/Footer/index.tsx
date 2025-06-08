@@ -4,7 +4,10 @@ import type { Session } from '../../../session'
 
 import React from 'react'
 import styled from 'styled-components'
-import ExamFooter from './ExamFooter'
+import lighten from 'polished/lib/color/lighten'
+import { Language } from '@styled-icons/material/Language'
+import Timer from './Timer'
+import Arrows from './Arrows'
 
 const FooterStyles = styled.div<FooterStylesProps>`
   position: fixed;
@@ -18,10 +21,47 @@ const FooterStyles = styled.div<FooterStylesProps>`
   border-top: 1px solid ${({ theme }) => theme.grey[1]};
 `
 
+const InnerFooterStyles = styled.div<InnerFooterStylesProps>`
+  width: ${({ $open }) => ($open ? 'calc(100% - 24rem)' : 'calc(100% - 5rem)')};
+  height: 100%;
+  display: grid;
+  grid-template-columns: 10rem 1fr 5rem;
+  align-items: center;
+  transition: 0.3s;
+`
+
+const LanguageStyles = styled.div<ThemedStyles>`
+  .language {
+    height: 5rem;
+    display: grid;
+    justify-self: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: ${({ theme }) => lighten(0.2, theme.primary)};
+    }
+    svg {
+      color: ${({ theme }) => theme.black};
+    }
+  }
+`
+
 const FooterComponent: React.FC<NavigationFooterProps> = ({ open, exam, session, setLang }) => {
   return (
     <FooterStyles id="footer" $open={open}>
-      <ExamFooter open={open} session={session} questionCount={exam.test.length} setLang={setLang} />
+      <InnerFooterStyles id="inner-footer" $open={open}>
+        <Timer session={session} />
+
+        <Arrows session={session} questionCount={exam.test.length} />
+
+        <LanguageStyles
+          className="language"
+          onClick={() => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar')}
+        >
+          <Language size={30} />
+        </LanguageStyles>
+      </InnerFooterStyles>
     </FooterStyles>
   )
 }
@@ -36,5 +76,9 @@ export interface NavigationFooterProps {
 }
 
 export interface FooterStylesProps extends ThemedStyles {
+  $open: boolean
+}
+
+export interface InnerFooterStylesProps extends ThemedStyles {
   $open: boolean
 }
