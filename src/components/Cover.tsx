@@ -20,11 +20,7 @@ export const Image = styled.img<ThemedStyles>`
   margin-bottom: 0.5rem;
   border: 1px solid ${({ theme }) => theme.grey[2]};
   padding: 1rem;
-`
-
-export const Description = styled.div`
-  font: 1.25rem 'Open Sans';
-  padding: 1rem;
+  margin: 1rem;
 `
 
 export const Title = styled.div<ThemedStyles>`
@@ -32,6 +28,11 @@ export const Title = styled.div<ThemedStyles>`
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.black};
+`
+
+export const Description = styled.div`
+  font: 2.25rem 'Open Sans';
+  padding: 1rem;
 `
 
 const StartButton = styled.button<ThemedStyles>`
@@ -55,9 +56,9 @@ const CoverComponent: React.FC<CoverProps> = ({ exam, onStart }) => {
 
   return (
     <CoverStyles id="cover">
-      {<Image src={Logo} alt={translate('cover.logo-alt')} />}
-      {title && <Title>{title}</Title>}
-      {description && <Description>{description}</Description>}
+      <Image src={Logo} alt={translate('cover.logo-alt')} />
+      <Title>{title}</Title>
+      <Description>{description}</Description>
 
       {onStart && <StartButton onClick={onStart}>{translate('cover.start')}</StartButton>}
     </CoverStyles>
