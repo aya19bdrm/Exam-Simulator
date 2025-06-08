@@ -10,6 +10,8 @@ import { type Lang, LangContext, setTranslation, langs, LangCode } from './setti
 import { useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
+const examNumber = Math.floor(Math.random() * 5)
+
 const AppComponent: React.FC<object> = ({}) => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
   const [loading, setLoading] = useState<number>(2)
@@ -17,9 +19,7 @@ const AppComponent: React.FC<object> = ({}) => {
   const [session, setSession] = useState<Session>(defaultSession)
 
   useEffect(() => {
-    const randNum = Math.floor(Math.random() * 5)
-
-    import(`./assets/exams/${lang.code}/${randNum}.json`).then((data) => {
+    import(`./assets/exams/${lang.code}/${examNumber}.json`).then((data) => {
       let exam: Exam = data.default as Exam
       exam = formatExam(exam)
       setExam(exam)
