@@ -34,7 +34,7 @@ export const InnerHeader = styled.div<ThemedStyles>`
 `
 
 const HeaderComponent: React.FC<HeaderProps> = ({ exam }) => {
-  if (!exam) return <></>
+  if (!exam) return null
 
   return (
     <HeaderStyles id="header" $dir={'rtl'}>

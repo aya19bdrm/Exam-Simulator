@@ -29,7 +29,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
 
   const toggleOpen = () => setOpen(!open)
 
-  if (!exam) return <></>
+  if (!exam) return null
 
   const confirms: Omit<MyConfirmProps, 'title' | 'message' | 'buttons'>[] = [
     {

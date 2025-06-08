@@ -10,7 +10,7 @@ const ReviewComponent: React.FC<object> = ({}) => {
   const session = useContext(SessionContext)
   const lang = useContext(LangContext)
 
-  if (!exam) return <></>
+  if (!exam) return null
 
   if (session.reviewState === 'summary') {
     return <Summary exam={exam} session={session} />

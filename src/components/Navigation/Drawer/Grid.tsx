@@ -82,7 +82,7 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
     setBookmarks(session.bookmarks)
   }, [session])
 
-  if (!open || !exam || exam.test.length === 0) return <></>
+  if (!open || !exam || exam.test.length === 0) return null
 
   const answered = session.answers
     .map((answer, i) => {

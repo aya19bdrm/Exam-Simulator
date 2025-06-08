@@ -22,7 +22,7 @@ const ExamComponent: React.FC<object> = ({}) => {
   const session = useContext(SessionContext)
   const lang = useContext(LangContext)
 
-  if (!exam) return <></>
+  if (!exam) return null
 
   const question = exam.test[session.index]
 
