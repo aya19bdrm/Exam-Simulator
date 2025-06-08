@@ -1,6 +1,6 @@
 import type { Exam } from './types'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import LoadingMain from './components/LoadingMain'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
@@ -10,6 +10,8 @@ import { type Lang, LangContext, setTranslation, langs, LangCode } from './setti
 import { useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
+// Cache for loaded resources to avoid re-importing
+const resourceCache = new Map<string, any>()
 const examNumber = Math.floor(Math.random() * 5)
 
 const AppComponent: React.FC<object> = ({}) => {
@@ -18,40 +20,88 @@ const AppComponent: React.FC<object> = ({}) => {
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
 
-  useEffect(() => {
-    import(`./assets/exams/${lang.code}/${examNumber}.json`).then((data) => {
-      let exam: Exam = data.default as Exam
-      exam = formatExam(exam)
-      setExam(exam)
+  const loadExam = useCallback(
+    async (randNum: number) => {
+      const cacheKey = `exam-${lang.code}-${randNum}`
 
-      setSession(formatSession(session, exam))
-
-      setLoading((prev) => prev - 1)
-    })
-
-    import('./session.json').then((data) => {
-      // @ts-expect-error
-      const session: Session = data.default as Session
-      if (exam) {
-        setSession(formatSession(session, exam))
+      let examData
+      if (resourceCache.has(cacheKey)) {
+        examData = resourceCache.get(cacheKey)
       } else {
-        setSession(session)
+        const data = await import(`./assets/exams/${lang.code}/${randNum}.json`)
+        examData = data.default
+        resourceCache.set(cacheKey, examData)
       }
 
-      setLoading((prev) => prev - 1)
-    })
+      const exam: Exam = formatExam(examData as Exam)
+      setExam(exam)
+      setLoading((prev) => Math.max(0, prev - 1))
+    },
+    [lang.code]
+  )
+
+  const loadSession = useCallback(async () => {
+    const cacheKey = 'session-default'
+
+    let sessionData
+    if (resourceCache.has(cacheKey)) {
+      sessionData = resourceCache.get(cacheKey)
+    } else {
+      const data = await import('./session.json')
+      sessionData = data.default
+      resourceCache.set(cacheKey, sessionData)
+    }
+
+    const session: Session = sessionData as Session
+    setSession(session)
+    setLoading((prev) => Math.max(0, prev - 1))
   }, [])
 
+  const loadTranslation = useCallback(
+    async (code: LangCode) => {
+      const cacheKey = `translation-${code}`
+
+      let translations
+      if (resourceCache.has(cacheKey)) {
+        translations = resourceCache.get(cacheKey)
+      } else {
+        const data = await import(`./langs/${code}.json`)
+        translations = data.default
+        resourceCache.set(cacheKey, translations)
+      }
+
+      setTranslation(lang, translations as object)
+    },
+    [lang]
+  )
+
+  // Format session when exam changes
   useEffect(() => {
-    import(`./langs/${lang.code}.json`).then((data) => {
-      const translations: object = data.default as object
+    if (exam && session) {
+      setSession((prevSession) => formatSession(prevSession, exam))
+    }
+  }, [exam]) // Remove session from dependency to avoid infinite loops
 
-      setTranslation(lang, translations)
-    })
+  // Initial data loading
+  useEffect(() => {
+    const loadInitialData = async () => {
+      // Load exam and session in parallel for better performance
+      await Promise.all([loadExam(examNumber), loadSession()])
+    }
 
-    document.documentElement.lang = lang.code
-    // document.documentElement.dir = lang.dir
-  }, [lang])
+    loadInitialData()
+  }, [loadExam, loadSession, examNumber])
+
+  // Load translation and set document properties when language changes
+  useEffect(() => {
+    const loadLanguageData = async () => {
+      await loadTranslation(lang.code)
+      document.documentElement.lang = lang.code
+      // document.documentElement.dir = lang.dir
+    }
+
+    loadLanguageData()
+  }, [lang.code, loadTranslation])
 
   if (loading > 0) {
     return <LoadingMain size={100} height={100} />
