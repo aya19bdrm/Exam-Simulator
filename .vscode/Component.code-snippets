@@ -1,0 +1,53 @@
+{
+  // This is a VS Code snippets file for TypeScript React (.tsx files)
+  // Place this in: ~/.vscode/snippets/typescriptreact.json (global)
+  // Or: .vscode/typescriptreact.json (workspace-specific)
+
+  "React TSX Component with Styled Components": {
+    "prefix": "styled-component",
+    "body": [
+      "import type { ThemedStyles } from '../types'",
+      "",
+      "import React from 'react'",
+      "import styled from 'styled-components'",
+      "",
+      "const ${1:Component}Styles = styled.div<${1:Component}StylesProps>`",
+      "$3",
+      "`",
+      "",
+      "const ${1:Component}: React.FC<${1:Component}Props> = ({$4}) => {",
+      "  return <${1:Component}Styles id=\"<${2:component}\"></${1:Component}Styles>",
+      "}",
+      "",
+      "export default ${1:Component}",
+      "",
+      "export interface ${1:Component}Props {",
+      "$6",
+      "}",
+      "",
+      "export interface ${1:Component}StylesProps extends ThemedStyles {",
+      "$7",
+      "}"
+    ],
+    "description": "Creates a React TSX component with styled-components and TypeScript interfaces"
+  },
+
+  // You can add more snippets here
+  "React Functional Component": {
+    "prefix": "component",
+    "body": [
+      "import React from 'react'",
+      "",
+      "const ${1:Component}: React.FC<object> = ({}) => {",
+      "  return (",
+      "    <div id=\"<${2:component}\">",
+      "      $3",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:Component}"
+    ],
+    "description": "Creates a basic React functional component"
+  }
+}
