@@ -1,6 +1,6 @@
 import type { QuestionTypes } from './types'
 
-import React, { createContext } from 'react'
+import { createContext } from 'react'
 
 export type Answer<QT extends QuestionTypes> = AnswerOf[QT]
 export type AnswerOfMultipleChoice = Answer<'multiple-choice'>
@@ -53,13 +53,13 @@ export type SessionActionTypes =
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
 export type SessionActions = {
-  SET_INDEX: { type: 'SET_INDEX'; payload: number }
-  SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[] }
-  SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers }
-  SET_TIME: { type: 'SET_TIME'; payload: number }
-  SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates }
-  SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState }
-  SET_REVIEW_STATE: { type: 'SET_REVIEW_STATE'; payload: ReviewState }
+  SET_INDEX: { type: 'SET_INDEX'; payload: number; prop: 'index' }
+  SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[]; prop: 'bookmarks' }
+  SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers; prop: 'answers' }
+  SET_TIME: { type: 'SET_TIME'; payload: number; prop: 'time' }
+  SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates; prop: 'timerState' }
+  SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState; prop: 'examState' }
+  SET_REVIEW_STATE: { type: 'SET_REVIEW_STATE'; payload: ReviewState; prop: 'reviewState' }
 }
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
@@ -99,43 +99,12 @@ export const defaultSession: Session = {
 export const SessionContext = createContext<Session>(defaultSession)
 
 export const SessionReducer: SessionReducerFunc = (state: Session, { type, payload }: SessionAction): Session => {
-  switch (type) {
-    case SessionActionTypes.SET_INDEX: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, index: value }
-    }
+  const key: keyof Session = payload as SessionActions[typeof type]['prop']
+  const val: any = payload as SessionActions[typeof type]['payload']
 
-    case SessionActionTypes.SET_BOOKMARKS: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, bookmarks: value }
-    }
-
-    case SessionActionTypes.SET_ANSWERS: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, answers: value }
-    }
-
-    case SessionActionTypes.SET_TIME: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, time: value }
-    }
-
-    case SessionActionTypes.SET_TIMER_STATE: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, timerState: value }
-    }
-
-    case SessionActionTypes.SET_EXAM_STATE: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, examState: value }
-    }
-
-    case SessionActionTypes.SET_REVIEW_STATE: {
-      const value = payload as SessionActions[typeof type]['payload']
-      return { ...state, reviewState: value }
-    }
-
-    default:
-      return state
+  if (val !== state[key]) {
+    return { ...state, [key]: val }
   }
+
+  return state
 }
