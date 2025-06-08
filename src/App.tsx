@@ -7,7 +7,7 @@ import Navigation from './components/Navigation'
 import { defaultSession, type Session } from './session'
 import { ExamContext } from './exam'
 import { type Lang, LangContext, setTranslation, langs, LangCode } from './settings'
-import { useForceUpdate, useLocalStorage } from '@mantine/hooks'
+import { useLocalStorage } from '@mantine/hooks'
 import { formatExam, formatSession } from './utils/format'
 
 const AppComponent: React.FC<object> = ({}) => {
@@ -15,7 +15,6 @@ const AppComponent: React.FC<object> = ({}) => {
   const [loading, setLoading] = useState<number>(2)
   const [exam, setExam] = useState<Exam | null>(null)
   const [session, setSession] = useState<Session>(defaultSession)
-  const forceUpdate = useForceUpdate()
 
   useEffect(() => {
     const randNum = Math.floor(Math.random() * 5)
@@ -48,7 +47,6 @@ const AppComponent: React.FC<object> = ({}) => {
       const translations: object = data.default as object
 
       setTranslation(lang, translations)
-      forceUpdate()
     })
 
     document.documentElement.lang = lang.code
