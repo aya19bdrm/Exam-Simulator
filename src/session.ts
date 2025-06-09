@@ -85,8 +85,8 @@ export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
 
 export const defaultSession: Session = {
   index: 0,
-  maxTime: 13800,
-  time: 13800,
+  maxTime: 0,
+  time: 0,
   paused: false,
   examState: 'not-started',
   reviewState: 'summary',

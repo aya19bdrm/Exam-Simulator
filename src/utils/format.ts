@@ -96,6 +96,9 @@ export function formatSession(session: Session, exam: Exam): Session {
   const nullArr = Array(exam.test.length - session.answers.length).fill(null)
   session.answers = session.answers.concat(nullArr)
 
+  session.maxTime = exam.time
+  session.time = exam.time
+
   return session
 }
 
