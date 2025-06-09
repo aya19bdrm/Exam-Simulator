@@ -20,7 +20,6 @@ const AppComponent: React.FC<object> = ({}) => {
   const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
   const [exam, setExam] = useState<Exam | null>(null)
   const [coverVisible, setCoverVisible] = useState(true)
-  const [hasExistingSession, setHasExistingSession] = useState(false)
 
   const loadExam = useCallback(
     async (randNum: number) => {
@@ -41,16 +40,6 @@ const AppComponent: React.FC<object> = ({}) => {
     [lang.code]
   )
 
-  const createNewSession = useCallback(
-    (exam: Exam) => {
-      const newSession: Session = formatSession(defaultSession, exam)
-      setSession(newSession)
-      setHasExistingSession(false)
-      return newSession
-    },
-    [setSession]
-  )
-
   const loadTranslation = useCallback(
     async (code: LangCode) => {
       const cacheKey = `translation-${code}`
@@ -69,12 +58,19 @@ const AppComponent: React.FC<object> = ({}) => {
     [lang]
   )
 
-  // Check if there's an existing session that's in progress
-  useEffect(() => {
-    if (session && session.examState === 'in-progress') {
-      setHasExistingSession(true)
-    }
-  }, [session])
+  const handleStarting = useCallback(
+    (session: Session) => {
+      if (exam) {
+        let newSession: Session = formatSession({ ...session, examState: 'in-progress' }, exam)
+        setSession(newSession)
+
+        setCoverVisible(false)
+      }
+    },
+    [exam]
+  )
+
+  const updateSession = useCallback((newSession: Session) => setSession(newSession), [setSession])
 
   // Initial data loading
   useEffect(() => {
@@ -96,17 +92,6 @@ const AppComponent: React.FC<object> = ({}) => {
     loadLanguageData()
   }, [lang.code, loadTranslation])
 
-  const handleStartNew = useCallback(() => {
-    if (exam) {
-      createNewSession(exam)
-    }
-    setCoverVisible(false)
-  }, [exam, createNewSession])
-
-  const handleContinue = useCallback(() => {
-    setCoverVisible(false)
-  }, [])
-
   if (!exam) {
     return <LoadingMain size={100} height={100} />
   }
@@ -117,9 +102,17 @@ const AppComponent: React.FC<object> = ({}) => {
         <Header exam={exam} />
 
         {coverVisible ? (
-          <Cover exam={exam} onStartNew={handleStartNew} onContinue={hasExistingSession ? handleContinue : undefined} />
+          <Cover
+            exam={exam}
+            onStartNew={() => handleStarting(defaultSession)}
+            onContinue={() => handleStarting(session)}
+          />
         ) : (
-          <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])} />
+          <Navigation
+            startingSession={session}
+            onSessionUpdate={updateSession}
+            setLang={(code: LangCode) => setLang(langs[code])}
+          />
         )}
       </ExamContext.Provider>
     </LangContext.Provider>

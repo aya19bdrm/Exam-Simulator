@@ -99,7 +99,14 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
     .filter((i) => i !== undefined)
   const answeredCorrectly = session.answers
     .map((answer, i) => {
-      const isCorrect = answer === exam.test[i].answer
+      let isCorrect = false
+      if (Array.isArray(answer) && Array.isArray(exam.test[i].answer)) {
+        const arr: number[] = exam.test[i].answer
+        isCorrect = answer.length === arr.length && answer.every((val) => arr.includes(val))
+      } else {
+        isCorrect = answer === exam.test[i].answer
+      }
+
       if (isCorrect) return i
     })
     .filter((i) => i !== undefined)
@@ -109,6 +116,24 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
     if (question === session.index) return
     session.update!(SessionActionTypes.SET_INDEX, question)
     session.update!(SessionActionTypes.SET_REVIEW_STATE, 'question')
+  }
+
+  const getVisibleQuestions = () => {
+    switch (show) {
+      case 'marked':
+        return bookmarks
+      case 'complete':
+        return answered
+      case 'incorrect':
+        return answeredIncorrectly
+      case 'correct':
+        return answeredCorrectly
+      case 'incomplete':
+        return Array.from({ length: exam.test.length }, (_, i) => i).filter((i) => !answered.includes(i))
+      case 'all':
+      default:
+        return Array.from({ length: exam.test.length }, (_, i) => i)
+    }
   }
 
   return (
@@ -126,39 +151,20 @@ const GridComponent: React.FC<GridProps> = ({ open, show }) => {
       </LegendStyles>
 
       <InnerGridStyles>
-        {show === 'marked'
-          ? bookmarks.map((index, i) => <GridItemCreator i={i} index={index} />)
-          : show === 'complete'
-            ? answered.map((index, i) => <GridItemCreator i={i} index={index} />)
-            : show === 'incorrect'
-              ? answeredIncorrectly.map((index, i) => <GridItemCreator i={i} index={index} />)
-              : show === 'correct'
-                ? answeredCorrectly.map((index, i) => <GridItemCreator i={i} index={index} />)
-                : show === 'incomplete'
-                  ? Array(exam.test.length)
-                      .fill(null)
-                      .map((_, i) => (answered.includes(i) ? null : <GridItemCreator i={i} index={i} />))
-                      .filter((item) => item !== null)
-                  : Array(exam.test.length)
-                      .fill(null)
-                      .map((_, i) => <GridItemCreator i={i} index={i} />)}
+        {getVisibleQuestions().map((questionIndex) => (
+          <GridItem
+            key={`grid-item-${questionIndex}`} // More descriptive key
+            data-test={`Grid Item ${questionIndex}`}
+            $background={getGridItemBackground(questionIndex, bookmarks, answered)}
+            $selected={questionIndex === session.index}
+            onClick={() => onClickGridItem(questionIndex)}
+          >
+            {questionIndex + 1}
+          </GridItem>
+        ))}
       </InnerGridStyles>
     </GridStyles>
   )
-
-  function GridItemCreator({ i, index }) {
-    return (
-      <GridItem
-        key={i}
-        data-test={`Grid Item ${i}`}
-        $background={getGridItemBackground(index, bookmarks, answered)}
-        $selected={index === session.index}
-        onClick={() => onClickGridItem(index)}
-      >
-        {index + 1}
-      </GridItem>
-    )
-  }
 }
 
 export default GridComponent

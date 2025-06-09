@@ -127,9 +127,8 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       text: translate('nav.drawer.pause'),
       icon: <Pause size={20} />,
       onClick: () => {
-        if (timerIsRunning(session)) {
-          session.update!(SessionActionTypes.SET_TIME, session.time)
-          session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
+        if (session.update && timerIsRunning(session)) {
+          session.update(SessionActionTypes.SET_TIMER_PAUSED, true)
         }
       }
     })
@@ -139,10 +138,9 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       text: translate('nav.drawer.stop'),
       icon: <Stop size={20} />,
       onClick: () => {
-        if (timerIsRunning(session)) {
-          session.update!(SessionActionTypes.SET_TIME, session.time)
-          session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
-          session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
+        if (session.update) {
+          session.update(SessionActionTypes.SET_TIMER_PAUSED, true)
+          session.update(SessionActionTypes.SET_EXAM_STATE, 'completed')
         }
       }
     })
@@ -151,7 +149,11 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       type: 'review',
       text: translate('nav.drawer.summary'),
       icon: <Report size={20} />,
-      onClick: () => session.update!(SessionActionTypes.SET_REVIEW_STATE, 'summary')
+      onClick: () => {
+        if (session.update) {
+          session.update(SessionActionTypes.SET_REVIEW_STATE, 'summary')
+        }
+      }
     })
   }
 

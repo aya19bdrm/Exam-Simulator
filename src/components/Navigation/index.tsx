@@ -11,18 +11,20 @@ import { SessionActionTypes, SessionContext, SessionReducer } from '../../sessio
 import { timerHaveExpired, timerIsPaused } from '../../utils/state'
 import { translate, type LangCode } from '../../settings'
 
-const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLang }) => {
+const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, onSessionUpdate, setLang }) => {
   const [session, updateSession] = useReducer(SessionReducer, startingSession)
   const exam = useContext(ExamContext)
   const [open, setOpen] = useState<boolean>(true)
 
   session.update = ((type, payload) => {
     updateSession({ type, payload })
+    onSessionUpdate(SessionReducer(session, { type, payload }))
   }) as SessionDispatch
 
   useEffect(() => {
     session.update = ((type, payload) => {
       updateSession({ type, payload })
+      onSessionUpdate(SessionReducer(session, { type, payload }))
     }) as SessionDispatch
   }, [startingSession])
 
@@ -60,7 +62,9 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
       <div id="navigation">
         <Drawer open={open} session={session} toggleOpen={toggleOpen} />
 
-        <Main $open={open}>{<Content session={session} />}</Main>
+        <Main $open={open}>
+          <Content session={session} />
+        </Main>
 
         {exam && <Footer open={open} exam={exam} session={session} setLang={setLang} />}
 
@@ -68,7 +72,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
           .filter((c) => c.show)
           .map((c, i) => (
             <Confirm
-              key={i}
+              key={`${c.id}-${i}`}
               title={c.title}
               message={c.message}
               buttons={c.buttons}
@@ -85,6 +89,7 @@ export default NavigationComponent
 
 export interface NavigationProps {
   startingSession: Session
+  onSessionUpdate: (session: Session) => void
   setLang: (lang: LangCode) => void
 }
 
