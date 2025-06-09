@@ -29,7 +29,10 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
 
     session.update!(SessionActionTypes.SET_TIME, timer)
 
-    if (session.timerState === 'running') {
+    if (session.paused) {
+      clearInterval(interval)
+      session.update!(SessionActionTypes.SET_TIME, timer)
+    } else {
       interval = setInterval(() => {
         setTimer((prev: number) => {
           const newTime = prev - 1
@@ -43,16 +46,13 @@ const TimerComponent: React.FC<TimerProps> = ({ session }) => {
           return newTime
         })
       }, 1000)
-    } else if (session.timerState === 'paused' || session.timerState === 'stopped') {
-      clearInterval(interval)
-      session.update!(SessionActionTypes.SET_TIME, timer)
     }
 
     return () => {
       clearInterval(interval)
       session.update!(SessionActionTypes.SET_TIME, timer)
     }
-  }, [session.timerState])
+  }, [session.paused])
 
   return (
     <TimerStyles id="timer" $warning={timer < 120}>

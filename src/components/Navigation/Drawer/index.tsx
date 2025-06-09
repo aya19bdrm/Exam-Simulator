@@ -129,7 +129,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       onClick: () => {
         if (timerIsRunning(session)) {
           session.update!(SessionActionTypes.SET_TIME, session.time)
-          session.update!(SessionActionTypes.SET_TIMER_STATE, 'paused')
+          session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
         }
       }
     })
@@ -141,7 +141,8 @@ const DrawerComponent: React.FC<DrawerProps> = ({ open, toggleOpen, session }) =
       onClick: () => {
         if (timerIsRunning(session)) {
           session.update!(SessionActionTypes.SET_TIME, session.time)
-          session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+          session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
+          session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
         }
       }
     })

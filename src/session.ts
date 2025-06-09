@@ -11,7 +11,6 @@ export type AnswerOf = {
   ['multiple-answer']: number[]
 }
 
-export type TimerStates = 'running' | 'paused' | 'stopped'
 export type ExamState = 'not-started' | 'in-progress' | 'completed'
 export type ReviewState = 'summary' | 'question'
 
@@ -26,7 +25,7 @@ export interface Session {
   time: number
 
   /** the state of the timer */
-  timerState: TimerStates
+  paused: boolean
 
   /** the state of the exam */
   examState: ExamState
@@ -49,7 +48,7 @@ export type SessionActionTypes =
   | 'SET_BOOKMARKS'
   | 'SET_ANSWERS'
   | 'SET_TIME'
-  | 'SET_TIMER_STATE'
+  | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
 export type SessionActions = {
@@ -57,7 +56,7 @@ export type SessionActions = {
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[]; prop: 'bookmarks' }
   SET_ANSWERS: { type: 'SET_ANSWERS'; payload: Answers; prop: 'answers' }
   SET_TIME: { type: 'SET_TIME'; payload: number; prop: 'time' }
-  SET_TIMER_STATE: { type: 'SET_TIMER_STATE'; payload: TimerStates; prop: 'timerState' }
+  SET_TIMER_PAUSED: { type: 'SET_TIMER_PAUSED'; payload: boolean; prop: 'paused' }
   SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { type: 'SET_REVIEW_STATE'; payload: ReviewState; prop: 'reviewState' }
 }
@@ -79,7 +78,7 @@ export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
   SET_BOOKMARKS: 'SET_BOOKMARKS',
   SET_ANSWERS: 'SET_ANSWERS',
   SET_TIME: 'SET_TIME',
-  SET_TIMER_STATE: 'SET_TIMER_STATE',
+  SET_TIMER_PAUSED: 'SET_TIMER_PAUSED',
   SET_EXAM_STATE: 'SET_EXAM_STATE',
   SET_REVIEW_STATE: 'SET_REVIEW_STATE'
 } as const
@@ -88,7 +87,7 @@ export const defaultSession: Session = {
   index: 0,
   maxTime: 13800,
   time: 13800,
-  timerState: 'stopped',
+  paused: false,
   examState: 'not-started',
   reviewState: 'summary',
   bookmarks: [],

@@ -36,7 +36,7 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
       show: timerHaveExpired(session),
       onConfirm: () => {
         session.update!(SessionActionTypes.SET_TIME, 0)
-        session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+        session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
         session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
       }
     },
@@ -45,14 +45,14 @@ const NavigationComponent: React.FC<NavigationProps> = ({ startingSession, setLa
       show: examWantsToFinish(session),
       onConfirm: () => {
         session.update!(SessionActionTypes.SET_TIME, session.time)
-        session.update!(SessionActionTypes.SET_TIMER_STATE, 'stopped')
+        session.update!(SessionActionTypes.SET_TIMER_PAUSED, true)
         session.update!(SessionActionTypes.SET_EXAM_STATE, 'completed')
       }
     },
     {
       id: 'pause',
       show: timerIsPaused(session),
-      onConfirm: () => session.update!(SessionActionTypes.SET_TIMER_STATE, 'running')
+      onConfirm: () => session.update!(SessionActionTypes.SET_TIMER_PAUSED, false)
     }
   ]
   const newConfirms: MyConfirmProps[] = confirms.map((c) => ({
