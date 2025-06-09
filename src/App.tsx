@@ -17,9 +17,10 @@ const examNumber = Math.floor(Math.random() * 5)
 
 const AppComponent: React.FC<object> = ({}) => {
   const [lang, setLang] = useLocalStorage<Lang>({ key: 'settings.lang', defaultValue: langs.ar })
+  const [session, setSession] = useLocalStorage<Session>({ key: 'session', defaultValue: defaultSession })
   const [exam, setExam] = useState<Exam | null>(null)
-  const [session, setSession] = useState<Session>(defaultSession)
   const [coverVisible, setCoverVisible] = useState(true)
+  const [hasExistingSession, setHasExistingSession] = useState(false)
 
   const loadExam = useCallback(
     async (randNum: number) => {
@@ -40,21 +41,15 @@ const AppComponent: React.FC<object> = ({}) => {
     [lang.code]
   )
 
-  const loadSession = useCallback(async () => {
-    const cacheKey = 'session-default'
-
-    let sessionData
-    if (resourceCache.has(cacheKey)) {
-      sessionData = resourceCache.get(cacheKey)
-    } else {
-      const data = await import('./session.json')
-      sessionData = data.default
-      resourceCache.set(cacheKey, sessionData)
-    }
-
-    const session: Session = sessionData as Session
-    setSession(session)
-  }, [])
+  const createNewSession = useCallback(
+    (exam: Exam) => {
+      const newSession: Session = formatSession(defaultSession, exam)
+      setSession(newSession)
+      setHasExistingSession(false)
+      return newSession
+    },
+    [setSession]
+  )
 
   const loadTranslation = useCallback(
     async (code: LangCode) => {
@@ -74,22 +69,21 @@ const AppComponent: React.FC<object> = ({}) => {
     [lang]
   )
 
-  // Format session when exam changes
+  // Check if there's an existing session that's in progress
   useEffect(() => {
-    if (exam && session) {
-      setSession((prev) => formatSession(prev, exam))
+    if (session && session.examState === 'in-progress') {
+      setHasExistingSession(true)
     }
-  }, [exam]) // Remove session from dependency to avoid infinite loops
+  }, [session])
 
   // Initial data loading
   useEffect(() => {
     const loadInitialData = async () => {
-      // Load exam and session in parallel for better performance
-      await Promise.all([loadExam(examNumber), loadSession()])
+      await loadExam(examNumber)
     }
 
     loadInitialData()
-  }, [loadExam, loadSession, examNumber])
+  }, [loadExam])
 
   // Load translation and set document properties when language changes
   useEffect(() => {
@@ -102,7 +96,18 @@ const AppComponent: React.FC<object> = ({}) => {
     loadLanguageData()
   }, [lang.code, loadTranslation])
 
-  if (!exam || !session) {
+  const handleStartNew = useCallback(() => {
+    if (exam) {
+      createNewSession(exam)
+    }
+    setCoverVisible(false)
+  }, [exam, createNewSession])
+
+  const handleContinue = useCallback(() => {
+    setCoverVisible(false)
+  }, [])
+
+  if (!exam) {
     return <LoadingMain size={100} height={100} />
   }
 
@@ -112,7 +117,7 @@ const AppComponent: React.FC<object> = ({}) => {
         <Header exam={exam} />
 
         {coverVisible ? (
-          <Cover exam={exam} onStart={() => setCoverVisible(false)} />
+          <Cover exam={exam} onStartNew={handleStartNew} onContinue={hasExistingSession ? handleContinue : undefined} />
         ) : (
           <Navigation startingSession={session} setLang={(code: LangCode) => setLang(langs[code])} />
         )}

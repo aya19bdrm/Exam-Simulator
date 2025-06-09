@@ -40,16 +40,34 @@ const StartButton = styled.button<ThemedStyles>`
   background: ${({ theme }) => theme.primary};
   color: white;
   border: none;
-  padding: 1rem 2rem;
+  padding: 2rem;
   font-size: 1.8rem;
   font-weight: 600;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
   min-width: 200px;
-  position: relative;
-  padding: 2rem;
   margin: 0.8rem;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`
+
+const ContinueButton = styled(StartButton)<ThemedStyles>`
+  background: ${({ theme }) => theme.secondary || theme.grey[6]};
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 `
 
 const CoverComponent: React.FC<CoverProps> = ({ exam, onStartNew, onContinue }) => {
@@ -61,8 +79,10 @@ const CoverComponent: React.FC<CoverProps> = ({ exam, onStartNew, onContinue }) 
       <Title>{title}</Title>
       <Description>{description}</Description>
 
-      <StartButton onClick={onStartNew}>{translate('cover.new')}</StartButton>
-      {onContinue && <StartButton onClick={onContinue}>{translate('cover.continue')}</StartButton>}
+      <ButtonContainer>
+        <StartButton onClick={onStartNew}>{translate('cover.new')}</StartButton>
+        {onContinue && <ContinueButton onClick={onContinue}>{translate('cover.continue')}</ContinueButton>}
+      </ButtonContainer>
     </CoverStyles>
   )
 }
