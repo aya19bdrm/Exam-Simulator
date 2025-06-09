@@ -4,10 +4,6 @@ export function timerIsPaused({ examState, paused, time, maxTime }: Session): bo
   return examState === 'in-progress' && paused && timerHasRan(time, maxTime)
 }
 
-export function examWantsToFinish({ examState, paused, time, maxTime }: Session): boolean {
-  return examState === 'in-progress' && timerHasRan(time, maxTime)
-}
-
 export function timerIsRunning({ examState, paused, time, maxTime }: Session): boolean {
   return examState === 'in-progress' && !paused && timerHasRan(time, maxTime)
 }

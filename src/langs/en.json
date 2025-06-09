@@ -60,12 +60,6 @@
       "message": "Exam paused. Click to resume.",
       "button0": "Resume"
     },
-    "end": {
-      "title": "End Exam",
-      "message": "Do you want to end exam?",
-      "button0": "End",
-      "button1": "Cancel"
-    },
     "expired": {
       "title": "Time Expired",
       "message": "Time has expired. Your exam has ended.",
