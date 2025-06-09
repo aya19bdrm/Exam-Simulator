@@ -18,13 +18,13 @@ export interface Session {
   /** the question number */
   index: number
 
-  /** the time elapsed */
+  /** the maximum time allowed for the exam */
   maxTime: number
 
   /** the time elapsed */
   time: number
 
-  /** the state of the timer */
+  /** the state of the timer - using proper timer states */
   paused: boolean
 
   /** the state of the exam */
@@ -39,8 +39,8 @@ export interface Session {
   /** the list of answers */
   answers: Answers
 
-  /**  */
-  update: SessionDispatch
+  /** session update function - will be injected by reducer */
+  update?: SessionDispatch
 }
 
 export type SessionActionTypes =
@@ -51,6 +51,7 @@ export type SessionActionTypes =
   | 'SET_TIMER_PAUSED'
   | 'SET_EXAM_STATE'
   | 'SET_REVIEW_STATE'
+
 export type SessionActions = {
   SET_INDEX: { type: 'SET_INDEX'; payload: number; prop: 'index' }
   SET_BOOKMARKS: { type: 'SET_BOOKMARKS'; payload: number[]; prop: 'bookmarks' }
@@ -60,6 +61,7 @@ export type SessionActions = {
   SET_EXAM_STATE: { type: 'SET_EXAM_STATE'; payload: ExamState; prop: 'examState' }
   SET_REVIEW_STATE: { type: 'SET_REVIEW_STATE'; payload: ReviewState; prop: 'reviewState' }
 }
+
 export interface SessionAction<T extends SessionActionTypes = SessionActionTypes> {
   type: T
   payload: SessionActions[T]['payload']
@@ -73,6 +75,16 @@ export type SessionDispatch<T extends SessionActionTypes = SessionActionTypes> =
   payload: SessionActions[T]['payload']
 ) => void
 
+export const SessionActionProps: { [key in SessionActionTypes]: keyof Session } = {
+  SET_INDEX: 'index',
+  SET_BOOKMARKS: 'bookmarks',
+  SET_ANSWERS: 'answers',
+  SET_TIME: 'time',
+  SET_TIMER_PAUSED: 'paused',
+  SET_EXAM_STATE: 'examState',
+  SET_REVIEW_STATE: 'reviewState'
+} as const
+
 export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
   SET_INDEX: 'SET_INDEX',
   SET_BOOKMARKS: 'SET_BOOKMARKS',
@@ -83,6 +95,7 @@ export const SessionActionTypes: { [key in SessionActionTypes]: key } = {
   SET_REVIEW_STATE: 'SET_REVIEW_STATE'
 } as const
 
+// Default session with proper initial state
 export const defaultSession: Session = {
   index: 0,
   maxTime: 0,
@@ -91,15 +104,14 @@ export const defaultSession: Session = {
   examState: 'not-started',
   reviewState: 'summary',
   bookmarks: [],
-  answers: [],
-  update: () => {}
+  answers: []
 }
 
 export const SessionContext = createContext<Session>(defaultSession)
 
 export const SessionReducer: SessionReducerFunc = (state: Session, { type, payload }: SessionAction): Session => {
-  const key: keyof Session = payload as SessionActions[typeof type]['prop']
-  const val: any = payload as SessionActions[typeof type]['payload']
+  const key: keyof Session = SessionActionProps[type]
+  const val: SessionActions[typeof type]['payload'] = payload
 
   if (val !== state[key]) {
     return { ...state, [key]: val }
