@@ -2,7 +2,8 @@
   "loading": "Loading ...",
   "cover": {
     "logo-alt": "Logo",
-    "start": "Start Exam"
+    "continue": "Continue Last Exam",
+    "new": "Start New Exam"
   },
   "nav": {
     "drawer": {

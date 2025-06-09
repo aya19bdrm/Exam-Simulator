@@ -33,6 +33,7 @@ export const Title = styled.div<ThemedStyles>`
 export const Description = styled.div`
   font: 2.25rem 'Open Sans';
   padding: 1rem;
+  margin-bottom: 4rem;
 `
 
 const StartButton = styled.button<ThemedStyles>`
@@ -47,11 +48,11 @@ const StartButton = styled.button<ThemedStyles>`
   cursor: pointer;
   min-width: 200px;
   position: relative;
-  margin-top: 4rem;
   padding: 2rem;
+  margin: 0.8rem;
 `
 
-const CoverComponent: React.FC<CoverProps> = ({ exam, onStart }) => {
+const CoverComponent: React.FC<CoverProps> = ({ exam, onStartNew, onContinue }) => {
   const { title, description } = exam
 
   return (
@@ -60,7 +61,8 @@ const CoverComponent: React.FC<CoverProps> = ({ exam, onStart }) => {
       <Title>{title}</Title>
       <Description>{description}</Description>
 
-      {onStart && <StartButton onClick={onStart}>{translate('cover.start')}</StartButton>}
+      <StartButton onClick={onStartNew}>{translate('cover.new')}</StartButton>
+      {onContinue && <StartButton onClick={onContinue}>{translate('cover.continue')}</StartButton>}
     </CoverStyles>
   )
 }
@@ -69,5 +71,6 @@ export default CoverComponent
 
 export interface CoverProps {
   exam: Exam
-  onStart?: () => void | Promise<void>
+  onStartNew: () => void | Promise<void>
+  onContinue?: () => void | Promise<void>
 }
