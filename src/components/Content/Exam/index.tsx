@@ -32,7 +32,7 @@ const ExamComponent: React.FC<object> = ({}) => {
 
       <Progress exam={exam} session={session} />
 
-      <Slide key={session.index} direction="right">
+      <Slide id="question-slide" key={session.index} direction="right">
         <Question {...question} />
 
         {question.type === 'multiple-choice' ? (
