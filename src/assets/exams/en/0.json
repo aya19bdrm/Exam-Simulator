@@ -351,7 +351,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "After success in a particulary challenging project phase, a project manager reassigned a high-performing team member to a more strategic task. \tThis is an example of what?",
+      "text": "After success in a particulary challenging project phase, a project manager reassigned a high-performing team member to a more strategic task.  This is an example of what?",
       "explanation": "",
       "choices": [
         {
@@ -608,7 +608,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project sponsor is risk averse and is therefore concerned about negative impacts on the project. To help with this concern, the project team identifies four project risks and then evaluates both the probability of occurrence and the impact of the risk if it occurs. The team uses a 1-5 scale, 1 being the lowest and 5 being the highest.nnn\tn\t\tn\t\t\tRiskn\t\t\tProbabilityn\t\t\tImpactn\t\tn\tn\tn\t\tn\t\t\tAn\t\t\t3n\t\t\t3n\t\tn\t\tn\t\t\tBn\t\t\t5n\t\t\t1n\t\tn\t\tn\t\t\tCn\t\t\t2n\t\t\t4n\t\tn\t\tn\t\t\tDn\t\t\t4n\t\t\t4n\t\tn\tnnnBased on the table, in what order should the project manager rank these risks (high to low) for risk management purposes?",
+      "text": "A project sponsor is risk averse and is therefore concerned about negative impacts on the project. To help with this concern, the project team identifies four project risks and then evaluates both the probability of occurrence and the impact of the risk if it occurs. The team uses a 1-5 scale, 1 being the lowest and 5 being the highest.nnn n n Riskn Probabilityn Impactn n n n n An 3n 3n n n Bn 5n 1n n n Cn 2n 4n n n Dn 4n 4n n nnnBased on the table, in what order should the project manager rank these risks (high to low) for risk management purposes?",
       "explanation": "",
       "choices": [
         {
@@ -631,7 +631,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project manager has been made aware of a recent weather event that could potentially impact the project. Forecasters are unable to predict the path or strength of the event. Any delays would extend the project's finish date and cause cost overruns.n\tWhat should the project manager do first?",
+      "text": "A project manager has been made aware of a recent weather event that could potentially impact the project. Forecasters are unable to predict the path or strength of the event. Any delays would extend the project's finish date and cause cost overruns.n What should the project manager do first?",
       "explanation": "",
       "choices": [
         {
@@ -654,7 +654,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project manager learns that in-house resources are insufficient to produce a critical component of a deliverable. This poses a significant threat. The quality of the component is integral to the project, and the in-house resources cannot guarantee high-quality output. In response to this threat, the project manager decides to outsource the production of the component by contracting a third-party vendor.n\tWhich threat response strategy did the project manager use?",
+      "text": "A project manager learns that in-house resources are insufficient to produce a critical component of a deliverable. This poses a significant threat. The quality of the component is integral to the project, and the in-house resources cannot guarantee high-quality output. In response to this threat, the project manager decides to outsource the production of the component by contracting a third-party vendor.n Which threat response strategy did the project manager use?",
       "explanation": "",
       "choices": [
         {
@@ -677,7 +677,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A technology project for a multinational bank is in the testing stage. The project manager learns that a security breach has exposed the personal data of thousands of end users. The project sponsor suspends work while the cause is investigated. The threat of a security breach was identified during the risk management planning process, and the impact is significant.n\tWhat should the project manager do?",
+      "text": "A technology project for a multinational bank is in the testing stage. The project manager learns that a security breach has exposed the personal data of thousands of end users. The project sponsor suspends work while the cause is investigated. The threat of a security breach was identified during the risk management planning process, and the impact is significant.n What should the project manager do?",
       "explanation": "",
       "choices": [
         {
@@ -2322,7 +2322,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is beginning to impact the performance of the project team.n\tAfter reviewing the team charter, what should the project manager do next?",
+      "text": "A project manager learns that the project team is involved in an ongoing conflict with an overseas supplier team. The conflict is beginning to impact the performance of the project team.n After reviewing the team charter, what should the project manager do next?",
       "explanation": "",
       "choices": [
         {
@@ -2529,7 +2529,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project team meeting is focused on examining if the business value and vision for a project are being delivered by all parties. During the meeting, it was discovered that a few team members were unaware of the project's vision and business value.n\tWhat should the project manager do to ensure everyone is aware of the vision and business value the project is expected to bring moving forward?",
+      "text": "A project team meeting is focused on examining if the business value and vision for a project are being delivered by all parties. During the meeting, it was discovered that a few team members were unaware of the project's vision and business value.n What should the project manager do to ensure everyone is aware of the vision and business value the project is expected to bring moving forward?",
       "explanation": "",
       "choices": [
         {

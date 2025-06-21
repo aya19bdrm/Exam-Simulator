@@ -6,7 +6,7 @@
   "test": [
     {
       "type": "multiple-choice",
-      "text": "A real estate organization conducts a monthly review of its strategic project portfolio.nnn\tn\t\tn\t\t\tn\t\t\tProject An\t\t\tProject Bn\t\tn\tn\tn\t\tn\t\t\tStart daten\t\t\tMarch 2016n\t\t\tMay 2017n\t\tn\t\tn\t\t\tExpected completion daten\t\t\tApril 2019n\t\t\tJuly 2020n\t\tn\t\tn\t\t\tProject managern\t\t\tPM-An\t\t\tPM-Bn\t\tn\tnnnDuring a review in March 2018, it was found that Project B is experiencing problems that had previously not been identified in its risk management process. With Project A starting approximately one year prior, what information should be requested from Project A so that Project B may take preventive and/or corrective actions?",
+      "text": "A real estate organization conducts a monthly review of its strategic project portfolio.nnn n n n Project An Project Bn n n n n Start daten March 2016n May 2017n n n Expected completion daten April 2019n July 2020n n n Project managern PM-An PM-Bn n nnnDuring a review in March 2018, it was found that Project B is experiencing problems that had previously not been identified in its risk management process. With Project A starting approximately one year prior, what information should be requested from Project A so that Project B may take preventive and/or corrective actions?",
       "explanation": "",
       "choices": [
         {
@@ -696,7 +696,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A new project is about to start and is subject to strict time and budget constraints. When reviewing the lessons learned repository, the project manager learns that constant scope creep caused a similar project to fail.n\tWhat should the project manager do now to avoid project failure?",
+      "text": "A new project is about to start and is subject to strict time and budget constraints. When reviewing the lessons learned repository, the project manager learns that constant scope creep caused a similar project to fail.n What should the project manager do now to avoid project failure?",
       "explanation": "",
       "choices": [
         {
@@ -1551,7 +1551,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project manager is developing the schedule for a new software development project. The project network diagram shows two separate paths:nnPath A: Tasks 1-2-3-4 (all with a duration of 5 days each)n\tPath B: Tasks 5-6-7 (durations of 3, 7, and 2 days respectively)n\tThere are no external dependencies between these paths.nnWhat is the critical path for this project?",
+      "text": "A project manager is developing the schedule for a new software development project. The project network diagram shows two separate paths:nnPath A: Tasks 1-2-3-4 (all with a duration of 5 days each)n Path B: Tasks 5-6-7 (durations of 3, 7, and 2 days respectively)n There are no external dependencies between these paths.nnWhat is the critical path for this project?",
       "explanation": "",
       "choices": [
         {
@@ -3368,7 +3368,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project has the following characteristics:nnn\tThe project manager is being asked to deliver a business result in a compressed timeline; the original timeline was one month, but the new requested timeline is two weeks.n\tIn the resource planning activity, the project manager heard from another team member that no technical resources are available to join the team; however, the project manager knows the technical resource manager from a previous project.nnnWhat is the first action the project manager should take?",
+      "text": "A project has the following characteristics:nnn The project manager is being asked to deliver a business result in a compressed timeline; the original timeline was one month, but the new requested timeline is two weeks.n In the resource planning activity, the project manager heard from another team member that no technical resources are available to join the team; however, the project manager knows the technical resource manager from a previous project.nnnWhat is the first action the project manager should take?",
       "explanation": "",
       "choices": [
         {
@@ -3399,7 +3399,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A hybrid project has the following characteristics:nnn\tIt is in the early stages.n\tIt has a brand new team.n\tThe project manager will be very busy executing other projects during the first two weeks of the project.nnnDuring this early stage, how should the project manager develop the new project team?",
+      "text": "A hybrid project has the following characteristics:nnn It is in the early stages.n It has a brand new team.n The project manager will be very busy executing other projects during the first two weeks of the project.nnnDuring this early stage, how should the project manager develop the new project team?",
       "explanation": "",
       "choices": [
         {
@@ -3457,7 +3457,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A project has the following characteristics:nnn\tReoccurring project reviews are set up for the project.n\tDuring the fourth review, the customer requests to change the technical approach for the product in development.nnnWhich action should the project manager take?",
+      "text": "A project has the following characteristics:nnn Reoccurring project reviews are set up for the project.n During the fourth review, the customer requests to change the technical approach for the product in development.nnnWhich action should the project manager take?",
       "explanation": "",
       "choices": [
         {
