@@ -3037,7 +3037,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "In the Project team meeting the team members are complaining of a drop in motivation and that they don't feel that their efforts are appreciated. You decided to build and present the team as a high performance team to the organization.nnWhich of the following attributes of the organizational environment and managerial style will lead to a high performance team? Select 3",
       "explanation": "",
       "choices": [
@@ -3183,7 +3183,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "Select three ways to improve and practice leadership skills. (Choose 3)",
       "explanation": "",
       "choices": [
@@ -3233,7 +3233,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "An internal project has delivered its scope on time, within budget, and with the expected quality. The client was satisfied with the result and it enabled them to launch the new product to market. However, the product did not attract the expected interest and did not cover the investment made. The project team is aware of these results and it is impacting their morale to deliver the next project.nnHow should the project manager handle this situation? Choose 2 answers.",
       "explanation": "",
       "choices": [

@@ -1222,7 +1222,7 @@
       ]
     },
     {
-      "type": "multiple-choice",
+      "type": "multiple-answer",
       "text": "In a scaled agile framework, which responsibilities of a release train engineer can be performed by a project manager? (Choose 3).",
       "explanation": "",
       "choices": [

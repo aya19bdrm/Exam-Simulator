@@ -1042,32 +1042,32 @@
       ]
     },
     {
-  "type": "multiple-answer",
-  "text": "You are the project manager on a project delivered by a Scrum team. The project sponsors are not familiar with the Scrum framework and were invited to attend the first Sprint Review. They ask you to describe the scope of this event.\n\nWhich of the following are the goals of the Sprint Review? (Choose 3)",
-  "explanation": "",
-  "choices": [
-    {
-      "text": "Demonstrate what was completed during the Sprint and discuss how it meets the Sprint Goal.",
-      "correct": true
+      "type": "multiple-answer",
+      "text": "You are the project manager on a project delivered by a Scrum team. The project sponsors are not familiar with the Scrum framework and were invited to attend the first Sprint Review. They ask you to describe the scope of this event.\n\nWhich of the following are the goals of the Sprint Review? (Choose 3)",
+      "explanation": "",
+      "choices": [
+        {
+          "text": "Demonstrate what was completed during the Sprint and discuss how it meets the Sprint Goal.",
+          "correct": true
+        },
+        {
+          "text": "Collaborate with stakeholders to gather feedback and discuss the next steps.",
+          "correct": true
+        },
+        {
+          "text": "Review progress toward the overall product or project goal.",
+          "correct": true
+        },
+        {
+          "text": "Analyze team performance and identify internal process improvements.",
+          "correct": false
+        },
+        {
+          "text": "Discuss personal challenges team members faced during the Sprint.",
+          "correct": false
+        }
+      ]
     },
-    {
-      "text": "Collaborate with stakeholders to gather feedback and discuss the next steps.",
-      "correct": true
-    },
-    {
-      "text": "Review progress toward the overall product or project goal.",
-      "correct": true
-    },
-    {
-      "text": "Analyze team performance and identify internal process improvements.",
-      "correct": false
-    },
-    {
-      "text": "Discuss personal challenges team members faced during the Sprint.",
-      "correct": false
-    }
-  ]
-},
     {
       "type": "multiple-choice",
       "text": "A project manager needs to close out a project and does not have time to update the lessons learned register.nnWhat could be a consequence of this failure to act?",
