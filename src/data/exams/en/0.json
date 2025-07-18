@@ -721,7 +721,7 @@
     },
     {
       "type": "multiple-choice",
-      "text": "A new project manager is assigned to replace a project manager who has resigned. During the initial assessment of project documentation, the new project manager discovers that the risk register has not been updated for several weeks. The project manager's next step be to consult the risk management plan. Why?",
+      "text": "A new  project manager is assigned to replace a project manager who has resigned. During the initial assessment of project documentation, the new project manager discovers that the risk register has not been updated for several weeks. The project manager's next step be to consult the risk management plan. Why?",
       "explanation": "Referring to the risk management plan helps the new project manager understand the method the previous manager used to classify and prioritize risks. This is essential to understand current priorities and deal with risks in a systematic manner consistent with the project management style.\n\n- Why the right choice?\nBecause the risk management plan contains risk assessment and ranking criteria, enabling the new manager to accurately understand the current risk management status.\n\n- Why are other options wrong?\n- Determine the number of times risks have appeared in the past: Not directly related to the risk management plan.\n- Know how often the risk register is updated: only procedural information and does not help in the risk assessment.\n- Determining the level of acceptable uncertainty: Part of the risk assessment but not the main reason for returning to the plan.",
       "choices": [
         {
