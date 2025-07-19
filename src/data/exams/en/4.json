@@ -4042,7 +4042,7 @@
       "explanation": "Correct answer: Postpone the closure of the project until the accounts payable department can document that the invoice was paid correctly.\n\n- Reason: It is necessary to ensure that the issues of financial invoices are resolved accurately before closing the project, to avoid legal and financial problems that may affect the company and future projects.\n\n- Why are other options wrong:\n- Inform the supplier of the payment once and start closing the project without proof that may lead to a subsequent financial dispute.\n- Completing documentation and postponing work on the new project is impractical and may delay future projects without resolving the problem.\n- Starting a new project before closing the current one without solving financial problems may cause administrative complications.",
       "choices": [
         {
-          "text": "Inform the supplier that payment was made only once, begin the close project process, and begin work on the new project.",
+          "text": "Inform  the supplier that payment was made only once, begin the close project process, and begin work on the new project.",
           "correct": false
         },
         {
